@@ -38,6 +38,7 @@ CREATE TABLE Øvelse(
 		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE FriØvelse (
+<<<<<<< HEAD
         øvelsesid INT NOT NULL,
 	øktid INT NOT NULL,
         resultat VARCHAR(30),
@@ -45,6 +46,15 @@ CREATE TABLE FriØvelse (
         FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
                 ON DELETE NO ACTION ON UPDATE CASCADE,
 	FOREIGN KEY (øktid) REFERENCES Treningsøkt(øktid)
+=======
+    øvelsesId INT NOT NULL,
+	øktId INT NOT NULL, 
+    resultat VARCHAR(30),
+	PRIMARY KEY (øvelsesId, øktId),
+        FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId) 
+                ON DELETE NO ACTION ON UPDATE CASCADE, 
+	FOREIGN KEY (øktId) REFERENCES Treningsøkt(øktId)
+>>>>>>> ab59bf9702ef879d6d7167bf4ab8ae489c40d14e
 		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE ApparatØvelse (
