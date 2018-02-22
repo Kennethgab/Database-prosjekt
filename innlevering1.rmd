@@ -47,21 +47,25 @@ ApperatØvelse(\underline{øvelsesId}, \underline{øktId}, antallKilo, antallSet
 
 # Oppfyllelse av krav
 
-## Registrere apparater, øvelser og treningsøkter med tilhørende data
+## 1. Registrere apparater, øvelser og treningsøkter med tilhørende data
 Apparater: Bare legg til rader i tabbelen
 
-## Krav 2
-Sorterer treningsøkt tabell på tidspunkt, og select'er de n øverste radene. så selecter du de radene som har fremmednøkkel til et notat slik at du sitter igjen med alle de treningsøkter med notater.
+Øvelser: Bare legg til rader i tabellen
 
-## Krav 3
-Select Treningsøkt sånn at du sitter igjen med de radene som passer i tidsintervllet, Join med ØvelsesPåØkt, Select øktId, antallKilo og antallSett for å ha resultatlogg for hver øvelse.
+Treningsøkter: Legg til rader i treningsøkt, og rader i FriØvelse eller ApparatØvelse for å logge resultater avhengig om øvelsen brukte apparater eller ikke.
 
-## Krav 4
-Add øvelsesgrupper. Join ØvelsesGrupper med ØvelseTilHørerGruppe og Select ØvelsesId så har du nøkler til alle øvelser i samme gruppe.
+## 2. få opp informasjon om et antall n sist gjennomførte treningsøkter med notater, der n spesifiseres av brukeren
+Left join Treningsøkt med Notat. Sorter på dato. Select de n første radene. Select de kolonnene du ønsker fra treningsøkt og notat. Mest informasjon blir gitt med å bruke select * .
 
-## Krav 5
-Finne ut hvilke øvelser et apparat kan brukes til.
-Select alle øvelser som er i FastMontertApparat som har ApparatID til apparatet.
+## 3. For hver enkelt øvelse skal det være mulig å se en resultatlogg i et gitt tidsintervall spesifisert av brukeren.
+Left join Øvelse med ApparatØvelse og lagre resultat som ApparatResultat. Left join igjen dette med Friøvelse og lagre resultat som FriResultat. Natural join så dette med Treningsøkt og select de radene smo passer i tidsintervallet.
+
+## 4. Lagre øvelsegrpuper og finne øvelser som er i samme gruppe
+Legg til rader i ØVelseGruppe for å lage øvelsesgrupper. Natural join ØVelsesgruppe med ØvelseTilhørerGruppe. Select radene med GruppeIDen til grpupa du vil finne øvelser til. Select ØvelsesID.
+
+
+## 5, Finne ut hvilke øvelser et apparat kan brukes til
+Select det apparatet du vil se på Apparat. Natural join med øvelser for å finne alle øvelsene som bruker dette aparatet.
 
 
 
