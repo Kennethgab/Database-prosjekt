@@ -21,7 +21,7 @@ public class Øvelse extends ActiveDomainObject {
 	public void save(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			Resultset rs = stmt.executeQuery("update Øvelse set navn="+navn+", beskrivelse="+beskrivelse+", apparatid="+apparatid+"where øvelsesid="+øvelsesid);
+			Resultset rs = stmt.executeQuery("update Øvelse set øvelsenavn="+navn+", øvelsebeskrivelse="+beskrivelse+", apparatid="+apparatid+"where øvelsesid="+øvelsesid);
 		} catch(Exception e) {
 			System.out.println("db error during update of øvelse="+e);
 			return;
@@ -34,11 +34,11 @@ public class Øvelse extends ActiveDomainObject {
 	public void initialize(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select navn, beskrivelse, apparatid from Øvelse where øvelsesid="+øvelsesid);
+			ResultSet rs = stmt.executeQuery("select øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse where øvelsesid="+øvelsesid);
 			while(rs.next()) {
-				navn = rs.getString("navn");
-				beskrivelse = rs.getString("beskrivelse");
-				apparatid = rs.getString("apparatid");
+				navn = rs.getString("øvelsenavn");
+				beskrivelse = rs.getString("øvelsebeskrivelse");
+				apparatid = rs.getInt("apparatid");
 			}
 		} catch( Exception e) {
 			System.out.println("db error during select of øvelse= "+e);
