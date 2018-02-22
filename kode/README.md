@@ -1,3 +1,0 @@
-# Prosjekt kode
-
-JAR fil.
