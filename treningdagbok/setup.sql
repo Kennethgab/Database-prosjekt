@@ -1,69 +1,69 @@
 CREATE TABLE Notat(
-	løpeNr INT NOT NULL,
+	løpenr INT NOT NULL,
 	treningsformål VARCHAR(20),
 	øktbeskrivelse VARCHAR(50),
 	resultat VARCHAR(20),
-	PRIMARY KEY(løpeNr) );
+	PRIMARY KEY(løpenr) );
 
 CREATE TABLE Treningsøkt(
-	øktId INT NOT NULL,
+	øktid INT NOT NULL,
 	dato DATE,
 	varighet INT,
 	tidspunkt TIME,
 	form INT,
 	prestasjon INT,
-	løpeNr INT NOT NULL,
-	PRIMARY KEY(øktId), 
-	FOREIGN KEY (løpeNr) REFERENCES Notat(løpeNr)
+	løpenr INT NOT NULL,
+	PRIMARY KEY(øktid),
+	FOREIGN KEY (løpenr) REFERENCES Notat(løpenr)
 		ON DELETE CASCADE ON UPDATE CASCADE );
 
-CREATE TABLE Øvelsesgruppe(
-	gruppeId INT NOT NULL,
+CREATE TABLE ØvelsesGruppe(
+	gruppeid INT NOT NULL,
 	gruppebeskrivelse VARCHAR(50),
-	PRIMARY KEY (gruppeId) );
+	PRIMARY KEY (gruppeid) );
 
 CREATE TABLE Apparat(
-	apparatId INT NOT NULL,
-	apparatNavn VARCHAR(50),
-	apparatBeskrivelse VARCHAR(50),
-	PRIMARY KEY(apparatId) );
+	apparatid INT NOT NULL,
+	apparatnavn VARCHAR(50),
+	apparatbeskrivelse VARCHAR(50),
+	PRIMARY KEY(apparatid) );
 
 CREATE TABLE Øvelse(
-	øvelsesId INT NOT NULL,
-	øvelseNavn VARCHAR(30),
-	øvelseBeskrivelse VARCHAR(50),
-	apparatId INT, 
-	PRIMARY KEY(øvelsesId), 
-	FOREIGN KEY (apparatId) REFERENCES Apparat(apparatId)
+	øvelsesid INT NOT NULL,
+	øvelsenavn VARCHAR(30),
+	øvelsebeskrivelse VARCHAR(50),
+	apparatid INT,
+	PRIMARY KEY(øvelsesid),
+	FOREIGN KEY (apparatid) REFERENCES Apparat(apparatid)
 		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE FriØvelse (
-        øvelsesId INT NOT NULL,
-	øktId INT NOT NULL, 
+        øvelsesid INT NOT NULL,
+	øktid INT NOT NULL,
         resultat VARCHAR(30),
-	PRIMARY KEY (øvelsesId, øktId),
-        FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId) 
-                ON DELETE NO ACTION ON UPDATE CASCADE, 
-	FOREIGN KEY (øktId) REFERENCES Treningsøkt(øktId)
+	PRIMARY KEY (øvelsesid, øktid),
+        FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
+                ON DELETE NO ACTION ON UPDATE CASCADE,
+	FOREIGN KEY (øktid) REFERENCES Treningsøkt(øktid)
 		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE ApparatØvelse (
-	øvelsesId INT NOT NULL,
-	øktId INT NOT NULL,
-	antallKilo INT,
-	antallSett INT,
-	resultat VARCHAR(30), 
-	PRIMARY KEY (øvelsesId, øktId), 
-	FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId)
-		ON DELETE NO ACTION	ON UPDATE CASCADE,  
-	FOREIGN KEY (øktId) REFERENCES Treningsøkt(øktId)
+	øvelsesid INT NOT NULL,
+	øktid INT NOT NULL,
+	antallkilo INT,
+	antallsett INT,
+	resultat VARCHAR(30),
+	PRIMARY KEY (øvelsesid, øktid),
+	FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
+		ON DELETE NO ACTION	ON UPDATE CASCADE,
+	FOREIGN KEY (øktid) REFERENCES Treningsøkt(øktid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE );
 
 CREATE TABLE ØvelseTilhørerGruppe (
-	gruppeId	INT	NOT NULL, 
-	øvelsesId	INT	NOT NULL, 
-	PRIMARY KEY (gruppeId, øvelsesId), 
-	FOREIGN KEY (gruppeId) REFERENCES Øvelsesgruppe(gruppeId) 
+	gruppeid	INT	NOT NULL,
+	øvelsesid	INT	NOT NULL,
+	PRIMARY KEY (gruppeid, øvelsesid),
+	FOREIGN KEY (gruppeid) REFERENCES Øvelsesgruppe(gruppeId)
 		ON DELETE NO ACTION	ON UPDATE CASCADE,
-	FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId)
+	FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesId)
 		ON DELETE NO ACTION	ON UPDATE CASCADE );

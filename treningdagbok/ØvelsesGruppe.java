@@ -14,7 +14,7 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 	public void initialize(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select beskrivelse from ØvelsesGruppe where gruppeid="+gruppeid);
+			ResultSet rs = stmt.executeQuery("select gruppebeskrivelse from ØvelsesGruppe where gruppeid="+gruppeid);
 			while(rs.next()) {
 				beskrivelse = rs.getString("gruppebeskrivelse");
 			}
@@ -32,7 +32,7 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 	public void save(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("update ØvelsesGruppe set beskrivelse="+beskrivelse+"where gruppeid="+gruppeid);
+			ResultSet rs = stmt.executeQuery("update ØvelsesGruppe set gruppebeskrivelse="+beskrivelse+"where gruppeid="+gruppeid);
 			} catch(Exception e) {
 			System.out.println("db error during update of øvelsesgruppe="+e);
 			return;
