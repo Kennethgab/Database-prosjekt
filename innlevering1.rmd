@@ -1,0 +1,33 @@
+---
+title: TDT4145 Innlevering 1
+author: Simon Retard Tveit, Robert Rognerud, Kenneth Gabrielsen
+output: pdf_document
+---
+# ER Diagram
+
+
+\begin{figure}[h!]
+\includegraphics[width=1\textwidth]{C:/Repositories/Database-Prosjekt/diagrammer/ER_del_1.png}
+\caption{ER Diagram}
+\end{figure}
+
+# Er Diagram oversatt til tabellform
+tabellform her
+
+# Oppfyllelse av krav
+
+## Krav 1
+Registrerte apperater, øvelser og treningsøkter med tilhørende data
+
+## Krav 2
+Få opp informasjon om et antall *n* sist gjennomførte treningsøkter med notater, der n spesifiseres av brukeren:
+
+## Krav 3
+For hver enkelt øvelse skal det være mulig å se en resultatlogg i et gitt tidsintervall spesifisert av brukeren.
+## Krav 4
+Lage øvelsegrupper og finne øvelser som er i samme gruppe
+## Krav 5
+Et valgfritt use case som dere selv bestemmer
+
+
+
