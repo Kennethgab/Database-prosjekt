@@ -1,6 +1,6 @@
 ---
 title: TDT4145 Innlevering 1
-author: Simon Retard Tveit, Robert Rognerud, Kenneth Gabrielsen
+author: Simon Oliver Tveit, Robert Rognerud, Kenneth Gabrielsen
 output: pdf_document
 ---
 # ER Diagram
@@ -10,24 +10,55 @@ output: pdf_document
 \includegraphics[width=1\textwidth]{C:/Repositories/Database-Prosjekt/diagrammer/ER_del_1.png}
 \caption{ER Diagram}
 \end{figure}
+\newpage
+# ER Diagram oversatt til tabellform
 
-# Er Diagram oversatt til tabellform
-tabellform her
+Treningsøkt(\underline{ØktId}, dato, tidspunkt, varighet, personlig form(1-10), prestasjon(1-10), LøpeNr)
+
+FK: LøpeNr -> Notat
+
+Notat(\underline{LøpeNr}, treningsformål, notatBeskrivelse, notatResultat)
+
+ØvelsesGruppe(\underline{GruppeId}, gruppebeskrivelse)
+
+Øvelse(\underline{øvelsesId}, øvelseNavn, øvelseBeskrivelse)
+
+FastmontertApparat(\underline{øvelsesId},\underline{apperatId})
+
+FK: apparatId -> Apparat, FK: øvelsesId -> Øvelse
+
+Apparat(\underline{ApparatId}, apparatNavn, apparatBeskrivelse)
+
+FriØvelse(\underline{ØvelsesId}, resultat)
+
+FK: ØvelsesId -> Øvelse
+
+ØvelseTilhørerGruppe(\underline{GruppeId}, \underline{ØvelsesId})
+
+FK: GruppeId -> ØvelsesGruppe, FK: ØvelsesId -> Øvelse
+
+ØvelsePåØkt(\underline{øvelsesId}, \underline{øktId}, antallKilo, antallSett)
+
+FK: øktId -> TreningsØkt, FK: øvelsesId -> Øvelse
 
 # Oppfyllelse av krav
 
 ## Krav 1
-Registrerte apperater, øvelser og treningsøkter med tilhørende data
+
+Det er mulig å legge til rader i tabellene for apparater, øvelser og økter.
 
 ## Krav 2
-Få opp informasjon om et antall *n* sist gjennomførte treningsøkter med notater, der n spesifiseres av brukeren:
+Sorterer treningsøkt tabell på tidspunkt, og select'er de n øverste radene. så selecter du de radene som har fremmednøkkel til et notat slik at du sitter igjen med alle de treningsøkter med notater.
 
 ## Krav 3
-For hver enkelt øvelse skal det være mulig å se en resultatlogg i et gitt tidsintervall spesifisert av brukeren.
+Select Treningsøkt sånn at du sitter igjen med de radene som passer i tidsintervllet, Join med ØvelsesPåØkt, Select øktId, antallKilo og antallSett for å ha resultatlogg for hver øvelse.
+
 ## Krav 4
-Lage øvelsegrupper og finne øvelser som er i samme gruppe
+Add øvelsesgrupper. Join ØvelsesGrupper med ØvelseTilHørerGruppe og Select ØvelsesId så har du nøkler til alle øvelser i samme gruppe.
+
 ## Krav 5
-Et valgfritt use case som dere selv bestemmer
+Finne ut hvilke øvelser et apparat kan brukes til.
+Select alle øvelser som er i FastMontertApparat som har ApparatID til apparatet.
 
 
 
