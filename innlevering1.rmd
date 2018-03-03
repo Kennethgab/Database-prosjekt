@@ -2,6 +2,12 @@
 title: TDT4145 Innlevering 1
 author: Simon Oliver Tveit, Robert Rognerud, Kenneth Gabrielsen
 output: pdf_document
+fontsize: 11pt
+geometry: margin = 1.2in
+header-includes:
+- \usepackage{setspace}
+- \usepackage{chngcntr}
+- \onehalfspacing
 ---
 # ER Diagram
 
