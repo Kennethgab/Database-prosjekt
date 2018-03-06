@@ -42,19 +42,19 @@ public class Bruker extends ActiveDomainObject {
         }
 
     }
-    
+
     public void refresh (Connection conn) {
         initialize (conn);
     }
-    
+
     public void save (Connection conn) {
         try {
-            Statement stmt = conn.createStatement(); 
+            Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("update Bruker set navn="+navn+", epost="+epost+", brukertype="+type+"where bid="+bid);
         } catch (Exception e) {
             System.out.println("db error during update of bruker="+e);
             return;
         }
     }
-    
+
 }

@@ -13,45 +13,42 @@ header-includes:
 
 
 \begin{figure}[h!]
-\includegraphics[width=1\textwidth]{C:/Repositories/Database-Prosjekt/diagrammer/ER_del_1.png}
+\includegraphics[width=1\textwidth]{~/Repositories/Database-prosjekt/diagrammer/ER-del_1.png}
 \caption{ER Diagram}
 \end{figure}
 \newpage
 # ER Diagram oversatt til tabellform
-
+\newcommand\tab[1][1cm]{\hspace*{#1}}
 Treningsøkt(\underline{ØktId}, dato, tidspunkt, varighet, personlig form(1-10), prestasjon(1-10), LøpeNr)
 
-FK: LøpeNr -> Notat
+\tab FK: LøpeNr -> Notat
 
 Notat(\underline{LøpeNr}, treningsformål, notatBeskrivelse, notatResultat)
 
 ØvelsesGruppe(\underline{GruppeId}, gruppebeskrivelse)
 
-Øvelse(\underline{øvelsesId}, øvelseNavn, øvelseBeskrivelse)
+Øvelse(\underline{øvelsesId}, øvelseNavn, øvelseBeskrivelse, apperatId)
 
-FastmontertApparat(\underline{øvelsesId},\underline{apperatId})
+\tab FK: apperatId -> apparat
 
-FK: apparatId -> Apparat, FK: øvelsesId -> Øvelse
+Apparat(\underline{apparatId}, apparatNavn, apparatBeskrivelse)
 
-Apparat(\underline{ApparatId}, apparatNavn, apparatBeskrivelse)
+FriØvelse(\underline{øvelsesId},\underline{øktId}, resultat)
 
-FriØvelse(\underline{ØvelsesId}, resultat)
+\tab FK: øktId -> treningsøkt  FK: ØvelsesId -> Øvelse
 
-FK: ØvelsesId -> Øvelse
+ØvelseTilhørerGruppe(\underline{gruppeId}, \underline{øvelsesId})
 
-ØvelseTilhørerGruppe(\underline{GruppeId}, \underline{ØvelsesId})
+\tab FK: GruppeId -> ØvelsesGruppe, FK: ØvelsesId -> Øvelse
 
-FK: GruppeId -> ØvelsesGruppe, FK: ØvelsesId -> Øvelse
+ApperatØvelse(\underline{øvelsesId}, \underline{øktId}, antallKilo, antallSett, resultat)
 
-ØvelsePåØkt(\underline{øvelsesId}, \underline{øktId}, antallKilo, antallSett)
-
-FK: øktId -> TreningsØkt, FK: øvelsesId -> Øvelse
+\tab FK: øktId -> TreningsØkt, FK: øvelsesId -> Øvelse
 
 # Oppfyllelse av krav
 
-## Krav 1
-
-Det er mulig å legge til rader i tabellene for apparater, øvelser og økter.
+## Registrere apparater, øvelser og treningsøkter med tilhørende data
+Apparater: Bare legg til rader i tabbelen
 
 ## Krav 2
 Sorterer treningsøkt tabell på tidspunkt, og select'er de n øverste radene. så selecter du de radene som har fremmednøkkel til et notat slik at du sitter igjen med alle de treningsøkter med notater.
