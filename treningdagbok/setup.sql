@@ -14,7 +14,7 @@ CREATE TABLE Treningsøkt(
 	prestasjon INT,
 	løpeNr INT NOT NULL,
 	PRIMARY KEY(øktId), 
-    FOREIGN KEY (løpeNr) REFERENCES Notat(løpeNr)
+	FOREIGN KEY (løpeNr) REFERENCES Notat(løpeNr)
 		ON DELETE CASCADE ON UPDATE CASCADE );
 
 CREATE TABLE Øvelsesgruppe(
@@ -22,34 +22,37 @@ CREATE TABLE Øvelsesgruppe(
 	gruppebeskrivelse VARCHAR(50),
 	PRIMARY KEY (gruppeId) );
 
+CREATE TABLE Apparat(
+	apparatId INT NOT NULL,
+	apparatNavn VARCHAR(50),
+	apparatBeskrivelse VARCHAR(50),
+	PRIMARY KEY(apparatId) );
+
 CREATE TABLE Øvelse(
 	øvelsesId INT NOT NULL,
 	øvelseNavn VARCHAR(30),
 	øvelseBeskrivelse VARCHAR(50),
-	PRIMARY KEY(øvelsesId) );
-
-CREATE TABLE FastMontertApperat(
-	øvelsesId INT REFERENCES Øvelse(øvelsesId),
-	apperatId INT REFERENCES Apperat(apperatId) );
-
-CREATE TABLE Apparat(
-	apperatId INT NOT NULL,
-	apperatNavn VARCHAR(50),
-	apparatBeskrivelse VARCHAR(50),
-	PRIMARY KEY(apperatId) );
+	apparatId INT, 
+	PRIMARY KEY(øvelsesId), 
+	FOREIGN KEY (apparatId) REFERENCES Apparat(apparatId)
+		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE FriØvelse (
-        øvelsesId	INT NOT NULL,
-        resultat	VARCHAR(30),
-        PRIMARY KEY (øvelsesId),
+        øvelsesId INT NOT NULL,
+	øktId INT NOT NULL, 
+        resultat VARCHAR(30),
+	PRIMARY KEY (øvelsesId, øktId),
         FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId) 
-                ON DELETE NO ACTION ON UPDATE CASCADE );
+                ON DELETE NO ACTION ON UPDATE CASCADE, 
+	FOREIGN KEY (øktId) REFERENCES Treningsøkt(øktId)
+		ON DELETE NO ACTION ON UPDATE CASCADE );
 
-CREATE TABLE ØvelsePåØkt (
-	øvelsesId	INT	NOT NULL,
-	øktId		INT	NOT NULL,
-	antallKilo	INT,
-	antallSett	INT, 
+CREATE TABLE ApparatØvelse (
+	øvelsesId INT NOT NULL,
+	øktId INT NOT NULL,
+	antallKilo INT,
+	antallSett INT,
+	resultat VARCHAR(30), 
 	PRIMARY KEY (øvelsesId, øktId), 
 	FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId)
 		ON DELETE NO ACTION	ON UPDATE CASCADE,  
@@ -64,4 +67,3 @@ CREATE TABLE ØvelseTilhørerGruppe (
 		ON DELETE NO ACTION	ON UPDATE CASCADE,
 	FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId)
 		ON DELETE NO ACTION	ON UPDATE CASCADE );
- 	
