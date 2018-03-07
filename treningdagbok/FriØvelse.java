@@ -13,36 +13,24 @@ public class FriØvelse extends ActiveDomainObject {
         this.øvelsesid = øvelsesid;
     }
     
-
     public int getØvelsesid() {
 		return øvelsesid;
 	}
-
-
 	public void setØvelsesid(int øvelsesid) {
 		this.øvelsesid = øvelsesid;
 	}
-
-
 	public int getØktid() {
 		return øktid;
 	}
-
-
 	public void setØktid(int øktid) {
 		this.øktid = øktid;
 	}
-
-
 	public String getResultat() {
 		return resultat;
 	}
-
-
 	public void setResultat(String resultat) {
 		this.resultat = resultat;
 	}
-
 
 	public void initialize (Connection conn) {
         try {
