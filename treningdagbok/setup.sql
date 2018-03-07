@@ -1,8 +1,8 @@
 CREATE TABLE Notat(
 	løpenr INT NOT NULL,
-	treningsformål VARCHAR(20),
-	øktbeskrivelse VARCHAR(50),
-	resultat VARCHAR(20),
+	treningsformål VARCHAR(255),
+	øktbeskrivelse VARCHAR(255),
+	resultat VARCHAR(255),
 	PRIMARY KEY(løpenr) );
 
 CREATE TABLE Treningsøkt(
@@ -19,19 +19,19 @@ CREATE TABLE Treningsøkt(
 
 CREATE TABLE ØvelsesGruppe(
 	gruppeid INT NOT NULL,
-	gruppebeskrivelse VARCHAR(50),
+	gruppebeskrivelse VARCHAR(255),
 	PRIMARY KEY (gruppeid) );
 
 CREATE TABLE Apparat(
 	apparatid INT NOT NULL,
-	apparatnavn VARCHAR(50),
-	apparatbeskrivelse VARCHAR(50),
+	apparatnavn VARCHAR(255),
+	apparatbeskrivelse VARCHAR(255),
 	PRIMARY KEY(apparatid) );
 
 CREATE TABLE Øvelse(
 	øvelsesid INT NOT NULL,
-	øvelsenavn VARCHAR(30),
-	øvelsebeskrivelse VARCHAR(50),
+	øvelsenavn VARCHAR(255),
+	øvelsebeskrivelse VARCHAR(255),
 	apparatid INT,
 	PRIMARY KEY(øvelsesid),
 	FOREIGN KEY (apparatid) REFERENCES Apparat(apparatid)
@@ -40,7 +40,7 @@ CREATE TABLE Øvelse(
 CREATE TABLE FriØvelse (
         øvelsesid INT NOT NULL,
 	øktid INT NOT NULL,
-        resultat VARCHAR(30),
+        resultat VARCHAR(255),
 	PRIMARY KEY (øvelsesid, øktid),
         FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
                 ON DELETE NO ACTION ON UPDATE CASCADE,
@@ -52,7 +52,7 @@ CREATE TABLE ApparatØvelse (
 	øktid INT NOT NULL,
 	antallkilo INT,
 	antallsett INT,
-	resultat VARCHAR(30),
+	resultat VARCHAR(255),
 	PRIMARY KEY (øvelsesid, øktid),
 	FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE,
