@@ -13,12 +13,12 @@
 
 import java.sql.*;
 import java.util.*;
-//whathefuck
+
 public class ApparatØvelse extends ActiveDomainObject {
     private int øvelsesid, øktid, antallkilo, antallsett;
     private String resultat;
 
-    public ApparatØvelse (intøvelsesid, int øktid) {
+    public ApparatØvelse (int øvelsesid, int øktid) {
         this.øvelsesid = øvelsesid;
         this.øktid = øktid;
     }
