@@ -21,6 +21,30 @@ public class Treningsøkt extends ActiveDomainObject {
         return øktid;
     }
 
+    public void setDato (Date dato) {
+        this.dato = dato;
+    }
+
+    public void setTidspunkt (Time tpkt) {
+        this.tidspunkt = tpkt;
+    }
+
+    public void setVarighet (Date dato) {
+        this.dato = dato;
+    }
+
+    public void setForm (int form) {
+        this.form = form;
+    }
+
+    public void setPrestasjon (int prest) {
+        this.prestasjon = prest;
+    }
+
+    public void setLøpenr (int løpenr) {
+        this.løpenr = løpenr;
+    }
+
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
