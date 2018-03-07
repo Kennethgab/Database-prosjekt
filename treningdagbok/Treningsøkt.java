@@ -5,21 +5,21 @@ import java.util.*;
 //import sun.util.calendar.BaseCalendar.Date;
 import treningsdagbok.ActiveDomainObject;
 
-public class Treningsøkt extends ActiveDomainObject {
-    private int øktid;
+public class TreningsÃ¸kt extends ActiveDomainObject {
+    private int Ã¸ktid;
     private Date dato;
     private Time tidspunkt;
     private int varighet;
     private int form;
     private int prestasjon;
-    private int løpenr;
+    private int lÃ¸penr;
 
-    public Treningsøkt (int øktid) {
-        this.øktid = øktid;
+    public TreningsÃ¸kt(int Ã¸ktid) {
+        this.Ã¸ktid = Ã¸ktid;
     }
    
-    public int getØktid() {
-		return øktid;
+    public int getÃ˜ktid() {
+		return Ã¸ktid;
 	}
 
 	public Date getDato() {
@@ -62,12 +62,12 @@ public class Treningsøkt extends ActiveDomainObject {
 		this.prestasjon = prestasjon;
 	}
 
-	public int getLøpenr() {
-		return løpenr;
+	public int getLÃ¸penr() {
+		return lÃ¸penr;
 	}
 
-	public void setLøpenr(int løpenr) {
-		this.løpenr = løpenr;
+	public void setLÃ¸penr(int lÃ¸penr) {
+		this.lÃ¸penr = lÃ¸penr;
 	}
 
 	public void initialize (Connection conn) {
@@ -75,14 +75,14 @@ public class Treningsøkt extends ActiveDomainObject {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
                 "SELECT dato, tidspunkt, varighet, form, prestasjon, lÃ¸penr " +
-                 "FROM TreningsÃ¸kt WHERE Ã¸ktid=" + øktid);
+                 "FROM TreningsÃ¸kt WHERE Ã¸ktid=" + lÃ¸penr);
             while (rs.next()) {
                 dato = rs.getDate("dato");
                 tidspunkt = rs.getTime("tidspunkt");
                 varighet = rs.getInt("varighet");
                 form = rs.getInt("form");
                 prestasjon = rs.getInt("prestasjon");
-                løpenr = rs.getInt("lÃ¸penr");
+                lÃ¸penr = rs.getInt("lÃ¸penr");
             }
         } catch (Exception e) {
             System.out.println("DB-feil ved select av bruker = " + e);
@@ -97,11 +97,11 @@ public class Treningsøkt extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE Treningsøkt set" +
-            "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr=" +løpenr+
-            " WHERE øktid="+øktid);
+            ResultSet rs = stmt.executeQuery("UPDATE TreningsÃ¸kt set" +
+            "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", lÃ¸penr=" +lÃ¸penr+
+            " WHERE Ã¸ktid="+Ã¸ktid);
         } catch (Exception e) {
-            System.out.println("DB-feil ved oppdatering av økt = "+e);
+            System.out.println("DB-feil ved oppdatering av Ã¸kt = "+e);
             return;
         }
     }
