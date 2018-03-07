@@ -1,7 +1,7 @@
 package treningdagbok;
 
 
-import java.sql*;
+import java.sql.*;
 
 public abstract class ActiveDomainObject {
 	public abstract void initialize( Connection conn);
