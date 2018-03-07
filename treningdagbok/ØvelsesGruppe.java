@@ -5,10 +5,10 @@ import java.util.*;
 
 public class ØvelsesGruppe extends ActiveDomainObject {
 	private int gruppeid;
-	private int String beskrivelse;
+	private String beskrivelse;
 
 	public ØvelsesGruppe(int gruppeid) {
-		this.gruppeid = gruppeid
+		this.gruppeid = gruppeid;
 	}
 
 	public void initialize(Connection conn) {
@@ -38,6 +38,8 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 			return;
 			}
 	}
+
+}
 
 
 
