@@ -43,8 +43,6 @@ public class Øvelse extends ActiveDomainObject {
 		return øvelsesid;
 	}
 	
-
-
 	public void refresh(Connection conn) {
 		initialize(conn);
 	}
