@@ -1,11 +1,19 @@
+
+import java.util.*;
+import java.sql.*;
+
+
 public class Øvelse extends ActiveDomainObject {
 	private String navn;
 	private String beskrivelse;
 	private int øvelsesid;
-	private int apperatid;
+	private int apparatid;
 
 
 
+	public Øvelse(int øvelsesid){
+	this.øvelsesid = øvelsesid;
+	}
 
 	public void refresh(Connection conn) {
 		initialize(conn);
@@ -13,9 +21,9 @@ public class Øvelse extends ActiveDomainObject {
 	public void save(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			Resultset rs = stmt.executeQuery("update Øvelse:");
+			Resultset rs = stmt.executeQuery("update Øvelse set navn="+navn+", beskrivelse="+beskrivelse+", apparatid="+apparatid+"where øvelsesid="+øvelsesid);
 		} catch(Exception e) {
-			System.out.println("db error during update of øvelse="+e));
+			System.out.println("db error during update of øvelse="+e);
 			return;
 		}
 	}
@@ -26,9 +34,16 @@ public class Øvelse extends ActiveDomainObject {
 	public void initialize(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select navn, beskrivelse, apperatid from Øvelse where øvelsesid="+øvelsesid);
-			navn = rs.getString("navn");
-			beskrivelse = rs.getString("beskrivelse");
+			ResultSet rs = stmt.executeQuery("select navn, beskrivelse, apparatid from Øvelse where øvelsesid="+øvelsesid);
+			while(rs.next()) {
+				navn = rs.getString("navn");
+				beskrivelse = rs.getString("beskrivelse");
+				apparatid = rs.getString("apparatid");
+			}
+		} catch( Exception e) {
+			System.out.println("db error during select of øvelse= "+e);
+		}
+	}
 }
 
 
