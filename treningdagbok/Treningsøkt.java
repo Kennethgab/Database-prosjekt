@@ -1,63 +1,88 @@
 import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 
-import sun.util.calendar.BaseCalendar.Date;
+//import sun.util.calendar.BaseCalendar.Date;
 import treningsdagbok.ActiveDomainObject;
 
-public class TreningsÃ¸kt extends ActiveDomainObject {
-    private int Ã¸ktid;
+public class Treningsøkt extends ActiveDomainObject {
+    private int øktid;
     private Date dato;
     private Time tidspunkt;
     private int varighet;
     private int form;
     private int prestasjon;
-    private int lÃ¸penr;
+    private int løpenr;
 
-    public TreningsÃ¸kt (int Ã¸ktid) {
-        this.Ã¸ktid = Ã¸ktid;
+    public Treningsøkt (int øktid) {
+        this.øktid = øktid;
     }
+   
+    public int getØktid() {
+		return øktid;
+	}
 
-    public int getÃ˜ktid () {
-        return Ã¸ktid;
-    }
+	public Date getDato() {
+		return dato;
+	}
 
-    public void setDato (Date dato) {
-        this.dato = dato;
-    }
+	public void setDato(Date dato) {
+		this.dato = dato;
+	}
 
-    public void setTidspunkt (Time tpkt) {
-        this.tidspunkt = tpkt;
-    }
+	public Time getTidspunkt() {
+		return tidspunkt;
+	}
 
-    public void setVarighet (Date dato) {
-        this.dato = dato;
-    }
+	public void setTidspunkt(Time tidspunkt) {
+		this.tidspunkt = tidspunkt;
+	}
 
-    public void setForm (int form) {
-        this.form = form;
-    }
+	public int getVarighet() {
+		return varighet;
+	}
 
-    public void setPrestasjon (int prest) {
-        this.prestasjon = prest;
-    }
+	public void setVarighet(int varighet) {
+		this.varighet = varighet;
+	}
 
-    public void setLÃ¸penr (int lÃ¸penr) {
-        this.lÃ¸penr = lÃ¸penr;
-    }
+	public int getForm() {
+		return form;
+	}
 
-    public void initialize (Connection conn) {
+	public void setForm(int form) {
+		this.form = form;
+	}
+
+	public int getPrestasjon() {
+		return prestasjon;
+	}
+
+	public void setPrestasjon(int prestasjon) {
+		this.prestasjon = prestasjon;
+	}
+
+	public int getLøpenr() {
+		return løpenr;
+	}
+
+	public void setLøpenr(int løpenr) {
+		this.løpenr = løpenr;
+	}
+
+	public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
                 "SELECT dato, tidspunkt, varighet, form, prestasjon, lÃ¸penr " +
-                 "FROM TreningsÃ¸kt WHERE Ã¸ktid=" + Ã¸ktid);
+                 "FROM TreningsÃ¸kt WHERE Ã¸ktid=" + øktid);
             while (rs.next()) {
                 dato = rs.getDate("dato");
                 tidspunkt = rs.getTime("tidspunkt");
                 varighet = rs.getInt("varighet");
                 form = rs.getInt("form");
                 prestasjon = rs.getInt("prestasjon");
-                lÃ¸penr = rs.getInt("lÃ¸penr");
+                løpenr = rs.getInt("lÃ¸penr");
             }
         } catch (Exception e) {
             System.out.println("DB-feil ved select av bruker = " + e);
@@ -72,13 +97,15 @@ public class TreningsÃ¸kt extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE TreningsÃ¸kt set" +
-            "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", lÃ¸penr=" +lÃ¸penr+
-            " WHERE Ã¸ktid="+Ã¸ktid);
+            ResultSet rs = stmt.executeQuery("UPDATE Treningsøkt set" +
+            "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr=" +løpenr+
+            " WHERE øktid="+øktid);
         } catch (Exception e) {
-            System.out.println("DB-feil ved oppdatering av Ã¸kt = "+e);
+            System.out.println("DB-feil ved oppdatering av økt = "+e);
             return;
         }
     }
+
+	
 
 }
