@@ -13,7 +13,7 @@
 
 import java.sql.*;
 import java.util.*;
-
+//whathefuck
 public class ApparatØvelse extends ActiveDomainObject {
     private int øvelsesid, øktid, antallkilo, antallsett;
     private String resultat;
