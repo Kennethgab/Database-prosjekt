@@ -11,6 +11,18 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 		this.gruppeid = gruppeid;
 	}
 
+	public int getGruppeid() {
+		return gruppeid;
+	}
+
+	public String getBeskrivelse() {
+		return beskrivelse;
+	}
+
+	public void setBeskrivelse(String beskrivelse) {
+		this.beskrivelse = beskrivelse;
+	}
+
 	public void initialize(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();

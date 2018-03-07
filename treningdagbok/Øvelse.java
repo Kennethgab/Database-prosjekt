@@ -9,11 +9,41 @@ public class Øvelse extends ActiveDomainObject {
 	private int øvelsesid;
 	private int apparatid;
 
-
-
 	public Øvelse(int øvelsesid){
 	this.øvelsesid = øvelsesid;
 	}
+
+	public String getNavn() {
+		return navn;
+	}
+
+	public void setNavn(String navn) {
+		this.navn = navn;
+	}
+
+	public String getBeskrivelse() {
+		return beskrivelse;
+	}
+
+	public void setBeskrivelse(String beskrivelse) {
+		this.beskrivelse = beskrivelse;
+	}
+
+
+	public int getApparatid() {
+		return apparatid;
+	}
+
+
+	public void setApparatid(int apparatid) {
+		this.apparatid = apparatid;
+	}
+	
+	public int getØvelsesid() {
+		return øvelsesid;
+	}
+	
+
 
 	public void refresh(Connection conn) {
 		initialize(conn);
@@ -27,9 +57,7 @@ public class Øvelse extends ActiveDomainObject {
 			return;
 		}
 	}
-	public int getØvelsesid() {
-		return øvelsesid;
-		}
+
 
 	public void initialize(Connection conn) {
 		try {

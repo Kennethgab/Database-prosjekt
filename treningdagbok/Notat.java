@@ -17,7 +17,32 @@ public class Notat extends ActiveDomainObject {
         return løpenr;
     }
 
-    public void initialize (Connection conn) {
+    public String getTreningsformål() {
+		return treningsformål;
+	}
+
+	public void setTreningsformål(String treningsformål) {
+		this.treningsformål = treningsformål;
+	}
+
+	public String getØktbeskrivelse() {
+		return øktbeskrivelse;
+	}
+
+	public void setØktbeskrivelse(String øktbeskrivelse) {
+		this.øktbeskrivelse = øktbeskrivelse;
+	}
+
+	public String getResultat() {
+		return resultat;
+	}
+
+	public void setResultat(String resultat) {
+		this.resultat = resultat;
+	}
+
+
+	public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT "+
