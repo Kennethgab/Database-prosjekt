@@ -14,13 +14,13 @@
 import java.sql.*;
 import java.util.*;
 
-public class ApparatØvelse extends ActiveDomainObject {
-    private int øvelsesid, øktid, antallkilo, antallsett;
+public class ApparatÃ˜velse extends ActiveDomainObject {
+    private int Ã¸velsesid, Ã¸ktid, antallkilo, antallsett;
     private String resultat;
 
-    public ApparatØvelse (int øvelsesid, int øktid) {
-        this.øvelsesid = øvelsesid;
-        this.øktid = øktid;
+    public ApparatÃ˜velse (intÃ¸velsesid, int Ã¸ktid) {
+        this.Ã¸velsesid = Ã¸velsesid;
+        this.Ã¸ktid = Ã¸ktid;
     }
     public void setResultat(String resultat) {
     	this.resultat = resultat;
@@ -31,11 +31,11 @@ public class ApparatØvelse extends ActiveDomainObject {
     public void setSett(int sett) {
     	this.antallsett = sett;
     }
-    public int getØvelsesID () {
-        return øvelsesid;
+    public int getÃ˜velsesID () {
+        return Ã¸velsesid;
     }
-    public int getØktID () {
-        return øktid;
+    public int getÃ˜ktID () {
+        return Ã˜ktid;
     }
     public int getKilo() {
     	return antallkilo;
@@ -50,7 +50,7 @@ public class ApparatØvelse extends ActiveDomainObject {
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select resultat, antallkilo, antallsett  from ApparatØvelse where øvelsesid="+ øvelsesid +" and øktid="+øktid);
+            ResultSet rs = stmt.executeQuery("select resultat, antallkilo, antallsett  from Apparatï¿½velse where Ã¸velsesid="+ Ã¸velsesid +" and Ã¸ktid="+Ã¸ktid);
             while (rs.next()) {
                 resultat =  rs.getString("resultat");
                 antallkilo = rs.getInt("antallkilo");
@@ -58,7 +58,7 @@ public class ApparatØvelse extends ActiveDomainObject {
             }
 
         } catch (Exception e) {
-            System.out.println("db error during select of apparatøvelse= "+e);
+            System.out.println("db error during select of apparatÃ¸velse= "+e);
             return;
         }
 
@@ -71,9 +71,9 @@ public class ApparatØvelse extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("update ApparatØvelse set resultat="+resultat+", antallkilo="+antallkilo+", antallsett = "+ antallsett +" where øvelsesid="+øvelsesid+" and øktid="+øktid);
+            ResultSet rs = stmt.executeQuery("update ApparatÃ¸velse set resultat="+resultat+", antallkilo="+antallkilo+", antallsett = "+ antallsett +" where Ã¸velsesid="+Ã¸velsesid+" and Ã¸ktid="+Ã¸ktid);
         } catch (Exception e) {
-            System.out.println("db error during update of apparatøvelse="+e);
+            System.out.println("db error during update of apparatÃ¸velse="+e);
             return;
         }
     }
