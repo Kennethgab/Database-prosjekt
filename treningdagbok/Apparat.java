@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Apparat extends ActiveDomainObject {
     private int apparatid;
-    private String beskrivelse;
+    private String apparatbeskrivelse;
     private String navn;
 
 
@@ -24,14 +24,14 @@ public class Apparat extends ActiveDomainObject {
         this.apparatid = apparatid;
     }
     
-    public void setBeskrivelse(String beskrivelse) {
-    	this.beskrivelse = beskrivelse;
+    public void setBeskrivelse(String apparatbeskrivelse) {
+    	this.apparatbeskrivelse = apparatbeskrivelse;
     }
     public void setNavn(String navn) {
     	this.navn = navn;
     }
     public String getBeskrivelse() {
-    	return beskrivelse;
+    	return apparatbeskrivelse;
     }
     public int getApparatID () {
         return apparatid;
@@ -42,10 +42,10 @@ public class Apparat extends ActiveDomainObject {
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select navn, beskrivelse from Apparat where apparatid=" + apparatid);
+            ResultSet rs = stmt.executeQuery("select navn, apparatbeskrivelse from Apparat where apparatid=" + apparatid);
             while (rs.next()) {
                 navn =  rs.getString("navn");
-                beskrivelse = rs.getString("beskrivelse");
+                apparatbeskrivelse = rs.getString("apparatbeskrivelse");
             }
 
         } catch (Exception e) {
@@ -62,7 +62,7 @@ public class Apparat extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("update Apparat set navn="+navn+", beskrivelse="+beskrivelse+"where apparatid="+apparatid);
+            ResultSet rs = stmt.executeQuery("update Apparat set navn="+navn+", apparatbeskrivelse="+apparatbeskrivelse+"where apparatid="+apparatid);
         } catch (Exception e) {
             System.out.println("db error during update of apparat="+e);
             return;

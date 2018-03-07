@@ -38,9 +38,9 @@ CREATE TABLE Øvelse(
 		ON DELETE NO ACTION ON UPDATE CASCADE );
 
 CREATE TABLE FriØvelse (
-        øvelsesId INT NOT NULL,
+    øvelsesId INT NOT NULL,
 	øktId INT NOT NULL, 
-        resultat VARCHAR(30),
+    resultat VARCHAR(30),
 	PRIMARY KEY (øvelsesId, øktId),
         FOREIGN KEY (øvelsesId) REFERENCES Øvelse(øvelsesId) 
                 ON DELETE NO ACTION ON UPDATE CASCADE, 

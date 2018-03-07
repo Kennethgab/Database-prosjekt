@@ -3,28 +3,28 @@ import java.sql.*;
 import treningdagbok.ActiveDomainObject;
 
 public class Notat extends ActiveDomainObject {
-    private int løpeNr;
+    private int løpenr;
     private String treningsformål;
     private String øktbeskrivelse;
     private String resultat;
 
 
-    public Notat (int løpeNr) {
-        this.løpeNr = løpeNr;
+    public Notat (int løpenr) {
+        this.løpenr = løpenr;
     }
 
-    public int getLøpeNr () {
-        return løpeNr;
+    public int getLøpenr () {
+        return løpenr;
     }
 
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT "+
-                "løpeNr, treningsformål, øktbeskrivelse, resultat"+
-                " WHERE løpeNr="+løpeNr);
+                "løpenr, treningsformål, øktbeskrivelse, resultat"+
+                " WHERE løpenr="+løpenr);
             while (rs.next()) {
-                løpeNr = rs.getInt("løpeNr");
+                løpenr = rs.getInt("løpenr");
                 treningsformål = rs.getString("treningsformål");
                 øktbeskrivelse = rs.getString("øktbeskrivelse");
                 resultat = rs.getString("resultat");
@@ -40,7 +40,7 @@ public class Notat extends ActiveDomainObject {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Notat SET "+
                 "treningsformål="+treningsformål+", øktbeskrivelse="+øktbeskrivelse+", resultat="+resultat+
-                "WHERE løpeNr="+løpeNr);
+                "WHERE løpenr="+løpenr);
         } catch (Exception e) {
             System.out.println("DB-feil ved oppdatering av notat = "+e);
             return;
