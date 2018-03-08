@@ -8,7 +8,7 @@
 
 /**
  *
- * @author sveinbra
+ * @author Simon
  */
 
 import java.sql.*;
