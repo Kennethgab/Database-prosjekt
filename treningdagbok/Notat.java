@@ -59,8 +59,12 @@ public class Notat extends ActiveDomainObject {
             return;
         }
     }
-
-    public void refresh (Connection conn) {
+	
+	public void refresh (Connection conn) {
+		initialize(conn);
+	}
+	
+    public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Notat SET "+
