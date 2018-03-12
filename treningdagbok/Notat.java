@@ -61,7 +61,12 @@ public class Notat extends ActiveDomainObject {
     }
 
     public void refresh (Connection conn) {
-        try {
+       initialize (conn);
+    }
+    
+    @Override
+	public void save(Connection conn) {
+		try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("UPDATE Notat SET "+
                 "treningsformål="+treningsformål+", øktbeskrivelse="+øktbeskrivelse+", resultat="+resultat+
@@ -70,6 +75,7 @@ public class Notat extends ActiveDomainObject {
             System.out.println("DB-feil ved oppdatering av notat = "+e);
             return;
         }
-    }
+		
+	}
 
 }
