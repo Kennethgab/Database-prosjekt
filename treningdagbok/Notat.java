@@ -71,7 +71,6 @@ public class Notat extends ActiveDomainObject {
                 stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformål+","+øktbeskrivelse+","+resultat+")");
             } catch (Exception e) {
                 System.out.println("db error during insert of Notat="+e);
-                return;
             }
             ResultSet rs = stmt.executeQuery("UPDATE Notat SET "+
                 "treningsformål="+treningsformål+", øktbeskrivelse="+øktbeskrivelse+", resultat="+resultat+
