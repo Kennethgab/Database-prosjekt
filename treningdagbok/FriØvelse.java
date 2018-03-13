@@ -1,6 +1,7 @@
 import java.sql.*;
 import java.util.*;
 
+package treningdagbok;
 import treningdagbok.ActiveDomainObject;
 
 public class FriØvelse extends ActiveDomainObject {
@@ -12,7 +13,7 @@ public class FriØvelse extends ActiveDomainObject {
         this.øktid = øktid;
         this.øvelsesid = øvelsesid;
     }
-    
+
     public int getØvelsesid() {
 		return øvelsesid;
 	}

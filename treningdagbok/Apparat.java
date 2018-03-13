@@ -4,7 +4,7 @@
  */
 
 
-//package avtalebok;
+package treningdagbok;
 
 /**
  *
@@ -23,7 +23,7 @@ public class Apparat extends ActiveDomainObject {
     public Apparat (int apparatid) {
         this.apparatid = apparatid;
     }
-    
+
     public void setBeskrivelse(String apparatbeskrivelse) {
     	this.apparatbeskrivelse = apparatbeskrivelse;
     }

@@ -2,6 +2,7 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
+package treningdagbok;
 //import sun.util.calendar.BaseCalendar.Date;
 import treningsdagbok.ActiveDomainObject;
 
@@ -17,7 +18,7 @@ public class Treningsøkt extends ActiveDomainObject {
     public Treningsøkt(int øktid) {
         this.øktid = øktid;
     }
-   
+
     public int getØktid() {
 		return øktid;
 	}
@@ -89,8 +90,8 @@ public class Treningsøkt extends ActiveDomainObject {
             return;
         }
     }
-    
-    public void refresh (Connection conn) { 
+
+    public void refresh (Connection conn) {
         initialize(conn);
     }
 
@@ -106,6 +107,6 @@ public class Treningsøkt extends ActiveDomainObject {
         }
     }
 
-	
+
 
 }
