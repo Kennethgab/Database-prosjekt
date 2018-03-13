@@ -1,6 +1,6 @@
 
 
-package treningdagbok;
+package src.treningdagbok;
 
 import java.sql.*;
 import java.util.Properties;

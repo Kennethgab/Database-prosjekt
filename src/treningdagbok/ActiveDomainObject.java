@@ -1,4 +1,4 @@
-package treningdagbok;
+package src.treningdagbok;
 
 
 import java.sql.*;

@@ -4,7 +4,7 @@
  */
 
 
-//package avtalebok;
+package src.treningdagbok;
 
 /**
  *

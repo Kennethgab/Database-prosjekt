@@ -1,4 +1,4 @@
-package treningdagbok;
+package src.treningdagbok;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

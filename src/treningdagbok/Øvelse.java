@@ -1,8 +1,6 @@
-
+package src.treningdagbok;
 import java.util.*;
 import java.sql.*;
-
-package treningdagbok;
 
 public class Øvelse extends ActiveDomainObject {
 	private String navn;

@@ -1,8 +1,6 @@
-
+package src.treningdagbok;
 import java.sql.*;
 import java.util.*;
-
-package treningdagbok;
 
 public class ØvelsesGruppe extends ActiveDomainObject {
 	private int gruppeid;

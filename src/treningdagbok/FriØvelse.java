@@ -1,7 +1,9 @@
+package src.treningdagbok;
+
 import java.sql.*;
 import java.util.*;
 
-package treningdagbok;
+
 import treningdagbok.ActiveDomainObject;
 
 public class FriØvelse extends ActiveDomainObject {

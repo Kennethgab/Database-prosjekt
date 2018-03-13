@@ -1,10 +1,9 @@
+package src.treningdagbok;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
-
-package treningdagbok;
 //import sun.util.calendar.BaseCalendar.Date;
-import treningsdagbok.ActiveDomainObject;
+import treningdagbok.ActiveDomainObject;
 
 public class Treningsøkt extends ActiveDomainObject {
     private int øktid;

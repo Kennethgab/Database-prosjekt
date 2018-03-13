@@ -1,5 +1,5 @@
+package src.treningdagbok;
 import java.sql.*;
-package treningdagbok;
 import treningdagbok.ActiveDomainObject;
 
 public class Notat extends ActiveDomainObject {
