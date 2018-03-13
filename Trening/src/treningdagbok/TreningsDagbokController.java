@@ -45,6 +45,7 @@ public class TreningsDagbokController {
 			this.a = a;
 			a.setNavn(apparatNavnText.getText());
 			a.setBeskrivelse(apparatBeskrivelseText.getText());
+			a.refresh(conn.conn);
 			a.save(conn.conn);
 		}
 		catch (Exception e) {

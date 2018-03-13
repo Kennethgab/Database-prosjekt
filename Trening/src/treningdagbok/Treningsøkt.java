@@ -97,7 +97,7 @@ public class Treningsøkt extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE Treningsøkt set" +
+            stmt.executeUpdate("UPDATE Treningsøkt set" +
             "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr=" +løpenr+
             " WHERE øktid="+øktid);
         } catch (Exception e) {
