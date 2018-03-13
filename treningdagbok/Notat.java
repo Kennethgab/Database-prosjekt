@@ -1,5 +1,5 @@
 import java.sql.*;
-
+package treningdagbok;
 import treningdagbok.ActiveDomainObject;
 
 public class Notat extends ActiveDomainObject {
@@ -59,15 +59,15 @@ public class Notat extends ActiveDomainObject {
             return;
         }
     }
-	
+
 	public void refresh (Connection conn) {
 		initialize(conn);
 	}
-	
+
     public void save (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
-            try {     
+            try {
                 stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformål+","+øktbeskrivelse+","+resultat+")");
             } catch (Exception e) {
                 System.out.println("db error during insert of Notat="+e);

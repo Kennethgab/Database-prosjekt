@@ -2,6 +2,7 @@
 import java.util.*;
 import java.sql.*;
 
+package treningdagbok;
 
 public class Øvelse extends ActiveDomainObject {
 	private String navn;
@@ -38,11 +39,11 @@ public class Øvelse extends ActiveDomainObject {
 	public void setApparatid(int apparatid) {
 		this.apparatid = apparatid;
 	}
-	
+
 	public int getØvelsesid() {
 		return øvelsesid;
 	}
-	
+
 	public void refresh(Connection conn) {
 		initialize(conn);
 	}
