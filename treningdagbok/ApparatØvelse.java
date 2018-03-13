@@ -8,7 +8,7 @@
 
 /**
  *
- * @author sveinbra
+ * @author Simon
  */
 
 import java.sql.*;
@@ -35,7 +35,7 @@ public class ApparatØvelse extends ActiveDomainObject {
         return øvelsesid;
     }
     public int getØktID () {
-        return Øktid;
+        return øktid;
     }
     public int getKilo() {
     	return antallkilo;
