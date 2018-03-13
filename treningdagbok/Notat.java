@@ -69,6 +69,7 @@ public class Notat extends ActiveDomainObject {
             Statement stmt = conn.createStatement();
             try {     
                 stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformål+","+øktbeskrivelse+","+resultat+")");
+                return;
             } catch (Exception e) {
                 System.out.println("db error during insert of Notat="+e);
             }
