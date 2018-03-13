@@ -63,10 +63,10 @@ public class Apparat extends ActiveDomainObject {
     public void save (Connection conn) {
         try {
         	Statement stmt = conn.createStatement();
-        	String nameString = "\"" +navn+"\"";
-    		String beskrivelseString = "\"" + apparatbeskrivelse+"\"";
+        	String nameString = StaticMethods.toQuote(navn);
+    		String beskrivelseString = StaticMethods.toQuote(apparatbeskrivelse);
         	try {
-        		stmt.executeUpdate("insert into Apparat values ("+apparatid+","+ nameString +","+beskrivelseString+")");
+        		stmt.executeUpdate("insert into Apparat values ("+apparatid+","+ StaticMethods.toQuote(navn) +","+StaticMethods.toQuote(apparatbeskrivelse)+")");
         		return;
         	} catch(Exception e) {
         		System.out.println("Error inserting: "+e);

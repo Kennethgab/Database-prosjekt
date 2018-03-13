@@ -1,16 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 package treningdagbok;
-
-/**
- *
- * @author Simon
- */
-
 import java.sql.*;
 import java.util.*;
 
