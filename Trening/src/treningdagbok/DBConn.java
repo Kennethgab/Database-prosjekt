@@ -15,10 +15,13 @@ public abstract class DBConn {
 			Properties p = new Properties();
 			p.put("user", "myuser");
 			p.put("password", "mypassword");
-			conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/treningdagbok?autoReconnect=true&useSSL=false",p);
-		} catch (Exception e)
-		{
-			throw new RuntimeException("Unable to connect", e);
+			String databaseURL = "jdbc:mysql://127.0.0.1:3306/trening?autoReconnect=true&useSSL=true";
+			String user = "root";
+			String password = "root";
+			conn = DriverManager.getConnection(databaseURL, user, password);
+			//conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/trening?autoReconnect=true&useSSL=false",p);
+		} catch (Exception e) {
+			System.out.println("Error connecting to db: " + e);
 		}
 	}
 }

@@ -61,8 +61,16 @@ public class Apparat extends ActiveDomainObject {
 
     public void save (Connection conn) {
         try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("update Apparat set navn="+navn+", apparatbeskrivelse="+apparatbeskrivelse+"where apparatid="+apparatid);
+        	Statement stmt = conn.createStatement();
+        	try {
+        		String nameString = "\"" +navn+"\"";
+        		String beskrivelseString = "\"" + apparatbeskrivelse+"\"";
+        		stmt.executeUpdate("insert into Apparat values ("+apparatid+","+ nameString +","+beskrivelseString+")");
+        		return;
+        	} catch(Exception e) {
+        		System.out.println("Error inserting: "+e);
+        	}
+            stmt.executeUpdate("update Apparat set navn="+navn+", apparatbeskrivelse="+apparatbeskrivelse+"where apparatid="+apparatid);
         } catch (Exception e) {
             System.out.println("db error during update of apparat="+e);
             return;

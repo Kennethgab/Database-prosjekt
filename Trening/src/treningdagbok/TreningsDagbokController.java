@@ -1,7 +1,8 @@
 package treningdagbok;
 
 import java.sql.*;
-
+import treningdagbok.DBConn;
+import treningdagbok.SQLConn;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -22,11 +23,18 @@ public class TreningsDagbokController {
 	@FXML private TextField ovelseApparatIDText;
 
 
-	private Connection conn;
+	private DBConn conn;
 	private Apparat a;
 
 	@FXML
 	private void initialize() {
+		try {
+			this.conn = new SQLConn();
+			conn.connect();
+		} catch (Exception e) {
+			System.out.println("Error connecting to database: "+e);
+			//e.printStackTrace();
+		}
 
 	}
 
@@ -37,7 +45,7 @@ public class TreningsDagbokController {
 			this.a = a;
 			a.setNavn(apparatNavnText.getText());
 			a.setBeskrivelse(apparatBeskrivelseText.getText());
-			a.save(conn);
+			a.save(conn.conn);
 		}
 		catch (Exception e) {
 			System.out.println("Error med å lage nytt apparat: "+e);
@@ -50,7 +58,7 @@ public class TreningsDagbokController {
 		o.setNavn(apparatNavnText.getText());
 		o.setBeskrivelse(ovelseBeskrivelseText.getText());
 		o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
-		o.save(conn);
+		o.save(conn.conn);
 	}
 
 	@FXML
