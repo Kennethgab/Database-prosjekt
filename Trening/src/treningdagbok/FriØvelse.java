@@ -56,14 +56,18 @@ public class FriØvelse extends ActiveDomainObject {
 
     public void save (Connection conn) {
         try {
+			String resultatString = StaticMethods.toQuote(resultat);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("UPDATE FriØvelse SET"+
-                "resultat="+resultat+" WHERE øvelsesid="+øvelsesid+" AND øktid="+øktid);
+			try {
+			stmt.executeUpdate("insert into FriØvelse values("+øvelsesid+","+øktid+","+resultatString+")");
+			return;
         } catch (Exception e) {
-            System.out.println("DB-feil ved opdatering av FriØvelse = "+e);
-            return;
+            System.out.println("error inserting: " + e);
         }
-    }
+		stmt.executeUpdate("update FriØvelse set resultat="+resultatString+"where øktid="+øktid+" and øvelsesid="øvelsesid);
+    }catch (Exception e ) {
+		System.out.println("db error during update of friøvelse= "+e=;
 
-
+	}
+}
 }
