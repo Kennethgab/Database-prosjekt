@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SQLQuery {
 	
-	public void getOvelserTilApparat (Connection conn, int apparatid) {
+	public List getOvelserTilApparat (Connection conn, int apparatid) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsesnavn, øvelsesbeskrivelse, apparatid from Øvelse WHERE apparatid=" + apparatid);
@@ -21,6 +21,7 @@ public class SQLQuery {
                 o.setApparatid(rs.getInt("apparatid"));
                 list.add(o);
             }
+            return list;
 
         } catch (Exception e) {
             System.out.println("db error during select of bruker= "+e);
