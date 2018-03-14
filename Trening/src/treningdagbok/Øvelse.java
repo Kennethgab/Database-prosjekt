@@ -57,7 +57,7 @@ public class Øvelse extends ActiveDomainObject {
 			}	catch(Exception e) {
 			System.out.println("Error insterting: "+e);
 	 	    }
-			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid");
+			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
 	} catch(Exception e) {
 	System.out.println("db erorr during update of øvelse="+e);
 }
