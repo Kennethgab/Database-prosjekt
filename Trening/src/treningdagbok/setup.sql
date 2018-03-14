@@ -4,7 +4,7 @@ CREATE TABLE Treningsøkt(
 	tidspunkt TIMESTAMP,
 	form INT,
 	prestasjon INT,
-	notat VARCHAR(50),
+	notat VARCHAR(255),
 	PRIMARY KEY(øktid) );
 
 CREATE TABLE ØvelsesGruppe(
