@@ -11,7 +11,7 @@ public class SQLQuery {
 	public static List getOvelserTilApparat (Connection conn, int apparatid) {
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsenavn, øvelsesbeskrivelse, apparatid from Øvelse WHERE apparatid=" + apparatid);
+            ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse WHERE apparatid=" + apparatid);
             Øvelse o;
             List<Øvelse> list = new ArrayList<Øvelse>();
             while (rs.next()) {
