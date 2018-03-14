@@ -48,14 +48,20 @@ public class Øvelse extends ActiveDomainObject {
 	public void save(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("update Øvelse set øvelsenavn="+navn+", øvelsebeskrivelse="+beskrivelse+", apparatid="+apparatid+"where øvelsesid="+øvelsesid);
-		} catch(Exception e) {
-			System.out.println("db error during update of øvelse="+e);
-			return;
-		}
-	}
+			String nameString = StaticMethods.toQuote(navn);
+			String beskrivelseString = StaticMethods.toQuote(beskrivelse);
+			try {
+				stmt.executeUpdate("insert into Øvelse values ("+øvelsesid+","+ nameString + ","+ beskrivelseString + "," + apparatid+")");
+				return;
 
-
+			}	catch(Exception e) {
+			System.out.println("Error insterting: "+e);
+	 	    }
+			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid");
+	} catch(Exception e) {
+	System.out.println("db erorr during update of øvelse="+e);
+}
+}
 	public void initialize(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
