@@ -67,7 +67,7 @@ public class Apparat extends ActiveDomainObject {
 
 	@Override
 	public String toString() {
-		return "apparatID: " + this.apparatid + "\nBeskrivelse: " + this.apparatbeskrivelse;
+		return "apparatID: " + this.apparatid + "\nNavn: "+ navn + "\nBeskrivelse: " + this.apparatbeskrivelse;
 	}
 
 }

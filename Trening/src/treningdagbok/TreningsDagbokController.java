@@ -1,6 +1,7 @@
 package treningdagbok;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 import treningdagbok.DBConn;
@@ -37,6 +38,9 @@ public class TreningsDagbokController {
 	@FXML private TextField ØvelseGruppeØvelseIDText;
 	@FXML private TextField ØvelseGruppeGruppeIDText;
 	@FXML private Button ØvelseGruppeButton;
+	
+	@FXML private Button getØvelserButton;
+	@FXML private Button getApparatButton;
 
 
 	private DBConn conn;
@@ -139,8 +143,7 @@ public class TreningsDagbokController {
 	public void debugList(List<?> l) {
 		String s = "";
 		for (Object o : l) {
-			Øvelse øvelse = (Øvelse) o;
-			s+=øvelse.toString() + "\n\n";
+			s+=o.toString() + "\n\n";
 		}
 		this.debugTextArea.setText(s);
 	}
@@ -167,6 +170,73 @@ public class TreningsDagbokController {
 		this.debugTextArea.setText(s);*/
 		
 	}
+	@FXML
+	public void getØvelser() {
+		try {
+			Statement stmt = conn.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Øvelse");
+			Øvelse o;
+			List<Øvelse> l = new ArrayList<Øvelse>();
+			while(rs.next()) {
+				o = new Øvelse(rs.getInt("øvelsesid"));
+				o.setNavn(rs.getString("øvelsenavn"));
+				o.setBeskrivelse(rs.getString("øvelsebeskrivelse"));
+				o.setApparatid(rs.getInt("apparatid"));
+				l.add(o);
+			}
+			debugList(l);
+			}catch(Exception e) {
+				System.out.println("Error fetching all øvelser: "+e);
+	 	    }
+	}
+	@FXML
+	public void getApparat() {
+		try {
+			System.out.println("getapparat");
+			Statement stmt = conn.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Apparat");
+			List<Apparat> l = new ArrayList<Apparat>();
+			Apparat a;
+			System.out.println("Q");
+			while(rs.next()) {
+				a = new Apparat(rs.getInt("apparatid"));
+				a.setBeskrivelse(rs.getString("apparatbeskrivelse"));
+				a.setNavn(rs.getString("apparatnavn"));
+				l.add(a);
+			}
+			debugList(l);
+			}catch(Exception e) {
+				System.out.println("Error fetching all apparater: "+e);
+	 	    }
+	}
+	@FXML
+	public void getØkter() {
+		try {
+			int øvelseid = Integer.parseInt(this.ØvelseGruppeØvelseIDText.getText());
+			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
+			Statement stmt = conn.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("insert into ØvelseTilhørerGruppe values ("+gruppeid+","+ øvelseid+")");
+			while(rs.next()) {
+				
+			}
+			}catch(Exception e) {
+				System.out.println("Error inserting øvelse in group: "+e);
+	 	    }
+	}
+	@FXML
+	public void getGrupper() {
+		try {
+			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
+			Statement stmt = conn.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from ØvelseGruppe");
+			while(rs.next()) {
+				
+			}
+			}catch(Exception e) {
+				System.out.println("Error inserting øvelse in group: "+e);
+	 	    }
+	}
+
 
 	@FXML
 	public void update() {

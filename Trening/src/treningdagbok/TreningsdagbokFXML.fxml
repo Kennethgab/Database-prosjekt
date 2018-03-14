@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treningdagbok.TreningsDagbokController">
    <children>
       <Button fx:id="updateButton" layoutX="14.0" layoutY="458.0" mnemonicParsing="false" onAction="#update" text="Update" />
-      <TabPane prefHeight="447.0" prefWidth="432.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="447.0" prefWidth="358.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Usecase 1">
             <content>
@@ -68,9 +68,9 @@
         </tabs>
       </TabPane>
       <Button layoutX="311.0" layoutY="458.0" mnemonicParsing="false" text="GetGrupper" />
-      <Button layoutX="81.0" layoutY="458.0" mnemonicParsing="false" text="GetApparater" />
-      <Button layoutX="216.0" layoutY="458.0" mnemonicParsing="false" text="GetØvelser" />
+      <Button fx:id="getApparatButton" layoutX="81.0" layoutY="458.0" mnemonicParsing="false" onAction="#getApparat" text="GetApparat" />
+      <Button fx:id="getØvelserButton" layoutX="216.0" layoutY="458.0" mnemonicParsing="false" onAction="#getØvelser" text="GetØvelser" />
       <Button layoutX="414.0" layoutY="459.0" mnemonicParsing="false" text="GetØkter" />
-      <TextArea fx:id="debugTextArea" layoutX="344.0" prefHeight="447.0" prefWidth="323.0" />
+      <TextArea fx:id="debugTextArea" layoutX="360.0" layoutY="12.0" prefHeight="435.0" prefWidth="307.0" />
    </children>
 </AnchorPane>
