@@ -1,18 +1,11 @@
-CREATE TABLE Notat(
-	løpenr INT NOT NULL,
-	treningsformål VARCHAR(255),
-	øktbeskrivelse VARCHAR(255),
-	resultat VARCHAR(255),
-	PRIMARY KEY(løpenr) );
-
 CREATE TABLE Treningsøkt(
 	øktid INT NOT NULL,
-	dato DATE,
 	varighet INT,
-	tidspunkt TIME,
+	tidspunkt DATETIME,
 	form INT,
 	prestasjon INT,
 	løpenr INT NOT NULL,
+	notat VARCHAR(50),
 	PRIMARY KEY(øktid),
 	FOREIGN KEY (løpenr) REFERENCES Notat(løpenr)
 		ON DELETE CASCADE ON UPDATE CASCADE );
