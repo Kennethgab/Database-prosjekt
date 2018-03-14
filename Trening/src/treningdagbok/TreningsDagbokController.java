@@ -33,6 +33,10 @@ public class TreningsDagbokController {
 	
 	@FXML private TextField getGrupperOvelseIDText;
 	@FXML private Button getGrupperButton;
+		//legg øvelse i en gruppe
+	@FXML private TextField ØvelseGruppeØvelseIDText;
+	@FXML private TextField ØvelseGruppeGruppeIDText;
+	@FXML private Button ØvelseGruppeButton;
 
 
 	private DBConn conn;
@@ -87,13 +91,11 @@ public class TreningsDagbokController {
 		try {
 		Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
 		this.o = o;
-		o.setNavn(apparatNavnText.getText());
+		o.setNavn(ovelseNavnText.getText());
 		o.setBeskrivelse(ovelseBeskrivelseText.getText());
 		o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
 		o.save(conn.conn);
-		System.out.println("update?");
 		refresh();
-		System.out.println("update done?");
 		} catch (Exception e) {
 			System.out.println("error med å lage ny øvelse: "+e);
 		}
@@ -105,18 +107,26 @@ public class TreningsDagbokController {
 		try {
 			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(ovelseIDText.getText()));
 			this.og = og;
-			o.setNavn(apparatNavnText.getText());
-			o.setBeskrivelse(ovelseBeskrivelseText.getText());
-			o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
-			o.save(conn.conn);
-			System.out.println("update?");
-			refresh();
-			System.out.println("update done?");
+			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
+			og.save(conn.conn);
+			//refresh();
 			} catch (Exception e) {
-				System.out.println("error med å lage ny øvelse: "+e);
+				System.out.println("error med å lage ny øvelsesgruppe: "+e);
 			}
-		
 	}
+	@FXML
+	public void addToGroup() {
+		try {
+			int øvelseid = Integer.parseInt(this.ØvelseGruppeØvelseIDText.getText());
+			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
+			Statement stmt = conn.conn.createStatement();
+			stmt.executeUpdate("insert into ØvelseTilhørerGruppe values ("+gruppeid+","+ øvelseid+")");
+			}catch(Exception e) {
+			System.out.println("Error inserting øvelse in group: "+e);
+	 	    }
+	
+		}
+			
 	
 	public void debugObject(Object o) {
 		try {
@@ -130,7 +140,8 @@ public class TreningsDagbokController {
 	public void debugList(List<?> l) {
 		String s = "";
 		for (Object o : l) {
-			s+=o.toString() + "\n\n";
+			Øvelse øvelse = (Øvelse) o;
+			s+=øvelse.getNavn() + "\n\n";
 		}
 		this.debugTextArea.setText(s);
 	}

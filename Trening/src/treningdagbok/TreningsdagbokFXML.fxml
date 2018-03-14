@@ -18,12 +18,15 @@
       <TextField fx:id="ovelseApparatIDText" layoutX="214.0" layoutY="116.0" promptText="OvelseApparatID" />
       <TextArea fx:id="debugTextArea" layoutX="15.0" layoutY="175.0" prefHeight="307.0" prefWidth="316.0" />
       <Button fx:id="updateButton" layoutX="13.0" layoutY="492.0" mnemonicParsing="false" onAction="#update" text="Update" />
-      <TextField fx:id="getOvelserApparatID" layoutX="79.0" layoutY="492.0" promptText="apparatid" />
-      <Button fx:id="getOvelserButton" layoutX="238.0" layoutY="492.0" mnemonicParsing="false" onAction="#getOvelserForApparat" text="GetØvelserForApparatID" />
+      <TextField fx:id="getOvelserApparatID" layoutX="593.0" layoutY="116.0" promptText="apparatid" />
+      <Button fx:id="getOvelserButton" layoutX="595.0" layoutY="153.0" mnemonicParsing="false" onAction="#getOvelserForApparat" text="GetØvelserForApparatID" />
       <TextField fx:id="øvelsesgruppeIDText" layoutX="407.0" layoutY="14.0" promptText="ØvelsesgruppeID" />
       <TextField fx:id="øvelsesgruppeBeskrivelseText" layoutX="407.0" layoutY="50.0" promptText="GruppeBeskrivelse" />
       <Button fx:id="newØvelsesgruppeButton" layoutX="417.0" layoutY="82.0" mnemonicParsing="false" onAction="#newOvelsesGruppe" text="Lag øvelsesgruppe" />
       <Button fx:id="getGrupperButton" layoutX="597.0" layoutY="63.0" mnemonicParsing="false" onAction="#getOvelserForGruppe" text="GetØvelserForGruppeid" />
       <TextField fx:id="getGrupperOvelseIDText" layoutX="593.0" layoutY="27.0" promptText="gruppeøvelseid" />
+      <Button fx:id="ØvelseGruppeButton" layoutX="410.0" layoutY="211.0" mnemonicParsing="false" onAction="#addToGroup" text="LeggØvelseTilGruppe" />
+      <TextField fx:id="ØvelseGruppeGruppeIDText" layoutX="400.0" layoutY="175.0" promptText="GruppeID" />
+      <TextField fx:id="ØvelseGruppeØvelseIDText" layoutX="400.0" layoutY="140.0" promptText="ØvelseID" />
    </children>
 </AnchorPane>

@@ -58,7 +58,7 @@ public class SQLQuery {
     public static List<Øvelse> getOvelserInGroup(Connection conn, int gruppeid) {
     	try {
     		Statement stmt = conn.createStatement();
-    		ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse JOIN ØvelseTilhørerGruppe ON Øvelse.ØvelsesID= ØvelseTilhørerGruppe.ØvelsesID WHERE gruppeid=" + gruppeid);
+    		ResultSet rs = stmt.executeQuery("select Øvelse.øvelsesid, øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse JOIN ØvelseTilhørerGruppe ON Øvelse.ØvelsesID= ØvelseTilhørerGruppe.ØvelsesID WHERE gruppeid=" + gruppeid);
     		Øvelse o;
     		List<Øvelse> list = new ArrayList<Øvelse>();
     		while (rs.next()) {
