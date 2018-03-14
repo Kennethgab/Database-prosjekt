@@ -107,6 +107,6 @@ public class Treningsøkt extends ActiveDomainObject {
     
     @Override
 	public String toString() {
-		return "ØktID: "+øktid + "\nVarighet: "+varighet+"\nForm: "+form+"\nPrestasjon: "+prestasjon+"\nNotat: "+notat;
+		return "ØktID: "+øktid + "\nVarighet: "+varighet+"\nTidspunkt: " + tidspunkt.toString() +"\nForm: "+form+"\nPrestasjon: "+prestasjon+"\nNotat: "+notat;
 	}
 }
