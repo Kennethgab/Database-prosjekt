@@ -53,7 +53,7 @@ CREATE TABLE ØvelseTilhørerGruppe (
 	gruppeid	INT	NOT NULL,
 	øvelsesid	INT	NOT NULL,
 	PRIMARY KEY (gruppeid, øvelsesid),
-	FOREIGN KEY (gruppeid) REFERENCES Øvelsesgruppe(gruppeid)
+	FOREIGN KEY (gruppeid) REFERENCES ØvelsesGruppe(gruppeid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE,
 	FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE );
