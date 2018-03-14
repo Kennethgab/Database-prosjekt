@@ -1,21 +1,11 @@
-CREATE TABLE Notat(
-	løpenr INT NOT NULL,
-	treningsformål VARCHAR(255),
-	øktbeskrivelse VARCHAR(255),
-	resultat VARCHAR(255),
-	PRIMARY KEY(løpenr) );
-
 CREATE TABLE Treningsøkt(
 	øktid INT NOT NULL,
-	dato DATE,
 	varighet INT,
-	tidspunkt TIME,
+	tidspunkt TIMESTAMP,
 	form INT,
 	prestasjon INT,
-	løpenr INT NOT NULL,
-	PRIMARY KEY(øktid),
-	FOREIGN KEY (løpenr) REFERENCES Notat(løpenr)
-		ON DELETE CASCADE ON UPDATE CASCADE );
+	notat VARCHAR(255),
+	PRIMARY KEY(øktid) );
 
 CREATE TABLE ØvelsesGruppe(
 	gruppeid INT NOT NULL,
@@ -63,7 +53,7 @@ CREATE TABLE ØvelseTilhørerGruppe (
 	gruppeid	INT	NOT NULL,
 	øvelsesid	INT	NOT NULL,
 	PRIMARY KEY (gruppeid, øvelsesid),
-	FOREIGN KEY (gruppeid) REFERENCES Øvelsesgruppe(gruppeid)
+	FOREIGN KEY (gruppeid) REFERENCES ØvelsesGruppe(gruppeid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE,
 	FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)
 		ON DELETE NO ACTION	ON UPDATE CASCADE );

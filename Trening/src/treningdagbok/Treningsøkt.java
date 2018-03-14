@@ -8,11 +8,11 @@ import treningdagbok.ActiveDomainObject;
 public class Treningsøkt extends ActiveDomainObject {
     private int øktid;
     private Date dato;
-    private Time tidspunkt;
+    private Timestamp tidspunkt;
     private int varighet;
     private int form;
     private int prestasjon;
-    private int løpenr;
+	private String notat;
 
     public Treningsøkt(int øktid) {
         this.øktid = øktid;
@@ -22,19 +22,11 @@ public class Treningsøkt extends ActiveDomainObject {
 		return øktid;
 	}
 
-	public Date getDato() {
-		return dato;
-	}
-
-	public void setDato(Date dato) {
-		this.dato = dato;
-	}
-
-	public Time getTidspunkt() {
+	public Timestamp getTidspunkt() {
 		return tidspunkt;
 	}
 
-	public void setTidspunkt(Time tidspunkt) {
+	public void setTidspunkt(Timestamp tidspunkt) {
 		this.tidspunkt = tidspunkt;
 	}
 
@@ -62,27 +54,27 @@ public class Treningsøkt extends ActiveDomainObject {
 		this.prestasjon = prestasjon;
 	}
 
-	public int getLøpenr() {
-		return løpenr;
+	public void setNotat(String notat) {
+		this.notat = notat;
 	}
 
-	public void setLøpenr(int løpenr) {
-		this.løpenr = løpenr;
+	public String getNotat () {
+		return this.notat;
 	}
 
 	public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
-                "SELECT dato, tidspunkt, varighet, form, prestasjon, løpenr " +
+                "SELECT dato, tidspunkt, varighet, form, prestasjon, løpenr,notat " +
                  "FROM Treningsøkt WHERE øktid=" + øktid);
             while (rs.next()) {
-                dato = rs.getDate("dato");
-                tidspunkt = rs.getTime("tidspunkt");
+                tidspunkt = rs.getTimestamp("tidspunkt");
                 varighet = rs.getInt("varighet");
                 form = rs.getInt("form");
                 prestasjon = rs.getInt("prestasjon");
                 løpenr = rs.getInt("løpenr");
+				notat = rs.getString("notat");
             }
         } catch (Exception e) {
             System.out.println("DB-feil ved select av bruker = " + e);
@@ -97,17 +89,18 @@ public class Treningsøkt extends ActiveDomainObject {
     public void save (Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
+			String notatString = StaticMethods.toQuote(notat);
 			String datoString = StaticMethods.toQuote(dato.toString());
 			String tidspunktString = StaticMethods.toQuote(tidspunkt.toString());
 			try {
 				stmt.executeUpdate("insert into Treningsøkt values("+øktid+","+datoString+","+varighet+","+tidspunktString+
-				","+form+","+prestasjon+","+løpenr+")");
+				","+form+","+prestasjon+","+løpenr+","+notatString+")");
 				return;
 			} catch(Exception e) {
 			System.out.println("Error inserting: "+e);
 			}
 			stmt.executeUpdate("update Treningsøkt set dato="+datoString+", tidspunkt="+tidspunktString+", varighet="
-			+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr="+løpenr+"where øktid=" + øktid);
+			+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr="+løpenr+", notat="+notatString+ " where øktid=" + øktid);
 		} catch(Exception e) {
 			System.out.println("error updating Treningsøkt" + e);
 		}
