@@ -59,7 +59,7 @@ public class Øvelse extends ActiveDomainObject {
 	 	    }
 			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
 	} catch(Exception e) {
-	System.out.println("db erorr during update of øvelse="+e);
+	System.out.println("db erorr lol during update of øvelse = "+e);
 }
 }
 	public void initialize(Connection conn) {
