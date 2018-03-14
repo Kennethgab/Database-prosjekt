@@ -73,7 +73,6 @@ public class Treningsøkt extends ActiveDomainObject {
                 varighet = rs.getInt("varighet");
                 form = rs.getInt("form");
                 prestasjon = rs.getInt("prestasjon");
-                løpenr = rs.getInt("løpenr");
 				notat = rs.getString("notat");
             }
         } catch (Exception e) {
@@ -94,13 +93,13 @@ public class Treningsøkt extends ActiveDomainObject {
 			String tidspunktString = StaticMethods.toQuote(tidspunkt.toString());
 			try {
 				stmt.executeUpdate("insert into Treningsøkt values("+øktid+","+datoString+","+varighet+","+tidspunktString+
-				","+form+","+prestasjon+","+løpenr+","+notatString+")");
+				","+form+","+prestasjon+","+notatString+")");
 				return;
 			} catch(Exception e) {
 			System.out.println("Error inserting: "+e);
 			}
 			stmt.executeUpdate("update Treningsøkt set dato="+datoString+", tidspunkt="+tidspunktString+", varighet="
-			+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr="+løpenr+", notat="+notatString+ " where øktid=" + øktid);
+			+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 		} catch(Exception e) {
 			System.out.println("error updating Treningsøkt" + e);
 		}
