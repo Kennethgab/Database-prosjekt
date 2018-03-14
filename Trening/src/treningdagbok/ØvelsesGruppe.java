@@ -42,11 +42,21 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 
 	public void save(Connection conn) {
 		try {
+			String beskrivelseString = StaticMethods.toQuote(beskrivelse);
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("update ØvelsesGruppe set gruppebeskrivelse="+beskrivelse+"where gruppeid="+gruppeid);
+			try {
+				stmt.executeUpdate("insert into ØvelsesGruppe values ("+gruppeid+","+beskrivelseString+")");
+				return;
+				}catch(Exception e) {
+				System.out.println("db error during insertino of Øvelsesgruppe="+e);
+
+
+			}
+
+
+			 stmt.executeUpdate("update ØvelsesGruppe set gruppebeskrivelse="+beskrivelseString+"where gruppeid="+gruppeid);
 			} catch(Exception e) {
 			System.out.println("db error during update of øvelsesgruppe="+e);
-			return;
 			}
 	}
 
