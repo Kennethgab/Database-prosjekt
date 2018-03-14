@@ -75,7 +75,7 @@ public class Treningsøkt extends ActiveDomainObject {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(
                 "SELECT dato, tidspunkt, varighet, form, prestasjon, løpenr " +
-                 "FROM Treningsøkt WHERE øktid=" + løpenr);
+                 "FROM Treningsøkt WHERE øktid=" + øktid);
             while (rs.next()) {
                 dato = rs.getDate("dato");
                 tidspunkt = rs.getTime("tidspunkt");
@@ -95,17 +95,21 @@ public class Treningsøkt extends ActiveDomainObject {
     }
 
     public void save (Connection conn) {
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE Treningsøkt set" +
-            "dato="+dato+", tidspunkt="+tidspunkt+", varighet="+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr=" +løpenr+
-            " WHERE øktid="+øktid);
-        } catch (Exception e) {
-            System.out.println("DB-feil ved oppdatering av økt = "+e);
-            return;
-        }
-    }
-
-
-
+		try {
+			Statement stmt = conn.createStatement();
+			String datoString = StaticMethods.toQuote(dato.toString());
+			String tidspunktString = StaticMethods.toQuote(tidspunkt.toString());
+			try {
+				stmt.executeUpdate("insert into Treningsøkt values("+øktid+","+datoString+","+varighet+","+tidspunktString+
+				","+form+","+prestasjon+","+løpenr+")");
+				return;
+			} catch(Exception e) {
+			System.out.println("Error inserting: "+e);
+			}
+			stmt.executeUpdate("update Treningsøkt set dato="+datoString+", tidspunkt="+tidspunktString+", varighet="
+			+varighet+", form="+form+", prestasjon="+prestasjon+", løpenr="+løpenr+"where øktid=" + øktid);
+		} catch(Exception e) {
+			System.out.println("error updating Treningsøkt" + e);
+		}
+	}
 }
