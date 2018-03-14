@@ -10,7 +10,6 @@ public class Apparat extends ActiveDomainObject {
 
     public Apparat (int apparatid) {
         this.apparatid = apparatid;
-        System.out.println("fucking idiot");
     }
 
     public void setBeskrivelse(String apparatbeskrivelse) {
