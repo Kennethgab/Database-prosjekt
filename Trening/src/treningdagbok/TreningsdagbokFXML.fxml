@@ -9,16 +9,21 @@
    <children>
       <TextField fx:id="apparatIDText" layoutX="40.0" layoutY="37.0" promptText="ApparatID" />
       <TextField fx:id="apparatNavnText" layoutX="40.0" layoutY="69.0" promptText="ApparatNavn" />
-      <Button fx:id="newOvelseButton" layoutX="402.0" layoutY="175.0" mnemonicParsing="false" onAction="#newOvelse" text="Lag ovelse" />
+      <Button fx:id="newOvelseButton" layoutX="239.0" layoutY="140.0" mnemonicParsing="false" onAction="#newOvelse" text="Lag ovelse" />
       <Button fx:id="newApparatButton" layoutX="61.0" layoutY="140.0" mnemonicParsing="false" onAction="#newApparat" text="lag apparat" />
       <TextField fx:id="apparatBeskrivelseText" layoutX="40.0" layoutY="103.0" promptText="ApparatBeskrivelse" />
-      <TextField fx:id="ovelseIDText" layoutX="363.0" layoutY="37.0" promptText="OvelseID" />
-      <TextField fx:id="ovelseNavnText" layoutX="363.0" layoutY="69.0" promptText="OvelseNavn" />
-      <TextField fx:id="ovelseBeskrivelseText" layoutX="363.0" layoutY="103.0" promptText="OvelseBeskrivelse" />
-      <TextField fx:id="ovelseApparatIDText" layoutX="363.0" layoutY="140.0" promptText="OvelseApparatID" />
-      <TextArea fx:id="apparatTextArea" layoutX="15.0" layoutY="175.0" prefHeight="307.0" prefWidth="316.0" />
-      <Button fx:id="updateButton" layoutX="250.0" layoutY="116.0" mnemonicParsing="false" onAction="#update" text="Update" />
-      <TextField fx:id="getOvelserApparatID" layoutX="613.0" layoutY="37.0" promptText="apparatid" />
-      <Button fx:id="getOvelserButton" layoutX="648.0" layoutY="91.0" mnemonicParsing="false" onAction="#getOvelserForApparat" text="Button" />
+      <TextField fx:id="ovelseIDText" layoutX="214.0" layoutY="14.0" promptText="OvelseID" />
+      <TextField fx:id="ovelseNavnText" layoutX="214.0" layoutY="50.0" promptText="OvelseNavn" />
+      <TextField fx:id="ovelseBeskrivelseText" layoutX="214.0" layoutY="82.0" promptText="OvelseBeskrivelse" />
+      <TextField fx:id="ovelseApparatIDText" layoutX="214.0" layoutY="116.0" promptText="OvelseApparatID" />
+      <TextArea fx:id="debugTextArea" layoutX="15.0" layoutY="175.0" prefHeight="307.0" prefWidth="316.0" />
+      <Button fx:id="updateButton" layoutX="13.0" layoutY="492.0" mnemonicParsing="false" onAction="#update" text="Update" />
+      <TextField fx:id="getOvelserApparatID" layoutX="79.0" layoutY="492.0" promptText="apparatid" />
+      <Button fx:id="getOvelserButton" layoutX="238.0" layoutY="492.0" mnemonicParsing="false" onAction="#getOvelserForApparat" text="GetØvelserForApparatID" />
+      <TextField fx:id="øvelsesgruppeIDText" layoutX="407.0" layoutY="14.0" promptText="ØvelsesgruppeID" />
+      <TextField fx:id="øvelsesgruppeBeskrivelseText" layoutX="407.0" layoutY="50.0" promptText="GruppeBeskrivelse" />
+      <Button fx:id="newØvelsesgruppeButton" layoutX="417.0" layoutY="82.0" mnemonicParsing="false" onAction="#newOvelsesGruppe" text="Lag øvelsesgruppe" />
+      <Button fx:id="getGrupperButton" layoutX="597.0" layoutY="63.0" mnemonicParsing="false" onAction="#getOvelserForGruppe" text="GetØvelserForGruppeid" />
+      <TextField fx:id="getGrupperOvelseIDText" layoutX="593.0" layoutY="27.0" promptText="gruppeøvelseid" />
    </children>
 </AnchorPane>
