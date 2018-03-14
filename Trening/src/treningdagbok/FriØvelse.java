@@ -70,4 +70,9 @@ public class FriØvelse extends ActiveDomainObject {
 
 	}
 }
+
+	@Override
+	public String toString() {
+		return "ØvelsesID: " + this.øvelsesid +"\nØktID: " + this.øktid + "\nresultat: " + this.resultat;
+	}
 }

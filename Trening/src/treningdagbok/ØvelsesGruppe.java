@@ -60,6 +60,11 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 			}
 	}
 
+	@Override
+	public String toString() {
+		return "GruppeID: " + this.gruppeid + "\nBeskrivelse: "+this.beskrivelse+"\n";
+	}
+
 }
 
 

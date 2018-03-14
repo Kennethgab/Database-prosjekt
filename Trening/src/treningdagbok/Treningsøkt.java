@@ -104,4 +104,9 @@ public class Treningsøkt extends ActiveDomainObject {
 			System.out.println("error updating Treningsøkt" + e);
 		}
 	}
+    
+    @Override
+	public String toString() {
+		return "ØktID: "+øktid + "\nVarighet: "+varighet+"\nForm: "+form+"\nPrestasjon: "+prestasjon+"\nNotat: "+notat;
+	}
 }

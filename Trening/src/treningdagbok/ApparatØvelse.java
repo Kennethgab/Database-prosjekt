@@ -72,4 +72,8 @@ public class ApparatØvelse extends ActiveDomainObject {
 	}
 
 }
+	@Override
+	public String toString() {
+		return "ØvelsesID: " + øvelsesid + "\nØktID: " +øktid+"\nKilo: "+ antallkilo+"\nSett: "+antallsett;
+	}
 }

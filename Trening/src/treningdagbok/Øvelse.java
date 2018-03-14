@@ -57,9 +57,9 @@ public class Øvelse extends ActiveDomainObject {
 			}	catch(Exception e) {
 			System.out.println("Error insterting: "+e);
 	 	    }
-			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
+			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelsebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
 	} catch(Exception e) {
-	System.out.println("db erorr lol during update of øvelse = "+e);
+	System.out.println("db error during update of øvelse = "+e);
 }
 }
 	public void initialize(Connection conn) {
@@ -74,6 +74,11 @@ public class Øvelse extends ActiveDomainObject {
 		} catch( Exception e) {
 			System.out.println("db error during select of øvelse= "+e);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "ØvelsesID: "+this.øvelsesid+"\nNavn: "+this.navn+"\nBeskrivelse: "+this.beskrivelse+"\nApparatID: " + this.apparatid;
 	}
 }
 
