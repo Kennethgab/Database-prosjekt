@@ -7,7 +7,7 @@ import treningdagbok.ActiveDomainObject;
 
 public class Treningsøkt extends ActiveDomainObject {
     private int øktid;
-    private Date dato;
+   // private Date dato;
     private Timestamp tidspunkt;
     private int varighet;
     private int form;
@@ -89,16 +89,16 @@ public class Treningsøkt extends ActiveDomainObject {
 		try {
 			Statement stmt = conn.createStatement();
 			String notatString = StaticMethods.toQuote(notat);
-			String datoString = StaticMethods.toQuote(dato.toString());
+			//String datoString = StaticMethods.toQuote(dato.toString());
 			String tidspunktString = StaticMethods.toQuote(tidspunkt.toString());
 			try {
-				stmt.executeUpdate("insert into Treningsøkt values("+øktid+","+datoString+","+varighet+","+tidspunktString+
+				stmt.executeUpdate("insert into Treningsøkt values("+øktid+","+varighet+","+tidspunktString+
 				","+form+","+prestasjon+","+notatString+")");
 				return;
 			} catch(Exception e) {
 			System.out.println("Error inserting: "+e);
 			}
-			stmt.executeUpdate("update Treningsøkt set dato="+datoString+", tidspunkt="+tidspunktString+", varighet="
+			stmt.executeUpdate("update Treningsøkt set tidspunkt="+tidspunktString+", varighet="
 			+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 		} catch(Exception e) {
 			System.out.println("error updating Treningsøkt" + e);

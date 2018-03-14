@@ -50,7 +50,7 @@ public class SQLQuery {
             return list;
 
         } catch (Exception e) {
-            System.out.println("db error getNSisteØkter");
+            System.out.println("db error getNSisteØkter: "+e);
             return null;
         }
     }

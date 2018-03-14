@@ -1,6 +1,8 @@
 package treningdagbok;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,15 +40,25 @@ public class TreningsDagbokController {
 	@FXML private TextField ØvelseGruppeØvelseIDText;
 	@FXML private TextField ØvelseGruppeGruppeIDText;
 	@FXML private Button ØvelseGruppeButton;
-	
+	//getall funksjoner (knappene på bunnen av fxml)
 	@FXML private Button getØvelserButton;
 	@FXML private Button getApparatButton;
+	//get n siste økter
+	@FXML private Button getnØkterButton;
+	@FXML private TextField nØkterText;
+	
+	@FXML private TextField treningsøktIDText;
+	@FXML private TextField treningsøktVarighetText;
+	@FXML private TextField treningsøktTidspunktText;
+	@FXML private TextField treningsøktFormText;
+	@FXML private TextField treningsøktPrestasjonText;
+	@FXML private TextField treningsøktNotatText;
+	@FXML private Button newTreningsøktButton;
+	
+	
 
 
 	private DBConn conn;
-	private Apparat a;
-	private Øvelse o;
-	private ØvelsesGruppe og;
 
 	@FXML
 	private void initialize() {
@@ -109,12 +121,30 @@ public class TreningsDagbokController {
 	public void newOvelsesGruppe() {
 		try {
 			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(ovelseIDText.getText()));
-			this.og = og;
 			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
 			og.save(conn.conn);
 			debugObject(og);
 			} catch (Exception e) {
 				System.out.println("error med å lage ny øvelsesgruppe: "+e);
+			}
+	}
+	@FXML
+	public void newTreningsøkt() {
+		try {
+			Treningsøkt t = new Treningsøkt(Integer.parseInt(treningsøktIDText.getText()));
+			t.setVarighet(Integer.parseInt(this.treningsøktVarighetText.getText()));
+			DateFormat formatter;
+		    formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    java.util.Date date = formatter.parse(this.treningsøktTidspunktText.getText());
+		    java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
+			t.setTidspunkt(timeStampDate);
+			t.setForm(Integer.parseInt(this.treningsøktFormText.getText()));
+			t.setPrestasjon(Integer.parseInt(this.treningsøktPrestasjonText.getText()));
+			t.setNotat(this.treningsøktNotatText.getText());
+			t.save(conn.conn);
+			debugObject(t);
+			} catch (Exception e) {
+				System.out.println("error med å lage ny treningsøkt "+e);
 			}
 	}
 	@FXML
@@ -124,11 +154,20 @@ public class TreningsDagbokController {
 			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
 			Statement stmt = conn.conn.createStatement();
 			stmt.executeUpdate("insert into ØvelseTilhørerGruppe values ("+gruppeid+","+ øvelseid+")");
-			}catch(Exception e) {
+		}catch(Exception e) {
 			System.out.println("Error inserting øvelse in group: "+e);
 	 	    }
 	
 		}
+	@FXML
+	public void getnØkter() {
+		try {
+			int n= Integer.parseInt(this.nØkterText.getText());
+			debugList(SQLQuery.getNSisteØkter(conn.conn, n));
+		}catch(Exception e) {
+			System.out.println("Error fetching n siste økter: "+e);
+ 	    }
+	}
 			
 	
 	public void debugObject(Object o) {

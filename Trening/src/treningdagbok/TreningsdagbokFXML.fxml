@@ -25,13 +25,25 @@
                         <TextField fx:id="ovelseBeskrivelseText" layoutX="208.0" layoutY="86.0" promptText="OvelseBeskrivelse" />
                         <TextField fx:id="ovelseApparatIDText" layoutX="208.0" layoutY="124.0" promptText="OvelseApparatID" />
                         <Button fx:id="newApparatButton" layoutX="59.0" layoutY="111.0" mnemonicParsing="false" onAction="#newApparat" text="lag apparat" />
+                        <TextField fx:id="treningsøktIDText" layoutX="23.0" layoutY="177.0" promptText="TreningsøktID" />
+                        <TextField fx:id="treningsøktVarighetText" layoutX="23.0" layoutY="209.0" promptText="varighet" />
+                        <TextField fx:id="treningsøktTidspunktText" layoutX="23.0" layoutY="243.0" promptText="tidspunkt" />
+                        <TextField fx:id="treningsøktFormText" layoutX="23.0" layoutY="277.0" promptText="form" />
+                        <TextField fx:id="treningsøktPrestasjonText" layoutX="23.0" layoutY="312.0" promptText="prestasjon (1-10)" />
+                        <TextField fx:id="treningsøktNotatText" layoutX="23.0" layoutY="347.0" promptText="notat" />
+                        <Button fx:id="newTreningsøktButton" layoutX="59.0" layoutY="379.0" mnemonicParsing="false" onAction="#newTreningsøkt" text="Lag Økt" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
           <Tab text="Usecase 2">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="getnØkterButton" layoutX="60.0" layoutY="108.0" mnemonicParsing="false" onAction="#getnØkter" text="GetØkter" />
+                        <TextField fx:id="nØkterText" layoutX="30.0" layoutY="67.0" promptText="n" />
+                     </children>
+                  </AnchorPane>
             </content>
           </Tab>
             <Tab text="Usecase 3">
