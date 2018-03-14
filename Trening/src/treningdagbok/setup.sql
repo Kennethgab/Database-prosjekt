@@ -1,14 +1,11 @@
 CREATE TABLE Treningsøkt(
 	øktid INT NOT NULL,
 	varighet INT,
-	tidspunkt DATETIME,
+	tidspunkt TIMESTAMP,
 	form INT,
 	prestasjon INT,
-	løpenr INT NOT NULL,
 	notat VARCHAR(50),
-	PRIMARY KEY(øktid),
-	FOREIGN KEY (løpenr) REFERENCES Notat(løpenr)
-		ON DELETE CASCADE ON UPDATE CASCADE );
+	PRIMARY KEY(øktid) );
 
 CREATE TABLE ØvelsesGruppe(
 	gruppeid INT NOT NULL,

@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import src.treningdagbok.Treningsøkt;
+
 public class SQLQuery {
 	
 	public static List getOvelserTilApparat (Connection conn, int apparatid) {
@@ -28,6 +30,29 @@ public class SQLQuery {
             return null;
         }
 
+    }
+
+    public static List getNSisteØkter (Connection conn, int n) {
+        try {
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM Treningsøkt ORDER BY tidspunkt DESC LIMIT "+n);
+            Treningsøkt økt;
+            List<Treningsøkt> list = new ArrayList<Treningsøkt>();
+            while (rs.next()) {
+                økt = new Treningsøkt(rs.getInt("øktid"));
+                økt.setVarighet(rs.getInt("varighet"));
+                økt.setTidspunkt(rs.getTimestamp("tidspunkt"));
+                økt.setForm(rs.getInt("form"));
+                økt.setPrestasjon(rs.getInt("prestasjon"));
+                økt.setNotat(rs.getString("notat"));
+                list.add(økt);    
+            }
+            return list;
+
+        } catch (Exception e) {
+            System.out.println("db error getNSisteØkter");
+            return null;
+        }
     }
 
     

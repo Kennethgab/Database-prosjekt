@@ -8,11 +8,11 @@ import treningdagbok.ActiveDomainObject;
 public class Treningsøkt extends ActiveDomainObject {
     private int øktid;
     private Date dato;
-    private Time tidspunkt;
+    private Timestamp tidspunkt;
     private int varighet;
     private int form;
     private int prestasjon;
-    private int løpenr;
+	private String notat;
 
     public Treningsøkt(int øktid) {
         this.øktid = øktid;
@@ -22,19 +22,11 @@ public class Treningsøkt extends ActiveDomainObject {
 		return øktid;
 	}
 
-	public Date getDato() {
-		return dato;
-	}
-
-	public void setDato(Date dato) {
-		this.dato = dato;
-	}
-
-	public Time getTidspunkt() {
+	public Timestamp getTidspunkt() {
 		return tidspunkt;
 	}
 
-	public void setTidspunkt(Time tidspunkt) {
+	public void setTidspunkt(Timestamp tidspunkt) {
 		this.tidspunkt = tidspunkt;
 	}
 
@@ -62,13 +54,13 @@ public class Treningsøkt extends ActiveDomainObject {
 		this.prestasjon = prestasjon;
 	}
 
-	public int getLøpenr() {
-		return løpenr;
+	public void setNotat(String notat) {
+		this.notat = notat;
 	}
 
-	public void setLøpenr(int løpenr) {
-		this.løpenr = løpenr;
-	}
+	public String getNotat () {
+		return this.notat;
+	} 
 
 	public void initialize (Connection conn) {
         try {
@@ -77,8 +69,7 @@ public class Treningsøkt extends ActiveDomainObject {
                 "SELECT dato, tidspunkt, varighet, form, prestasjon, løpenr " +
                  "FROM Treningsøkt WHERE øktid=" + øktid);
             while (rs.next()) {
-                dato = rs.getDate("dato");
-                tidspunkt = rs.getTime("tidspunkt");
+                tidspunkt = rs.getTimestamp("tidspunkt");
                 varighet = rs.getInt("varighet");
                 form = rs.getInt("form");
                 prestasjon = rs.getInt("prestasjon");
