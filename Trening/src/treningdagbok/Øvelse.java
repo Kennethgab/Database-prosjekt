@@ -51,6 +51,10 @@ public class Øvelse extends ActiveDomainObject {
 			String nameString = StaticMethods.toQuote(navn);
 			String beskrivelseString = StaticMethods.toQuote(beskrivelse);
 			try {
+				if( apparatid == 0) {
+					stmt.executeUpdate("insert into Øvelse values ("+øvelsesid+","+ nameString + ","+ beskrivelseString +","+null+")");
+					return;
+				}
 				stmt.executeUpdate("insert into Øvelse values ("+øvelsesid+","+ nameString + ","+ beskrivelseString + "," + apparatid+")");
 				return;
 

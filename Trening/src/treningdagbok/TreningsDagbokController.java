@@ -108,7 +108,9 @@ public class TreningsDagbokController {
 		Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
 		o.setNavn(ovelseNavnText.getText());
 		o.setBeskrivelse(ovelseBeskrivelseText.getText());
-		o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
+		int apid = ovelseApparatIDText.getText().equals("") ? 0 : Integer.parseInt(ovelseApparatIDText.getText());
+		o.setApparatid(apid);
+		System.out.println("lol");
 		o.save(conn.conn);
 		debugObject(o);
 		} catch (Exception e) {
@@ -207,16 +209,43 @@ public class TreningsDagbokController {
 		for (Treningsøkt t : l) {
 			s+=t.toString() + "\n";
 			try {
-				String toString = "";
+				String toString = "Friøvelser:\n";
 				Statement stmt = conn.conn.createStatement();
-				ResultSet rs = stmt.executeQuery("select * from FriØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
+				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat from FriØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
 				//FriØvelse o;
 				//List<FriØvelse> list = new ArrayList<FriØvelse>();
 				while(rs.next()) {
-					
+					toString += "\tØvelsesID: "+rs.getInt("øvelsesid")+"\n";
+					toString += "\tØvelsesnavn: "+rs.getString("øvelsenavn")+"\n";
+					toString += "\tØvelsesbeskrivelse: "+rs.getString("øvelsebeskrivelse")+"\n";
+					toString += "\tApparatID: "+rs.getString("apparatid")+"\n";
+					toString += "\tResultat: "+rs.getString("resultat")+"\n";
+					toString += "\tØktID: "+rs.getString("øktid")+"\n";
+					toString += "*********\n";
 				}
+				s+=toString;
 			} catch(Exception e) {
-				
+				System.out.println("Error getting øktinfo: "+e);
+			}
+			try {
+				String toString = "Apparatøvelser:\n";
+				Statement stmt = conn.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat,F.antallkilo,F.antallsett from ApparatØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
+				//FriØvelse o;
+				//List<FriØvelse> list = new ArrayList<FriØvelse>();
+				while(rs.next()) {
+					toString += "\tØvelsesID: "+rs.getInt("øvelsesid")+"\n";
+					toString += "\tØvelsesnavn: "+rs.getString("øvelsenavn")+"\n";
+					toString += "\tØvelsesbeskrivelse: "+rs.getString("øvelsebeskrivelse")+"\n";
+					toString += "\tApparatID: "+rs.getString("apparatid")+"\n";
+					toString += "\tResultat: "+rs.getString("resultat")+"\n";
+					toString += "\tKilo: "+rs.getString("antallkilo")+"\n";
+					toString += "\tSett: "+rs.getString("antallsett")+"\n";
+					toString += "\tØktID: "+rs.getString("øktid")+"\n";
+				}
+				s+=toString;
+			} catch(Exception e) {
+				System.out.println("Error getting øktinfo: "+e);
 			}
 			s+="\n----------------------\n";
 		}
@@ -275,7 +304,7 @@ public class TreningsDagbokController {
 			t.setNotat(rs.getString("notat"));
 			l.add(t);
 		}
-		debugList(l);
+		debugØkt(l);
 		}catch(Exception e) {
 			System.out.println("Error fetching all apparater: "+e);
  	    }
