@@ -54,6 +54,14 @@ public class TreningsDagbokController {
 	@FXML private TextField treningsøktPrestasjonText;
 	@FXML private TextField treningsøktNotatText;
 	@FXML private Button newTreningsøktButton;
+	
+	@FXML private ChoiceBox<String> typeØvelse;
+	@FXML private TextField ØvelseØktØvelsesIDText;
+	@FXML private TextField ØvelseØktØktIDText;
+	@FXML private TextField ØvelseØktResultatText;
+	@FXML private TextField ØvelseØktKiloText;
+	@FXML private TextField ØvelseØktSettText;
+	@FXML private Button addØvelseToØktButton;
 	//connection to database
 	private DBConn conn;
 
@@ -150,6 +158,25 @@ public class TreningsDagbokController {
 	 	    }
 		}
 	@FXML
+	public void addØvelseToGruppe() {
+		try {
+			int øvelseid = Integer.parseInt(this.ØvelseØktØvelsesIDText.getText());
+			int øktid = Integer.parseInt(this.ØvelseØktØktIDText.getText());
+			String resultat = StaticMethods.toQuote(this.ØvelseØktResultatText.getText());
+			Statement stmt = conn.conn.createStatement();
+			System.out.println(typeØvelse.getValue());
+			if(typeØvelse.getValue().equals("friØvelse")) {
+				stmt.executeUpdate("insert into FriØvelse values ("+øvelseid+","+ øktid+","+resultat+")");
+			} else {
+				int kilo = Integer.parseInt(this.ØvelseØktKiloText.getText());
+				int sett = Integer.parseInt(this.ØvelseØktSettText.getText());
+				stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+kilo+","+sett+","+resultat+")");
+			}
+		}catch(Exception e) {
+			System.out.println("Error adding øvelse to gruppe: "+e);
+		}
+	}
+	@FXML
 	public void getnØkter() {
 		try {
 			int n= Integer.parseInt(this.nØkterText.getText());
@@ -171,6 +198,27 @@ public class TreningsDagbokController {
 		String s = "";
 		for (Object o : l) {
 			s+=o.toString() + "\n----------------------\n";
+		}
+		debugTextArea.setText(s);
+	}
+	
+	public void debugØkt(List<Treningsøkt> l) { //under construction
+		String s = "";
+		for (Treningsøkt t : l) {
+			s+=t.toString() + "\n";
+			try {
+				String toString = "";
+				Statement stmt = conn.conn.createStatement();
+				ResultSet rs = stmt.executeQuery("select * from FriØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
+				//FriØvelse o;
+				//List<FriØvelse> list = new ArrayList<FriØvelse>();
+				while(rs.next()) {
+					
+				}
+			} catch(Exception e) {
+				
+			}
+			s+="\n----------------------\n";
 		}
 		debugTextArea.setText(s);
 	}
