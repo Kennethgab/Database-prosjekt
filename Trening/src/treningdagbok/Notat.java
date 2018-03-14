@@ -66,9 +66,9 @@ public class Notat extends ActiveDomainObject {
 
     public void save (Connection conn) {
         try {
-			treningsformålString = StaticMethods.toQuote(treningsformål);
-			øktbeskrivelseString = StaticMethods.toQuote(øktbeskrivelse);
-			resultatString = Staticmethods.toQuote(resultat);
+			String treningsformålString = StaticMethods.toQuote(treningsformål);
+			String øktbeskrivelseString = StaticMethods.toQuote(øktbeskrivelse);
+			String resultatString = StaticMethods.toQuote(resultat);
             Statement stmt = conn.createStatement();
             try {
                 stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformålString+","+øktbeskrivelseString+","+resultatString+")");

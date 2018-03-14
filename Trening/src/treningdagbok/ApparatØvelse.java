@@ -34,7 +34,7 @@ public class ApparatØvelse extends ActiveDomainObject {
     public String getResultat() {
     	return resultat;
     }
- 
+
     public void initialize (Connection conn) {
         try {
             Statement stmt = conn.createStatement();
@@ -58,12 +58,18 @@ public class ApparatØvelse extends ActiveDomainObject {
 
     public void save (Connection conn) {
         try {
+			String resultatString = StaticMethods.toQuote(resultat);
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("update Apparatøvelse set resultat="+resultat+", antallkilo="+antallkilo+", antallsett = "+ antallsett +" where øvelsesid="+øvelsesid+" and øktid="+øktid);
+			try {
+			stmt.executeUpdate("insert into ApparatØvelse values ("+øvelsesid+","+øktid+","+antallkilo+","+antallsett+","+resultatString+")");
+			return;
         } catch (Exception e) {
-            System.out.println("db error during update of apparatøvelse="+e);
-            return;
+            System.out.println("db error during insert of apparatøvelse="+e);
         }
-    }
+		stmt.executeUpdate("update ApparatØvelse set antallkilo="+antallkilo+", antallsett="+antallsett+", resultat="+resultatString+"where øvelsesid="+øvelsesid+" and øktid="+øktid);
+    } catch(Exception e){
+	System.out.println("db error during update of apparatøvelse"+e);
+	}
 
+}
 }
