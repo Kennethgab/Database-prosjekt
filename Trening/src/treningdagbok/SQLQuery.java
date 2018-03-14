@@ -25,7 +25,7 @@ public class SQLQuery {
 
         } catch (Exception e) {
             System.out.println("db error during select of bruker= "+e);
-            return;
+            return null;
         }
 
     }
