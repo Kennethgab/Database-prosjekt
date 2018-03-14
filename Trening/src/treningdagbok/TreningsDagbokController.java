@@ -143,9 +143,9 @@ public class TreningsDagbokController {
 	public void debugList(List<?> l) {
 		String s = "";
 		for (Object o : l) {
-			s+=o.toString() + "\n\n";
+			s+=o.toString() + "\n----------------------\n";
 		}
-		this.debugTextArea.setText(s);
+		debugTextArea.setText(s);
 	}
 	
 	public void refresh() {
