@@ -10,6 +10,7 @@ public class Apparat extends ActiveDomainObject {
 
     public Apparat (int apparatid) {
         this.apparatid = apparatid;
+        System.out.println("fucking idiot");
     }
 
     public void setBeskrivelse(String apparatbeskrivelse) {
@@ -33,7 +34,6 @@ public class Apparat extends ActiveDomainObject {
             ResultSet rs = stmt.executeQuery("select apparatnavn, apparatbeskrivelse from Apparat where apparatid=" + apparatid);
             while (rs.next()) {
                 navn =  rs.getString("apparatnavn");
-                System.out.println(navn);
                 apparatbeskrivelse = rs.getString("apparatbeskrivelse");
             }
 
@@ -57,7 +57,7 @@ public class Apparat extends ActiveDomainObject {
         		stmt.executeUpdate("insert into Apparat values ("+apparatid+","+ StaticMethods.toQuote(navn) +","+StaticMethods.toQuote(apparatbeskrivelse)+")");
         		return;
         	} catch(Exception e) {
-        		System.out.println("Error inserting: "+e);
+        		System.out.println("Error inserting Apparat: "+e);
         	}
             stmt.executeUpdate("update Apparat set apparatnavn="+nameString+", apparatbeskrivelse="+beskrivelseString+"where apparatid="+apparatid);
         } catch (Exception e) {

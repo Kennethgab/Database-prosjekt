@@ -1,6 +1,8 @@
 package treningdagbok;
 
 import java.sql.*;
+import java.util.List;
+
 import treningdagbok.DBConn;
 import treningdagbok.SQLConn;
 import javafx.fxml.FXML;
@@ -21,6 +23,9 @@ public class TreningsDagbokController {
 	@FXML private TextField ovelseNavnText;
 	@FXML private TextField ovelseBeskrivelseText;
 	@FXML private TextField ovelseApparatIDText;
+	
+	@FXML private TextField getOvelserApparatID;
+	@FXML private Button getOvelserButton;
 
 
 	private DBConn conn;
@@ -38,6 +43,15 @@ public class TreningsDagbokController {
 		}
 
 	}
+	
+	@FXML
+	public void getOvelserForApparat() {
+		List<Øvelse> list = SQLQuery.getOvelserTilApparat(conn.conn, Integer.parseInt(getOvelserApparatID.getText()));
+		String output = "";
+		for (Øvelse o : list) {
+			output += "øvelsesid: " + o.getØvelsesid() + "\nnavn: " + o.getNavn() + "\nbeskrivelse: " + o.getBeskrivelse() + "\napparatid:" + o.getApparatid();
+		}
+	}
 
 	@FXML
 	public void newApparat() {
@@ -48,38 +62,57 @@ public class TreningsDagbokController {
 			a.setBeskrivelse(apparatBeskrivelseText.getText());
 			a.refresh(conn.conn);
 			a.save(conn.conn);
+			update();
 		}
 		catch (Exception e) {
 			System.out.println("Error med å lage nytt apparat: "+e);
 		}
-		update();
 	}
 
 	@FXML
 	public void newOvelse() {
 		try {
-			Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
-			this. o = o;
-			o.setNavn(apparatNavnText.getText());
-			o.setBeskrivelse(ovelseBeskrivelseText.getText());
-			o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
-			o.save(conn.conn);
+		Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
+		this.o = o;
+		o.setNavn(apparatNavnText.getText());
+		o.setBeskrivelse(ovelseBeskrivelseText.getText());
+		o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
+		o.save(conn.conn);
+		System.out.println("update?");
+		refresh();
+		System.out.println("update done?");
+		} catch (Exception e) {
+			System.out.println("error med å lage ny øvelse: "+e);
 		}
-		catch (Exception e) {
-			System.out.println("Error med å lage ny øvelse: "+e);
+		
+	}
+	
+	public void refresh() {
+		String s = "";
+		try {
+			s += a.getApparatID()+"";
+			s += "\n"+a.getNavn();
+			s+= "\n"+a.getBeskrivelse();
+		} catch (Exception e) {
+			System.out.println("error updating a: " + e);
 		}
-		update();
+		try {
+			s += o.getØvelsesid()+"";
+			s += "\n"+o.getNavn();
+			s+= "\n"+o.getBeskrivelse();
+			s+= "\n"+ o.getApparatid();
+			
+		} catch (Exception e) {
+			System.out.println("error updating o: "+e);
+			
+		}
+		this.apparatTextArea.setText(s);
+		
 	}
 
 	@FXML
 	public void update() {
-		String s = a.getApparatID()+"";
-		s += "\n"+a.getNavn();
-		s+= "\n"+a.getBeskrivelse();
-		this.apparatTextArea.setText(s);
+		refresh();
 	}
-
-
-
 
 }
