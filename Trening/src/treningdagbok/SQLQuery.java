@@ -6,11 +6,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import src.treningdagbok.Treningsøkt;
+import treningdagbok.Treningsøkt;
 
 public class SQLQuery {
 	
-	public static List getOvelserTilApparat (Connection conn, int apparatid) {
+	public static List<Øvelse> getOvelserTilApparat (Connection conn, int apparatid) {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse WHERE apparatid=" + apparatid);
@@ -32,7 +32,7 @@ public class SQLQuery {
 
     }
 
-    public static List getNSisteØkter (Connection conn, int n) {
+    public static List<Treningsøkt> getNSisteØkter (Connection conn, int n) {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM Treningsøkt ORDER BY tidspunkt DESC LIMIT "+n);
@@ -53,6 +53,28 @@ public class SQLQuery {
             System.out.println("db error getNSisteØkter");
             return null;
         }
+    }
+    
+    public static List<Øvelse> getOvelserInGroup(Connection conn, int gruppeid) {
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select øvelsesid, øvelsenavn, øvelsebeskrivelse, apparatid from Øvelse JOIN ØvelseTilhørerGruppe ON Øvelse.ØvelsesID= ØvelseTilhørerGruppe.ØvelsesID WHERE gruppeid=" + gruppeid);
+    		Øvelse o;
+    		List<Øvelse> list = new ArrayList<Øvelse>();
+    		while (rs.next()) {
+    			o = new Øvelse(rs.getInt("øvelsesid"));
+    			o.setNavn(rs.getString("øvelsenavn"));
+    			o.setBeskrivelse(rs.getString("øvelsebeskrivelse"));
+    			o.setApparatid(rs.getInt("apparatid"));
+    			list.add(o);
+    		}
+    		return list;
+
+    	} catch (Exception e) {
+    		System.out.println("db error getOvelserInGroup with groupid = " + gruppeid + "  ,"+e);
+    		return null;
+    	}
+
     }
 
     

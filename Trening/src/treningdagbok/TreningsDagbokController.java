@@ -62,7 +62,7 @@ public class TreningsDagbokController {
 	}
 	
 	@FXML public void getOvelserForGruppe() {
-		List<ØvelsesGruppe> list = SQLQuery.getOvelserInGroup(conn.conn, Integer.parseInt(getGrupperOvelseIDText.getText()));
+		List<Øvelse> list = SQLQuery.getOvelserInGroup(conn.conn, Integer.parseInt(getGrupperOvelseIDText.getText()));
 		debugList(list);
 	}
 
