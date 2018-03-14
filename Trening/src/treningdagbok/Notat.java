@@ -66,18 +66,21 @@ public class Notat extends ActiveDomainObject {
 
     public void save (Connection conn) {
         try {
+			treningsformålString = StaticMethods.toQuote(treningsformål);
+			øktbeskrivelseString = StaticMethods.toQuote(øktbeskrivelse);
+			resultatString = Staticmethods.toQuote(resultat);
             Statement stmt = conn.createStatement();
             try {
-                stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformål+","+øktbeskrivelse+","+resultat+")");
+                stmt.executeUpdate("insert into Notat values ("+løpenr+","+ treningsformålString+","+øktbeskrivelseString+","+resultatString+")");
+				return;
             } catch (Exception e) {
                 System.out.println("db error during insert of Notat="+e);
             }
-            ResultSet rs = stmt.executeQuery("UPDATE Notat SET "+
-                "treningsformål="+treningsformål+", øktbeskrivelse="+øktbeskrivelse+", resultat="+resultat+
+           		stmt.executeUpdate("UPDATE Notat SET "+
+                "treningsformål="+treningsformålString+", øktbeskrivelse="+øktbeskrivelseString+", resultat="+resultatString+
                 "WHERE løpenr="+løpenr);
         } catch (Exception e) {
             System.out.println("DB-feil ved oppdatering av notat = "+e);
-            return;
         }
     }
 
