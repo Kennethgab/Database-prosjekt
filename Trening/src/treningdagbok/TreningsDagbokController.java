@@ -25,6 +25,7 @@ public class TreningsDagbokController {
 
 	private DBConn conn;
 	private Apparat a;
+	private Øvelse o;
 
 	@FXML
 	private void initialize() {
@@ -51,15 +52,23 @@ public class TreningsDagbokController {
 		catch (Exception e) {
 			System.out.println("Error med å lage nytt apparat: "+e);
 		}
+		update();
 	}
 
 	@FXML
 	public void newOvelse() {
-		Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
-		o.setNavn(apparatNavnText.getText());
-		o.setBeskrivelse(ovelseBeskrivelseText.getText());
-		o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
-		o.save(conn.conn);
+		try {
+			Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
+			this. o = o;
+			o.setNavn(apparatNavnText.getText());
+			o.setBeskrivelse(ovelseBeskrivelseText.getText());
+			o.setApparatid(Integer.parseInt(ovelseApparatIDText.getText()));
+			o.save(conn.conn);
+		}
+		catch (Exception e) {
+			System.out.println("Error med å lage ny øvelse: "+e);
+		}
+		update();
 	}
 
 	@FXML
