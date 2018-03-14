@@ -43,6 +43,8 @@ public class TreningsDagbokController {
 	//getall funksjoner (knappene på bunnen av fxml)
 	@FXML private Button getØvelserButton;
 	@FXML private Button getApparatButton;
+	@FXML private Button getØkterButton;
+	@FXML private Button getAllGrupperButton;
 	//get n siste økter
 	@FXML private Button getnØkterButton;
 	@FXML private TextField nØkterText;
@@ -231,12 +233,10 @@ public class TreningsDagbokController {
 	@FXML
 	public void getApparat() {
 		try {
-			System.out.println("getapparat");
 			Statement stmt = conn.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from Apparat");
 			List<Apparat> l = new ArrayList<Apparat>();
 			Apparat a;
-			System.out.println("Q");
 			while(rs.next()) {
 				a = new Apparat(rs.getInt("apparatid"));
 				a.setBeskrivelse(rs.getString("apparatbeskrivelse"));
@@ -251,26 +251,37 @@ public class TreningsDagbokController {
 	@FXML
 	public void getØkter() {
 		try {
-			int øvelseid = Integer.parseInt(this.ØvelseGruppeØvelseIDText.getText());
-			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
-			Statement stmt = conn.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("insert into ØvelseTilhørerGruppe values ("+gruppeid+","+ øvelseid+")");
-			while(rs.next()) {
-				
-			}
-			}catch(Exception e) {
-				System.out.println("Error inserting øvelse in group: "+e);
-	 	    }
+		Statement stmt = conn.conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select * from Treningsøkt");
+		List<Treningsøkt> l = new ArrayList<Treningsøkt>();
+		Treningsøkt t;
+		while(rs.next()) {
+			t = new Treningsøkt(rs.getInt("øktid"));
+			t.setVarighet(rs.getInt("varighet"));
+			t.setTidspunkt(rs.getTimestamp("tidspunkt"));
+			t.setForm(rs.getInt("form"));
+			t.setPrestasjon(rs.getInt("prestasjon"));
+			t.setNotat(rs.getString("notat"));
+			l.add(t);
+		}
+		debugList(l);
+		}catch(Exception e) {
+			System.out.println("Error fetching all apparater: "+e);
+ 	    }
 	}
 	@FXML
 	public void getGrupper() {
 		try {
-			int gruppeid = Integer.parseInt(this.ØvelseGruppeGruppeIDText.getText());
 			Statement stmt = conn.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from ØvelseGruppe");
+			ResultSet rs = stmt.executeQuery("select * from ØvelsesGruppe");
+			ØvelsesGruppe g;
+			List<ØvelsesGruppe> l = new ArrayList<ØvelsesGruppe>();
 			while(rs.next()) {
-				
+				g = new ØvelsesGruppe(rs.getInt("gruppeid"));
+				g.setBeskrivelse(rs.getString("gruppebeskrivelse"));
+				l.add(g);
 			}
+			debugList(l);
 			}catch(Exception e) {
 				System.out.println("Error inserting øvelse in group: "+e);
 	 	    }

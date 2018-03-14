@@ -79,10 +79,10 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button layoutX="311.0" layoutY="458.0" mnemonicParsing="false" text="GetGrupper" />
+      <Button fx:id="getAllGrupperButton" layoutX="311.0" layoutY="458.0" mnemonicParsing="false" onAction="#getGrupper" text="GetGrupper" />
       <Button fx:id="getApparatButton" layoutX="81.0" layoutY="458.0" mnemonicParsing="false" onAction="#getApparat" text="GetApparat" />
       <Button fx:id="getØvelserButton" layoutX="216.0" layoutY="458.0" mnemonicParsing="false" onAction="#getØvelser" text="GetØvelser" />
-      <Button layoutX="414.0" layoutY="459.0" mnemonicParsing="false" text="GetØkter" />
+      <Button fx:id="getØkterButton" layoutX="414.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØkter" text="GetØkter" />
       <TextArea fx:id="debugTextArea" layoutX="360.0" layoutY="12.0" prefHeight="435.0" prefWidth="307.0" />
    </children>
 </AnchorPane>

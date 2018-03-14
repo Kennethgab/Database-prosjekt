@@ -49,8 +49,6 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 				return;
 				}catch(Exception e) {
 				System.out.println("db error during insertino of Øvelsesgruppe="+e);
-
-
 			}
 
 
@@ -62,7 +60,7 @@ public class ØvelsesGruppe extends ActiveDomainObject {
 
 	@Override
 	public String toString() {
-		return "GruppeID: " + this.gruppeid + "\nBeskrivelse: "+this.beskrivelse+"\n";
+		return "GruppeID: " + this.gruppeid + "\nBeskrivelse: "+this.beskrivelse;
 	}
 
 }
