@@ -18,8 +18,6 @@ public class TreningsDagbokController {
 	@FXML private TextField apparatNavnText;
 	@FXML private TextField apparatBeskrivelseText;
 	@FXML private TextArea debugTextArea;
-		//refresh
-	@FXML private Button updateButton;
 		//new øvelse
 	@FXML private Button newOvelseButton;
 	@FXML private TextField ovelseIDText;
@@ -48,7 +46,7 @@ public class TreningsDagbokController {
 	//get n siste økter
 	@FXML private Button getnØkterButton;
 	@FXML private TextField nØkterText;
-	
+	//make new treningsøkt
 	@FXML private TextField treningsøktIDText;
 	@FXML private TextField treningsøktVarighetText;
 	@FXML private TextField treningsøktTidspunktText;
@@ -56,10 +54,7 @@ public class TreningsDagbokController {
 	@FXML private TextField treningsøktPrestasjonText;
 	@FXML private TextField treningsøktNotatText;
 	@FXML private Button newTreningsøktButton;
-	
-	
-
-
+	//connection to database
 	private DBConn conn;
 
 	@FXML
@@ -77,11 +72,6 @@ public class TreningsDagbokController {
 	public void getOvelserForApparat() {
 		List<Øvelse> list = SQLQuery.getOvelserTilApparat(conn.conn, Integer.parseInt(getOvelserApparatID.getText()));
 		debugList(list);
-		//String output = "";
-		//for (Øvelse o : list) {
-		//	output += "øvelsesid: " + o.getØvelsesid() + "\nnavn: " + o.getNavn() + "\nbeskrivelse: " + o.getBeskrivelse() + "\napparatid:" + o.getApparatid()+"\n\n";
-		//}
-		//debugTextArea.setText(output);
 	}
 	
 	@FXML public void getOvelserForGruppe() {
@@ -116,7 +106,6 @@ public class TreningsDagbokController {
 		} catch (Exception e) {
 			System.out.println("error med å lage ny øvelse: "+e);
 		}
-		
 	}
 	
 	@FXML
@@ -159,7 +148,6 @@ public class TreningsDagbokController {
 		}catch(Exception e) {
 			System.out.println("Error inserting øvelse in group: "+e);
 	 	    }
-	
 		}
 	@FXML
 	public void getnØkter() {
@@ -170,14 +158,12 @@ public class TreningsDagbokController {
 			System.out.println("Error fetching n siste økter: "+e);
  	    }
 	}
-			
 	
 	public void debugObject(Object o) {
 		try {
 			this.debugTextArea.setText(o.toString());
 		}
 		catch (Exception e) {
-			
 		}
 	}
 	
@@ -187,29 +173,6 @@ public class TreningsDagbokController {
 			s+=o.toString() + "\n----------------------\n";
 		}
 		debugTextArea.setText(s);
-	}
-	
-	public void refresh() {
-	 /*	String s = "";
-		try {
-			s += a.getApparatID()+"";
-			s += "\n"+a.getNavn();
-			s+= "\n"+a.getBeskrivelse();
-		} catch (Exception e) {
-			System.out.println("error updating a: " + e);
-		}
-		try {
-			s += o.getØvelsesid()+"";
-			s += "\n"+o.getNavn();
-			s+= "\n"+o.getBeskrivelse();
-			s+= "\n"+ o.getApparatid();
-			
-		} catch (Exception e) {
-			System.out.println("error updating o: "+e);
-			
-		}
-		this.debugTextArea.setText(s);*/
-		
 	}
 	@FXML
 	public void getØvelser() {
@@ -288,9 +251,5 @@ public class TreningsDagbokController {
 	}
 
 
-	@FXML
-	public void update() {
-		refresh();
-	}
 
 }
