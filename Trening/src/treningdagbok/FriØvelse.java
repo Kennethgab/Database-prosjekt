@@ -64,9 +64,9 @@ public class FriØvelse extends ActiveDomainObject {
         } catch (Exception e) {
             System.out.println("error inserting: " + e);
         }
-		stmt.executeUpdate("update FriØvelse set resultat="+resultatString+"where øktid="+øktid+" and øvelsesid="øvelsesid);
+		stmt.executeUpdate("update FriØvelse set resultat="+resultatString+"where øktid="+øktid+" and øvelsesid="+øvelsesid);
     }catch (Exception e ) {
-		System.out.println("db error during update of friøvelse= "+e=;
+		System.out.println("db error during update of friøvelse= "+e);
 
 	}
 }
