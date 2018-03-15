@@ -39,7 +39,7 @@
                         <TextField fx:id="ØvelseØktResultatText" layoutX="187.0" layoutY="256.0" promptText="resultat" />
                         <TextField fx:id="ØvelseØktKiloText" layoutX="187.0" layoutY="290.0" promptText="antall kilo" />
                         <TextField fx:id="ØvelseØktSettText" layoutX="187.0" layoutY="325.0" promptText="antall sett" />
-                        <Button fx:id="addØvelseToØktButton" layoutX="224.0" layoutY="392.0" mnemonicParsing="false" onAction="#addØvelseToGruppe" text="Add øvelse" />
+                        <Button fx:id="addØvelseToØktButton" layoutX="224.0" layoutY="392.0" mnemonicParsing="false" onAction="#addØvelseToØkt" text="Add øvelse" />
                         <ChoiceBox fx:id="typeØvelse" layoutX="187.0" layoutY="360.0" prefWidth="150.0" value="apparatØvelse">
                         	<items>
         						<FXCollections fx:factory="observableArrayList">
@@ -95,10 +95,10 @@
             </Tab>
         </tabs>
       </TabPane>
-      <Button fx:id="getAllGrupperButton" layoutX="301.0" layoutY="459.0" mnemonicParsing="false" onAction="#getGrupper" text="GetGrupper" />
-      <Button fx:id="getApparatButton" layoutX="47.0" layoutY="459.0" mnemonicParsing="false" onAction="#getApparat" text="GetApparat" />
-      <Button fx:id="getØvelserButton" layoutX="179.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØvelser" text="GetØvelser" />
-      <Button fx:id="getØkterButton" layoutX="431.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØkter" text="GetØkter" />
+      <Button fx:id="getAllGrupperButton" layoutX="514.0" layoutY="459.0" mnemonicParsing="false" onAction="#getGrupper" text="GetGrupper" />
+      <Button fx:id="getApparatButton" layoutX="341.0" layoutY="459.0" mnemonicParsing="false" onAction="#getApparat" text="GetApparat" />
+      <Button fx:id="getØvelserButton" layoutX="427.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØvelser" text="GetØvelser" />
+      <Button fx:id="getØkterButton" layoutX="602.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØkter" text="GetØkter" />
       <TextArea fx:id="debugTextArea" layoutX="360.0" layoutY="12.0" prefHeight="435.0" prefWidth="307.0" />
    </children>
 </AnchorPane>

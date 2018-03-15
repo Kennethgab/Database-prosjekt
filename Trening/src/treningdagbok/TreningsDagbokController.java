@@ -81,8 +81,8 @@ public class TreningsDagbokController {
 		List<Øvelse> list = SQLQuery.getOvelserTilApparat(conn.conn, Integer.parseInt(getOvelserApparatID.getText()));
 		debugList(list);
 	}
-	
-	@FXML public void getOvelserForGruppe() {
+	@FXML 
+	public void getOvelserForGruppe() {
 		List<Øvelse> list = SQLQuery.getOvelserInGroup(conn.conn, Integer.parseInt(getGrupperOvelseIDText.getText()));
 		debugList(list);
 	}
@@ -160,22 +160,36 @@ public class TreningsDagbokController {
 	 	    }
 		}
 	@FXML
-	public void addØvelseToGruppe() {
+	public void addØvelseToØkt() {
 		try {
 			int øvelseid = Integer.parseInt(this.ØvelseØktØvelsesIDText.getText());
 			int øktid = Integer.parseInt(this.ØvelseØktØktIDText.getText());
 			String resultat = StaticMethods.toQuote(this.ØvelseØktResultatText.getText());
 			Statement stmt = conn.conn.createStatement();
 			System.out.println(typeØvelse.getValue());
-			if(typeØvelse.getValue().equals("friØvelse")) {
+			if(typeØvelse.getValue().equals("friØvelse")) { //if friøvelse
+				Statement stmta = conn.conn.createStatement();
+				ResultSet rs = stmta.executeQuery("select apparatid from Øvelse where øvelsesid ="+øvelseid);
+				rs.next();
+				int apparatid = rs.getInt("apparatid"); 
+				if(apparatid != 0) {//throws exception if apparat != null, friøvelse cant have apparat
+					throw new IllegalStateException("Cant add øvelse with apparatid as a friøvelse");//throws exception if apparat, friøvelse cant have apparat
+				}
 				stmt.executeUpdate("insert into FriØvelse values ("+øvelseid+","+ øktid+","+resultat+")");
-			} else {
+			} else { //if apparatøvelse
+				Statement stmta = conn.conn.createStatement();
+				ResultSet rs = stmta.executeQuery("select apparatid from Øvelse where øvelsesid ="+øvelseid);
+				rs.next();
+				int apparatid = rs.getInt("apparatid"); //throws exception if no apparat, apparatøvelse needs apparat
+				if(apparatid == 0) {
+					throw new IllegalStateException("Prøvde å legge til apparatøvelse med øvelse uten apparat");
+				}
 				int kilo = Integer.parseInt(this.ØvelseØktKiloText.getText());
 				int sett = Integer.parseInt(this.ØvelseØktSettText.getText());
 				stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+kilo+","+sett+","+resultat+")");
 			}
 		}catch(Exception e) {
-			System.out.println("Error adding øvelse to gruppe: "+e);
+			System.out.println("Error adding øvelse to økt: "+e);
 		}
 	}
 	@FXML
@@ -214,14 +228,18 @@ public class TreningsDagbokController {
 				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat from FriØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
 				//FriØvelse o;
 				//List<FriØvelse> list = new ArrayList<FriØvelse>();
+				boolean first = true;
 				while(rs.next()) {
+					if(first == false) {
+						toString+="*********\n";
+					}
+					first = false;
 					toString += "\tØvelsesID: "+rs.getInt("øvelsesid")+"\n";
 					toString += "\tØvelsesnavn: "+rs.getString("øvelsenavn")+"\n";
 					toString += "\tØvelsesbeskrivelse: "+rs.getString("øvelsebeskrivelse")+"\n";
 					toString += "\tApparatID: "+rs.getString("apparatid")+"\n";
 					toString += "\tResultat: "+rs.getString("resultat")+"\n";
 					toString += "\tØktID: "+rs.getString("øktid")+"\n";
-					toString += "*********\n";
 				}
 				s+=toString;
 			} catch(Exception e) {
@@ -233,7 +251,12 @@ public class TreningsDagbokController {
 				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat,F.antallkilo,F.antallsett from ApparatØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
 				//FriØvelse o;
 				//List<FriØvelse> list = new ArrayList<FriØvelse>();
+				boolean first = true;
 				while(rs.next()) {
+					if(first == false) {
+						toString+="*********\n";
+					}
+					first = false;
 					toString += "\tØvelsesID: "+rs.getInt("øvelsesid")+"\n";
 					toString += "\tØvelsesnavn: "+rs.getString("øvelsenavn")+"\n";
 					toString += "\tØvelsesbeskrivelse: "+rs.getString("øvelsebeskrivelse")+"\n";
@@ -242,7 +265,6 @@ public class TreningsDagbokController {
 					toString += "\tKilo: "+rs.getString("antallkilo")+"\n";
 					toString += "\tSett: "+rs.getString("antallsett")+"\n";
 					toString += "\tØktID: "+rs.getString("øktid")+"\n";
-					toString+="*********\n";
 				}
 				s+=toString;
 			} catch(Exception e) {
