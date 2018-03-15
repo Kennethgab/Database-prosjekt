@@ -242,6 +242,7 @@ public class TreningsDagbokController {
 					toString += "\tKilo: "+rs.getString("antallkilo")+"\n";
 					toString += "\tSett: "+rs.getString("antallsett")+"\n";
 					toString += "\tØktID: "+rs.getString("øktid")+"\n";
+					toString+="*********\n";
 				}
 				s+=toString;
 			} catch(Exception e) {
