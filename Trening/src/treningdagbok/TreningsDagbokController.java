@@ -121,7 +121,7 @@ public class TreningsDagbokController {
 	@FXML
 	public void newOvelsesGruppe() {
 		try {
-			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(ovelseIDText.getText()));
+			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(øvelsesgruppeIDText.getText()));
 			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
 			og.save(conn.conn);
 			debugObject(og);
@@ -184,9 +184,13 @@ public class TreningsDagbokController {
 				if(apparatid == 0) {
 					throw new IllegalStateException("Prøvde å legge til apparatøvelse med øvelse uten apparat");
 				}
-				int kilo = Integer.parseInt(this.ØvelseØktKiloText.getText());
-				int sett = Integer.parseInt(this.ØvelseØktSettText.getText());
-				stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+kilo+","+sett+","+resultat+")");
+				if (this.ØvelseØktKiloText.getText().equals("") || this.ØvelseØktSettText.getText().equals("") ) {
+					stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+null+","+null+","+resultat+")");
+				} else {
+					int kilo = Integer.parseInt(this.ØvelseØktKiloText.getText());
+					int sett = Integer.parseInt(this.ØvelseØktSettText.getText());
+					stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+kilo+","+sett+","+resultat+")");
+				}
 			}
 		}catch(Exception e) {
 			System.out.println("Error adding øvelse to økt: "+e);
@@ -217,7 +221,6 @@ public class TreningsDagbokController {
 		}
 		debugTextArea.setText(s);
 	}
-	
 	public void debugØkt(List<Treningsøkt> l) { //under construction
 		String s = "";
 		for (Treningsøkt t : l) {
