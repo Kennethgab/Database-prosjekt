@@ -29,7 +29,7 @@ CREATE TABLE Øvelse(
 
 CREATE TABLE FriØvelse (
         øvelsesid INT NOT NULL,
-	øktid INT NOT NULL,
+		øktid INT NOT NULL,
         resultat VARCHAR(255),
 	PRIMARY KEY (øvelsesid, øktid),
         FOREIGN KEY (øvelsesid) REFERENCES Øvelse(øvelsesid)

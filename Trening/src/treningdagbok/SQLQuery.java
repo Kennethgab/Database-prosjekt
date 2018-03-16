@@ -1,5 +1,6 @@
 package treningdagbok;
 
+import java.security.Timestamp;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -72,6 +73,31 @@ public class SQLQuery {
 
     	} catch (Exception e) {
     		System.out.println("db error getOvelserInGroup with groupid = " + gruppeid + "  ,"+e);
+    		return null;
+    	}
+
+    }
+
+    public static List<?> getOvelseResultat(Connection conn, String øvelsesnavn, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
+    	try {
+    		Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT øktid, tidspunkt, resultat FROM" +
+                            " (SELECT * FROM (SELECT øvelsesid, øvelsesnavn, resultat FROM Øvelse NATURAL JOIN ApparatØvelse) " +
+                            " UNION (SELECT øvelsesid, øvelsesnavn, resultat FROM Øvelse NATURAL JOIN FriØvelse) "+
+                            " GROUP BY øvelsesnavn ORDER BY tidspunkt DESC) " +
+                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesnavn = "+ øvelsesnavn +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 );
+    		Treningsøkt o;
+    		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
+    		while (rs.next()) {
+    			o = new Treningsøkt(rs.getInt("øktid"));
+                o.setTidspunkt(rs.getTimestamp("tidspunkt"));
+                o.setNotat(rs.getString("resultat"));
+    			list.add(o);
+    		}
+    		return list;
+
+    	} catch (Exception e) {
+    		System.out.println("db error getgetOvelseResultat with groupid = " + gruppeid + "  ,"+e);
     		return null;
     	}
 
