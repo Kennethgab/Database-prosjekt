@@ -51,6 +51,9 @@ public class Treningsøkt extends ActiveDomainObject {
 	}
 
 	public void setPrestasjon(int prestasjon) {
+		if (prestasjon < 1 || prestasjon >10) {
+			throw new IllegalArgumentException("pretasjon må være i intervallet 1-10");
+		}
 		this.prestasjon = prestasjon;
 	}
 
