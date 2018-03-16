@@ -100,6 +100,22 @@ public class SQLQuery {
     	}
 
     }
-
     
+    public static List<ØvelsesGruppe> getGrupper(Connection conn){
+    	try {
+    	Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("select * from ØvelsesGruppe");
+		ØvelsesGruppe g;
+		List<ØvelsesGruppe> l = new ArrayList<ØvelsesGruppe>();
+		while(rs.next()) {
+			g = new ØvelsesGruppe(rs.getInt("gruppeid"));
+			g.setBeskrivelse(rs.getString("gruppebeskrivelse"));
+			l.add(g);
+		}
+		return l;
+    	}catch(Exception e) {
+    		throw new IllegalStateException(e);
+    	}
+    }
+
 }

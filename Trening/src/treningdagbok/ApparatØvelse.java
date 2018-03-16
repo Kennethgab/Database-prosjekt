@@ -68,7 +68,7 @@ public class ApparatØvelse extends ActiveDomainObject {
         		stmt.executeUpdate("update ApparatØvelse set antallkilo="+antallkilo+", antallsett="+antallsett+", resultat="+resultatString+"where øvelsesid="+øvelsesid+" and øktid="+øktid);
 			}
     } catch(Exception e){
-    	throw new IllegalStateException("db error during update of apparatøvelse"+e);
+    	throw new IllegalStateException("db error during update of apparatØvelse\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
 	}
 
 }

@@ -371,7 +371,8 @@ public class TreningsDagbokController {
 	@FXML
 	public void getGrupper() {
 		try {
-			Statement stmt = conn.conn.createStatement();
+			debug(SQLQuery.getGrupper(conn.conn));
+			/*Statement stmt = conn.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("select * from ØvelsesGruppe");
 			ØvelsesGruppe g;
 			List<ØvelsesGruppe> l = new ArrayList<ØvelsesGruppe>();
@@ -380,9 +381,9 @@ public class TreningsDagbokController {
 				g.setBeskrivelse(rs.getString("gruppebeskrivelse"));
 				l.add(g);
 			}
-			debug(l);
+			debug(l);*/
 			}catch(Exception e) {
-				System.out.println("Error inserting øvelse in group: "+e);
+				System.out.println("Error i getGruppe:\n\t"+e);
 	 	    }
 	}
 
