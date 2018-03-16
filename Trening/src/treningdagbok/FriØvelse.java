@@ -45,8 +45,7 @@ public class FriØvelse extends ActiveDomainObject {
                 øvelsesid = rs.getInt("øvelsesid");
             }
         } catch (Exception e) {
-            System.out.println("DB-feil ved select av FriØvelse = "+e);
-            return;
+            throw new IllegalStateException("DB-feil ved select av FriØvelse = "+e);
         }
     }
 

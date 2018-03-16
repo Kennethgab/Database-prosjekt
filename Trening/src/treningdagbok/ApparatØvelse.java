@@ -46,8 +46,7 @@ public class ApparatØvelse extends ActiveDomainObject {
             }
 
         } catch (Exception e) {
-            System.out.println("db error during select of apparatøvelse= "+e);
-            return;
+            throw new IllegalStateException("db error during select of apparatøvelse= "+e);
         }
 
     }
@@ -57,18 +56,19 @@ public class ApparatØvelse extends ActiveDomainObject {
     }
 
     public void save (Connection conn) {
+    	String error = "";
         try {
 			String resultatString = StaticMethods.toQuote(resultat);
             Statement stmt = conn.createStatement();
 			try {
-			stmt.executeUpdate("insert into ApparatØvelse values ("+øvelsesid+","+øktid+","+antallkilo+","+antallsett+","+resultatString+")");
-			return;
-        } catch (Exception e) {
-            System.out.println("db error during insert of apparatøvelse="+e);
-        }
-		stmt.executeUpdate("update ApparatØvelse set antallkilo="+antallkilo+", antallsett="+antallsett+", resultat="+resultatString+"where øvelsesid="+øvelsesid+" and øktid="+øktid);
+				stmt.executeUpdate("insert into ApparatØvelse values ("+øvelsesid+","+øktid+","+antallkilo+","+antallsett+","+resultatString+")");
+				return;
+			} catch (Exception e) {
+				error += e;
+        		stmt.executeUpdate("update ApparatØvelse set antallkilo="+antallkilo+", antallsett="+antallsett+", resultat="+resultatString+"where øvelsesid="+øvelsesid+" and øktid="+øktid);
+			}
     } catch(Exception e){
-	System.out.println("db error during update of apparatøvelse"+e);
+    	throw new IllegalStateException("db error during update of apparatøvelse"+e);
 	}
 
 }

@@ -98,12 +98,18 @@ public class TreningsDagbokController {
 			Apparat a = new Apparat(Integer.parseInt(apparatIDText.getText()));
 			a.setNavn(apparatNavnText.getText());
 			a.setBeskrivelse(apparatBeskrivelseText.getText());
+			String s = a.toString();
 			a.refresh(conn.conn);
+	        if(!a.toString().equals(s)) {
+	        	throw new IllegalStateException("Apparat med ID="+a.getApparatID()+" finnes allerede og er ulik input");
+	        }
 			a.save(conn.conn);
-			debug(a);
+			debug("Apparat ble lagt til /eksisterer allerede:\n"+a.toString());
 		}
 		catch (Exception e) {
-			System.out.println("Error med å lage nytt apparat: "+e);
+			String s = "Error med å lage nytt apparat: \n\t"+e;
+			System.out.println(s);
+			debug(s.toString());
 		}
 	}
 
@@ -117,7 +123,7 @@ public class TreningsDagbokController {
 		o.setApparatid(apid);
 		System.out.println("lol");
 		o.save(conn.conn);
-		debug(o);
+		debug(o.toString());
 		} catch (Exception e) {
 			System.out.println("error med å lage ny øvelse: "+e);
 		}
@@ -129,7 +135,7 @@ public class TreningsDagbokController {
 			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(øvelsesgruppeIDText.getText()));
 			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
 			og.save(conn.conn);
-			debug(og);
+			debug(og.toString());
 			} catch (Exception e) {
 				System.out.println("error med å lage ny øvelsesgruppe: "+e);
 			}
@@ -230,13 +236,14 @@ public class TreningsDagbokController {
  	    }
 	}
 	
-	public void debug(Object o) {
+	/*public void debug(Object o) {
 		try {
 			this.debugTextArea.setText(o.toString());
 		}
 		catch (Exception e) {
 		}
 	}
+	*/
 	public void debug(String s) {
 		this.debugTextArea.setText(s);
 	}

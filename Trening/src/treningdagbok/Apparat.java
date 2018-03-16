@@ -37,8 +37,7 @@ public class Apparat extends ActiveDomainObject {
             }
 
         } catch (Exception e) {
-            System.out.println("db error during select of bruker= "+e);
-            return;
+            throw new IllegalStateException("db error during select of bruker= "+e);
         }
 
     }
@@ -48,6 +47,7 @@ public class Apparat extends ActiveDomainObject {
     }
 
     public void save (Connection conn) {
+		String error = "";
         try {
         	Statement stmt = conn.createStatement();
         	String nameString = StaticMethods.toQuote(navn);
@@ -56,12 +56,11 @@ public class Apparat extends ActiveDomainObject {
         		stmt.executeUpdate("insert into Apparat values ("+apparatid+","+ StaticMethods.toQuote(navn) +","+StaticMethods.toQuote(apparatbeskrivelse)+")");
         		return;
         	} catch(Exception e) {
-        		System.out.println("Error inserting Apparat: "+e);
+        		error +=e;
+        		stmt.executeUpdate("update Apparat set apparatnavn="+nameString+", apparatbeskrivelse="+beskrivelseString+"where apparatid="+apparatid);
         	}
-            stmt.executeUpdate("update Apparat set apparatnavn="+nameString+", apparatbeskrivelse="+beskrivelseString+"where apparatid="+apparatid);
         } catch (Exception e) {
-            System.out.println("db error during update of apparat="+e);
-            return;
+            throw new IllegalStateException("db error during update of apparat\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
         }
     }
 

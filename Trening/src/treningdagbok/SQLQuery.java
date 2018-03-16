@@ -82,10 +82,9 @@ public class SQLQuery {
     	try {
     		Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT øktid, tidspunkt, resultat FROM" +
-                            " (SELECT * FROM (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN ApparatØvelse) " +
-                            " UNION (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN FriØvelse) "+
-                            " GROUP BY øvelsesnavn ORDER BY tidspunkt DESC) " +
-                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesid = "+ øvelsesid +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 );
+                            " (SELECT * FROM (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN ApparatØvelse AS Table1) " +
+                            " UNION (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN FriØvelse AS Table2)) AS Table3 " +
+                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesid = "+ øvelsesid +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 +"AS Table4");
     		Treningsøkt o;
     		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
     		while (rs.next()) {
@@ -97,7 +96,7 @@ public class SQLQuery {
     		return list;
 
     	} catch (Exception e) {
-    		throw new IllegalStateException("db error getOvelseResultat: \n\t" +e);
+    		throw new IllegalStateException("db error getOvelseResultat: \n\t\t" +e);
     	}
 
     }
