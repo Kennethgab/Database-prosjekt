@@ -82,8 +82,8 @@ public class SQLQuery {
     	try {
     		Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("select tidspunkt, resultat from FriØvelse left outer join Treningsøkt on Treningsøkt.øktid = FriØvelse.øktid "+
-                                            "where øvelsesid= "+øvelsesid+" tidspunkt > "+tid1+" and tidspunkt < "+tid2+" union select tidspunkt, resultat from ApparatØvelse left outer join Treningsøkt on Treningsøkt.øktid = ApparatØvelse.øktid "+
-                                            "where øvelsesid= "+øvelsesid+" tidspunkt > "+tid1+" and tidspunkt < "+tid2);
+                                            "where øvelsesid= "+øvelsesid+" tidspunkt > TIMESTAMP "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt < TIMESTAMP "+ StaticMethods.toQuote(tid2.toString())+" union select tidspunkt, resultat from ApparatØvelse left outer join Treningsøkt on Treningsøkt.øktid = ApparatØvelse.øktid "+
+                                            "where øvelsesid= "+øvelsesid+" tidspunkt > TIMESTAMP "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt < TIMESTAMP "+ StaticMethods.toQuote(tid2.toString()));
     		Treningsøkt o;
     		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
     		while (rs.next()) {
@@ -99,6 +99,24 @@ public class SQLQuery {
     	}
 
     }
+    
+    public static List<Apparat> getApparat(Connection conn) {
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Apparat");
+			List<Apparat> l = new ArrayList<Apparat>();
+			Apparat a;
+			while(rs.next()) {
+				a = new Apparat(rs.getInt("apparatid"));
+				a.setBeskrivelse(rs.getString("apparatbeskrivelse"));
+				a.setNavn(rs.getString("apparatnavn"));
+				l.add(a);
+			}
+			return l;
+			}catch(Exception e) {
+				throw new IllegalStateException("db error getOvelseResultat: \n\t\t" +e);
+	 	    }
+	}
     
     public static List<ØvelsesGruppe> getGrupper(Connection conn){
     	try {
@@ -116,5 +134,46 @@ public class SQLQuery {
     		throw new IllegalStateException(e);
     	}
     }
+    
+    public static List<Treningsøkt> getØkter(Connection conn){
+    	try {
+    		Statement stmt = conn.createStatement();
+    		ResultSet rs = stmt.executeQuery("select * from Treningsøkt");
+    		List<Treningsøkt> l = new ArrayList<Treningsøkt>();
+    		Treningsøkt t;
+    		while(rs.next()) {
+    			t = new Treningsøkt(rs.getInt("øktid"));
+    			t.setVarighet(rs.getInt("varighet"));
+    			t.setTidspunkt(rs.getTimestamp("tidspunkt"));
+    			t.setForm(rs.getInt("form"));
+    			t.setPrestasjon(rs.getInt("prestasjon"));
+    			t.setNotat(rs.getString("notat"));
+    			l.add(t);
+    		}
+    		return l;
+    		}catch(Exception e) {
+    			throw new IllegalStateException(e);
+     	    }
+    }
+    
+    public static List<Øvelse> getØvelser(Connection conn) {
+		try {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from Øvelse");
+			Øvelse o;
+			List<Øvelse> l = new ArrayList<Øvelse>();
+			while(rs.next()) {
+				o = new Øvelse(rs.getInt("øvelsesid"));
+				o.setNavn(rs.getString("øvelsenavn"));
+				o.setBeskrivelse(rs.getString("øvelsebeskrivelse"));
+				o.setApparatid(rs.getInt("apparatid"));
+				l.add(o);
+			}
+			return l;
+			}catch(Exception e) {
+				throw new IllegalStateException(e);
+	 	    }
+	}
 
 }
+    

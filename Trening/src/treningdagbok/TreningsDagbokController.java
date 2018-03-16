@@ -109,7 +109,7 @@ public class TreningsDagbokController {
 		catch (Exception e) {
 			String s = "Error med å lage nytt apparat: \n\t"+e;
 			System.out.println(s);
-			debug(s.toString());
+			debug(s);
 		}
 	}
 
@@ -123,9 +123,11 @@ public class TreningsDagbokController {
 			o.setApparatid(apid);
 			System.out.println("lol");
 			o.save(conn.conn);
-			debug(o.toString());
+			debug("Øvelse lagd:\n"+o.toString());
 		} catch (Exception e) {
-			System.out.println("error med å lage ny øvelse: "+e);
+			String s = "Error med å lage ny øvelse: \n\t"+e;
+			System.out.println(s);
+			debug(s);
 		}
 	}
 	
@@ -135,9 +137,11 @@ public class TreningsDagbokController {
 			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(øvelsesgruppeIDText.getText()));
 			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
 			og.save(conn.conn);
-			debug(og.toString());
+			debug("Øvelsesgruppe lagd:\n"+og.toString());
 			} catch (Exception e) {
-				System.out.println("error med å lage ny øvelsesgruppe: "+e);
+				String s = "Error med å lage ny øvelsesgruppe: \n\t"+e;
+				System.out.println(s);
+				debug(s);
 			}
 	}
 	@FXML
@@ -154,7 +158,7 @@ public class TreningsDagbokController {
 			t.setPrestasjon(Integer.parseInt(this.treningsøktPrestasjonText.getText()));
 			t.setNotat(this.treningsøktNotatText.getText());
 			t.save(conn.conn);
-			debug("treningsøkt added");
+			debug("treningsøkt added:\n"+t);
 			} catch (Exception e) {
 				String error = "error med å lage ny treningsøkt "+e;
 				System.out.println(error);
@@ -313,77 +317,33 @@ public class TreningsDagbokController {
 	@FXML
 	public void getØvelser() {
 		try {
-			Statement stmt = conn.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from Øvelse");
-			Øvelse o;
-			List<Øvelse> l = new ArrayList<Øvelse>();
-			while(rs.next()) {
-				o = new Øvelse(rs.getInt("øvelsesid"));
-				o.setNavn(rs.getString("øvelsenavn"));
-				o.setBeskrivelse(rs.getString("øvelsebeskrivelse"));
-				o.setApparatid(rs.getInt("apparatid"));
-				l.add(o);
-			}
-			debug(l);
+			debug(SQLQuery.getØvelser(conn.conn));
 			}catch(Exception e) {
-				System.out.println("Error fetching all øvelser: "+e);
+				System.out.println("Error i getØvelser:\n\t"+e);
 	 	    }
 	}
 	@FXML
 	public void getApparat() {
 		try {
-			Statement stmt = conn.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from Apparat");
-			List<Apparat> l = new ArrayList<Apparat>();
-			Apparat a;
-			while(rs.next()) {
-				a = new Apparat(rs.getInt("apparatid"));
-				a.setBeskrivelse(rs.getString("apparatbeskrivelse"));
-				a.setNavn(rs.getString("apparatnavn"));
-				l.add(a);
-			}
-			debug(l);
+			debug(SQLQuery.getApparat(conn.conn));
 			}catch(Exception e) {
-				System.out.println("Error fetching all apparater: "+e);
+				System.out.println("Error i getApparat:\n\t"+e);
 	 	    }
 	}
 	@FXML
 	public void getØkter() {
 		try {
-		Statement stmt = conn.conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select * from Treningsøkt");
-		List<Treningsøkt> l = new ArrayList<Treningsøkt>();
-		Treningsøkt t;
-		while(rs.next()) {
-			t = new Treningsøkt(rs.getInt("øktid"));
-			t.setVarighet(rs.getInt("varighet"));
-			t.setTidspunkt(rs.getTimestamp("tidspunkt"));
-			t.setForm(rs.getInt("form"));
-			t.setPrestasjon(rs.getInt("prestasjon"));
-			t.setNotat(rs.getString("notat"));
-			l.add(t);
-		}
-		debugØkt(l);
-		}catch(Exception e) {
-			System.out.println("Error fetching all apparater: "+e);
- 	    }
+			debug(SQLQuery.getØkter(conn.conn));
+			}catch(Exception e) {
+				System.out.println("Error i getØkter:\n\t"+e);
+	 	    }
 	}
 	@FXML
 	public void getGrupper() {
 		try {
 			debug(SQLQuery.getGrupper(conn.conn));
-			/*Statement stmt = conn.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("select * from ØvelsesGruppe");
-			ØvelsesGruppe g;
-			List<ØvelsesGruppe> l = new ArrayList<ØvelsesGruppe>();
-			while(rs.next()) {
-				g = new ØvelsesGruppe(rs.getInt("gruppeid"));
-				g.setBeskrivelse(rs.getString("gruppebeskrivelse"));
-				l.add(g);
-			}
-			debug(l);*/
 			}catch(Exception e) {
-				System.out.println("Error i getGruppe:\n\t"+e);
+				System.out.println("Error i getGrupper:\n\t"+e);
 	 	    }
 	}
 
