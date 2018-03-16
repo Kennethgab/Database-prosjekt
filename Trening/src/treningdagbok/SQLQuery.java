@@ -81,10 +81,9 @@ public class SQLQuery {
     public static List<?> getOvelseResultat(Connection conn, int øvelsesid, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
     	try {
     		Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT øktid, tidspunkt, resultat FROM" +
-                            " (SELECT * FROM (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN ApparatØvelse AS Table1) " +
-                            " UNION (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN FriØvelse AS Table2)) AS Table3 " +
-                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesid = "+ øvelsesid +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 +"AS Table4");
+            ResultSet rs = stmt.executeQuery("select tidspunkt, resultat from FriØvelse left outer join Treningsøkt on Treningsøkt.øktid = FriØvelse.øktid "+
+                                            "where øvelsesid= "+øvelsesid+" tidspunkt > "+tid1+" and tidspunkt < "+tid2+" union select tidspunkt, resultat from ApparatØvelse left outer join Treningsøkt on Treningsøkt.øktid = ApparatØvelse.øktid "+
+                                            "where øvelsesid= "+øvelsesid+" tidspunkt > "+tid1+" and tidspunkt < "+tid2);
     		Treningsøkt o;
     		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
     		while (rs.next()) {
