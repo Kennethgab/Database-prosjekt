@@ -116,14 +116,14 @@ public class TreningsDagbokController {
 	@FXML
 	public void newOvelse() {
 		try {
-		Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
-		o.setNavn(ovelseNavnText.getText());
-		o.setBeskrivelse(ovelseBeskrivelseText.getText());
-		int apid = ovelseApparatIDText.getText().equals("") ? 0 : Integer.parseInt(ovelseApparatIDText.getText());
-		o.setApparatid(apid);
-		System.out.println("lol");
-		o.save(conn.conn);
-		debug(o.toString());
+			Øvelse o = new Øvelse(Integer.parseInt(ovelseIDText.getText()));
+			o.setNavn(ovelseNavnText.getText());
+			o.setBeskrivelse(ovelseBeskrivelseText.getText());
+			int apid = ovelseApparatIDText.getText().equals("") ? 0 : Integer.parseInt(ovelseApparatIDText.getText());
+			o.setApparatid(apid);
+			System.out.println("lol");
+			o.save(conn.conn);
+			debug(o.toString());
 		} catch (Exception e) {
 			System.out.println("error med å lage ny øvelse: "+e);
 		}
