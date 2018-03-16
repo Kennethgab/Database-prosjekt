@@ -43,6 +43,9 @@ public class Treningsøkt extends ActiveDomainObject {
 	}
 
 	public void setForm(int form) {
+		if (form < 1 || form > 10) {
+			throw new IllegalArgumentException("Form må være i intervall 1-10");
+		}
 		this.form = form;
 	}
 
@@ -52,7 +55,7 @@ public class Treningsøkt extends ActiveDomainObject {
 
 	public void setPrestasjon(int prestasjon) {
 		if (prestasjon < 1 || prestasjon >10) {
-			throw new IllegalArgumentException("pretasjon må være i intervallet 1-10");
+			throw new IllegalArgumentException("Prestasjon må være i intervall 1-10");
 		}
 		this.prestasjon = prestasjon;
 	}
@@ -101,10 +104,10 @@ public class Treningsøkt extends ActiveDomainObject {
 			} catch(Exception e) {
 			System.out.println("Error inserting: "+e);
 			}
-			stmt.executeUpdate("update Treningsøkt set tidspunkt="+tidspunktString+", varighet="
+			stmt.executeUpdate("update Treningsøkt set tidspunkt="+tidspunkt+", varighet="
 			+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 		} catch(Exception e) {
-			System.out.println("error updating Treningsøkt" + e);
+			throw new IllegalStateException("error updating Treningsøkt" + e);
 		}
 	}
     

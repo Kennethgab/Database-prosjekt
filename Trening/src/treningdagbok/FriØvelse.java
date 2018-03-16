@@ -66,7 +66,7 @@ public class FriØvelse extends ActiveDomainObject {
         }
 		stmt.executeUpdate("update FriØvelse set resultat="+resultatString+"where øktid="+øktid+" and øvelsesid="+øvelsesid);
     }catch (Exception e ) {
-		System.out.println("db error during update of friøvelse= "+e);
+		throw new IllegalStateException("db error during update of friøvelse= "+e);
 
 	}
 }

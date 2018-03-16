@@ -30,8 +30,8 @@
                         <Button fx:id="newApparatButton" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" onAction="#newApparat" text="lag apparat" />
                         <TextField fx:id="treningsøktIDText" layoutX="71.0" layoutY="176.0" promptText="int" />
                         <TextField fx:id="treningsøktVarighetText" layoutX="71.0" layoutY="208.0" promptText="int" />
-                        <TextField fx:id="treningsøktTidspunktText" layoutX="71.0" layoutY="242.0" promptText="DD/MM/YYYY" />
-                        <TextField fx:id="treningsøktFormText" layoutX="71.0" layoutY="276.0" promptText="string" />
+                        <TextField fx:id="treningsøktTidspunktText" layoutX="71.0" layoutY="242.0" promptText="DD/MM/YYYY HH:mm" />
+                        <TextField fx:id="treningsøktFormText" layoutX="71.0" layoutY="276.0" promptText="int [1-10]" />
                         <TextField fx:id="treningsøktPrestasjonText" layoutX="71.0" layoutY="311.0" promptText="int [1-10]" />
                         <TextField fx:id="treningsøktNotatText" layoutX="71.0" layoutY="346.0" promptText="string" />
                         <Button fx:id="newTreningsøktButton" layoutX="107.0" layoutY="378.0" mnemonicParsing="false" onAction="#newTreningsøkt" text="Lag Økt" />
@@ -76,7 +76,16 @@
           </Tab>
             <Tab text="Usecase 3">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="OvelseResultatIDText" layoutX="102.0" layoutY="66.0" promptText="int" />
+                        <TextField fx:id="OvelseResultatTS1Text" layoutX="102.0" layoutY="100.0" promptText="DD/MM/YYY HH:mm" />
+                        <TextField fx:id="OvelseResultatTS2Text" layoutX="102.0" layoutY="139.0" promptText="DD/MM/YYY HH:mm" />
+                        <Button fx:id="OvelseResultatButton" layoutX="144.0" layoutY="184.0" mnemonicParsing="false" onAction="#getOvelseResultat" text="GetOvelseResultat" />
+                        <Text layoutX="57.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Øvelseid" />
+                        <Text layoutX="20.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="timestamp fra" />
+                        <Text layoutX="32.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="timestamp til" />
+                     </children></AnchorPane>
               </content>
             </Tab>
             <Tab text="Usecase 4">

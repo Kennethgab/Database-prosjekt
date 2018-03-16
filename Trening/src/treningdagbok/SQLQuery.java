@@ -78,14 +78,14 @@ public class SQLQuery {
 
     }
 
-    public static List<?> getOvelseResultat(Connection conn, String øvelsesnavn, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
+    public static List<?> getOvelseResultat(Connection conn, int øvelsesid, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
     	try {
     		Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT øktid, tidspunkt, resultat FROM" +
-                            " (SELECT * FROM (SELECT øvelsesid, øvelsesnavn, resultat FROM Øvelse NATURAL JOIN ApparatØvelse) " +
-                            " UNION (SELECT øvelsesid, øvelsesnavn, resultat FROM Øvelse NATURAL JOIN FriØvelse) "+
+                            " (SELECT * FROM (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN ApparatØvelse) " +
+                            " UNION (SELECT øvelsesid, resultat FROM Øvelse NATURAL JOIN FriØvelse) "+
                             " GROUP BY øvelsesnavn ORDER BY tidspunkt DESC) " +
-                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesnavn = "+ øvelsesnavn +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 );
+                            " NATURAL JOIN Treningsøkt WHERE Øvelse.øvelsesid = "+ øvelsesid +" AND tidspunkt > "+ tid1+ " AND tidspunkt < " +tid2 );
     		Treningsøkt o;
     		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
     		while (rs.next()) {
@@ -97,8 +97,7 @@ public class SQLQuery {
     		return list;
 
     	} catch (Exception e) {
-    		System.out.println("db error getgetOvelseResultat with groupid = " + gruppeid + "  ,"+e);
-    		return null;
+    		throw new IllegalStateException("db error getOvelseResultat: \n\t" +e);
     	}
 
     }

@@ -62,6 +62,11 @@ public class TreningsDagbokController {
 	@FXML private TextField ØvelseØktKiloText;
 	@FXML private TextField ØvelseØktSettText;
 	@FXML private Button addØvelseToØktButton;
+		//usecase 3 ovelseresultat
+	@FXML private TextField OvelseResultatIDText;
+	@FXML private TextField OvelseResultatTS1Text;
+	@FXML private TextField OvelseResultatTS2Text;
+	@FXML private Button OvelseResultatButton;
 	//connection to database
 	private DBConn conn;
 
@@ -79,12 +84,12 @@ public class TreningsDagbokController {
 	@FXML
 	public void getOvelserForApparat() {
 		List<Øvelse> list = SQLQuery.getOvelserTilApparat(conn.conn, Integer.parseInt(getOvelserApparatID.getText()));
-		debugList(list);
+		debug(list);
 	}
 	@FXML 
 	public void getOvelserForGruppe() {
 		List<Øvelse> list = SQLQuery.getOvelserInGroup(conn.conn, Integer.parseInt(getGrupperOvelseIDText.getText()));
-		debugList(list);
+		debug(list);
 	}
 
 	@FXML
@@ -95,7 +100,7 @@ public class TreningsDagbokController {
 			a.setBeskrivelse(apparatBeskrivelseText.getText());
 			a.refresh(conn.conn);
 			a.save(conn.conn);
-			debugObject(a);
+			debug(a);
 		}
 		catch (Exception e) {
 			System.out.println("Error med å lage nytt apparat: "+e);
@@ -112,7 +117,7 @@ public class TreningsDagbokController {
 		o.setApparatid(apid);
 		System.out.println("lol");
 		o.save(conn.conn);
-		debugObject(o);
+		debug(o);
 		} catch (Exception e) {
 			System.out.println("error med å lage ny øvelse: "+e);
 		}
@@ -124,7 +129,7 @@ public class TreningsDagbokController {
 			ØvelsesGruppe og = new ØvelsesGruppe(Integer.parseInt(øvelsesgruppeIDText.getText()));
 			og.setBeskrivelse(this.øvelsesgruppeBeskrivelseText.getText());
 			og.save(conn.conn);
-			debugObject(og);
+			debug(og);
 			} catch (Exception e) {
 				System.out.println("error med å lage ny øvelsesgruppe: "+e);
 			}
@@ -135,7 +140,7 @@ public class TreningsDagbokController {
 			Treningsøkt t = new Treningsøkt(Integer.parseInt(treningsøktIDText.getText()));
 			t.setVarighet(Integer.parseInt(this.treningsøktVarighetText.getText()));
 			DateFormat formatter;
-		    formatter = new SimpleDateFormat("dd/MM/yyyy");
+		    formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		    java.util.Date date = formatter.parse(this.treningsøktTidspunktText.getText());
 		    java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
 			t.setTidspunkt(timeStampDate);
@@ -143,9 +148,11 @@ public class TreningsDagbokController {
 			t.setPrestasjon(Integer.parseInt(this.treningsøktPrestasjonText.getText()));
 			t.setNotat(this.treningsøktNotatText.getText());
 			t.save(conn.conn);
-			debugObject(t);
+			debug("treningsøkt added");
 			} catch (Exception e) {
-				System.out.println("error med å lage ny treningsøkt "+e);
+				String error = "error med å lage ny treningsøkt "+e;
+				System.out.println(error);
+				debug(error);
 			}
 	}
 	@FXML
@@ -200,21 +207,40 @@ public class TreningsDagbokController {
 	public void getnØkter() {
 		try {
 			int n= Integer.parseInt(this.nØkterText.getText());
-			debugList(SQLQuery.getNSisteØkter(conn.conn, n));
+			debug(SQLQuery.getNSisteØkter(conn.conn, n));
 		}catch(Exception e) {
 			System.out.println("Error fetching n siste økter: "+e);
  	    }
 	}
+	@FXML
+	public void getOvelseResultat() {
+		try {
+			int øvelsesid= Integer.parseInt(this.OvelseResultatIDText.getText());
+			DateFormat formatter;
+		    formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		    java.util.Date date = formatter.parse(this.OvelseResultatTS1Text.getText());
+		    java.sql.Timestamp TS1 = new Timestamp(date.getTime());
+		    date = formatter.parse(this.OvelseResultatTS2Text.getText());
+		    java.sql.Timestamp TS2 = new Timestamp(date.getTime());
+			debug(SQLQuery.getOvelseResultat(conn.conn, øvelsesid, TS1,TS2));
+		}catch(Exception e) {
+			String s = "Error med getOvelseResultat: \n\t"+e;
+			System.out.println(s);
+			debug(s);
+ 	    }
+	}
 	
-	public void debugObject(Object o) {
+	public void debug(Object o) {
 		try {
 			this.debugTextArea.setText(o.toString());
 		}
 		catch (Exception e) {
 		}
 	}
-	
-	public void debugList(List<?> l) {
+	public void debug(String s) {
+		this.debugTextArea.setText(s);
+	}
+	public void debug(List<?> l) {
 		String s = "";
 		for (Object o : l) {
 			s+=o.toString() + "\n----------------------\n";
@@ -291,7 +317,7 @@ public class TreningsDagbokController {
 				o.setApparatid(rs.getInt("apparatid"));
 				l.add(o);
 			}
-			debugList(l);
+			debug(l);
 			}catch(Exception e) {
 				System.out.println("Error fetching all øvelser: "+e);
 	 	    }
@@ -309,7 +335,7 @@ public class TreningsDagbokController {
 				a.setNavn(rs.getString("apparatnavn"));
 				l.add(a);
 			}
-			debugList(l);
+			debug(l);
 			}catch(Exception e) {
 				System.out.println("Error fetching all apparater: "+e);
 	 	    }
@@ -347,7 +373,7 @@ public class TreningsDagbokController {
 				g.setBeskrivelse(rs.getString("gruppebeskrivelse"));
 				l.add(g);
 			}
-			debugList(l);
+			debug(l);
 			}catch(Exception e) {
 				System.out.println("Error inserting øvelse in group: "+e);
 	 	    }
