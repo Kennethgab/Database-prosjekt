@@ -46,6 +46,7 @@ public class Øvelse extends ActiveDomainObject {
 		initialize(conn);
 	}
 	public void save(Connection conn) {
+		String error = "";
 		try {
 			Statement stmt = conn.createStatement();
 			String nameString = StaticMethods.toQuote(navn);
@@ -59,11 +60,14 @@ public class Øvelse extends ActiveDomainObject {
 				return;
 
 			}	catch(Exception e) {
-			System.out.println("Error insterting: "+e);
+				error +=e;
+				if (apparatid == 0) {
+					stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelsebeskrivelse="+beskrivelseString+", apparatid="+null+"where øvelsesid="+øvelsesid+")");
+				}
+				stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelsebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
 	 	    }
-			stmt.executeUpdate("update Øvelse set øvelsenavn="+nameString+", øvelsebeskrivelse="+beskrivelseString+", apparatid="+apparatid+"where øvelsesid="+øvelsesid+")");
 	} catch(Exception e) {
-	System.out.println("db error during update of øvelse = "+e);
+		throw new IllegalStateException("db error during update of Øvelse\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
 }
 }
 	public void initialize(Connection conn) {

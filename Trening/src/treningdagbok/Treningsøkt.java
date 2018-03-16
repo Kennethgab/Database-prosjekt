@@ -92,6 +92,7 @@ public class Treningsøkt extends ActiveDomainObject {
     }
 
     public void save (Connection conn) {
+    	String error ="";
 		try {
 			Statement stmt = conn.createStatement();
 			String notatString = StaticMethods.toQuote(notat);
@@ -102,12 +103,12 @@ public class Treningsøkt extends ActiveDomainObject {
 				","+form+","+prestasjon+","+notatString+")");
 				return;
 			} catch(Exception e) {
-			System.out.println("Error inserting: "+e);
+				error +=e;
+				stmt.executeUpdate("update Treningsøkt set tidspunkt="+tidspunkt+", varighet="
+						+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 			}
-			stmt.executeUpdate("update Treningsøkt set tidspunkt="+tidspunkt+", varighet="
-			+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 		} catch(Exception e) {
-			throw new IllegalStateException("error updating Treningsøkt" + e);
+			throw new IllegalStateException("db error during update of Treningsøkt\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
 		}
 	}
     
