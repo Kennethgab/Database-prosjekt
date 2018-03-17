@@ -67,16 +67,34 @@ public class TreningsDagbokController {
 	@FXML private TextField OvelseResultatTS1Text;
 	@FXML private TextField OvelseResultatTS2Text;
 	@FXML private Button OvelseResultatButton;
+		//login
+	@FXML private TextField loginUsernameText;
+	@FXML private TextField loginPasswordText;
+	@FXML private TextField loginURLText;
+	@FXML private Button loginButton;
 	//connection to database
 	private DBConn conn;
 
 	@FXML
 	private void initialize() {
-		try {
+		/*try {
 			this.conn = new SQLConn();
 			conn.connect();
 		} catch (Exception e) {
 			System.out.println("Error connecting to database: "+e);
+			//e.printStackTrace();
+		}*/
+	}
+	
+	@FXML private void login() {
+		try {
+			this.conn = new SQLConn();
+			conn.connect(loginUsernameText.getText(),loginPasswordText.getText(),loginURLText.getText());
+			//System.out.println("lmao");
+			debug("Connection established!");
+		} catch (Exception e) {
+			System.out.println("Error connecting to database:\n\t"+e);
+			debug("Error connecting to database:\n\t"+e);
 			//e.printStackTrace();
 		}
 	}
@@ -107,7 +125,7 @@ public class TreningsDagbokController {
 			debug("Apparat ble lagt til /eksisterer allerede:\n"+a.toString());
 		}
 		catch (Exception e) {
-			String s = "Error med å lage nytt apparat: \n\t"+e;
+			String s = "Error med å lage nytt apparat:\n\t"+e;
 			System.out.println(s);
 			debug(s);
 		}
@@ -125,7 +143,7 @@ public class TreningsDagbokController {
 			o.save(conn.conn);
 			debug("Øvelse lagd:\n"+o.toString());
 		} catch (Exception e) {
-			String s = "Error med å lage ny øvelse: \n\t"+e;
+			String s = "Error med å lage ny øvelse:\n\t"+e;
 			System.out.println(s);
 			debug(s);
 		}
@@ -139,7 +157,7 @@ public class TreningsDagbokController {
 			og.save(conn.conn);
 			debug("Øvelsesgruppe lagd:\n"+og.toString());
 			} catch (Exception e) {
-				String s = "Error med å lage ny øvelsesgruppe: \n\t"+e;
+				String s = "Error med å lage ny øvelsesgruppe:\n\t"+e;
 				System.out.println(s);
 				debug(s);
 			}
@@ -160,7 +178,7 @@ public class TreningsDagbokController {
 			t.save(conn.conn);
 			debug("treningsøkt added:\n"+t);
 			} catch (Exception e) {
-				String error = "error med å lage ny treningsøkt "+e;
+				String error = "error med å lage ny treningsøkt:\n\t"+e;
 				System.out.println(error);
 				debug(error);
 			}
@@ -173,7 +191,7 @@ public class TreningsDagbokController {
 			Statement stmt = conn.conn.createStatement();
 			stmt.executeUpdate("insert into ØvelseTilhørerGruppe values ("+gruppeid+","+ øvelseid+")");
 		}catch(Exception e) {
-			System.out.println("Error inserting øvelse in group: "+e);
+			System.out.println("Error inserting øvelse in group:\n\t"+e);
 	 	    }
 		}
 	@FXML
@@ -210,7 +228,7 @@ public class TreningsDagbokController {
 				}
 			}
 		}catch(Exception e) {
-			System.out.println("Error adding øvelse to økt: "+e);
+			System.out.println("Error adding øvelse to økt:\n\t"+e);
 		}
 	}
 	@FXML
@@ -219,7 +237,7 @@ public class TreningsDagbokController {
 			int n= Integer.parseInt(this.nØkterText.getText());
 			debug(SQLQuery.getNSisteØkter(conn.conn, n));
 		}catch(Exception e) {
-			System.out.println("Error fetching n siste økter: "+e);
+			System.out.println("Error fetching n siste økter:\n\t"+e);
  	    }
 	}
 	@FXML
@@ -283,7 +301,7 @@ public class TreningsDagbokController {
 				}
 				s+=toString;
 			} catch(Exception e) {
-				System.out.println("Error getting øktinfo: "+e);
+				System.out.println("Error getting øktinfo:\n\t"+e);
 			}
 			try {
 				String toString = "Apparatøvelser:\n";
@@ -308,7 +326,7 @@ public class TreningsDagbokController {
 				}
 				s+=toString;
 			} catch(Exception e) {
-				System.out.println("Error getting øktinfo: "+e);
+				System.out.println("Error getting øktinfo:\n\t"+e);
 			}
 			s+="\n----------------------\n";
 		}
@@ -319,6 +337,7 @@ public class TreningsDagbokController {
 		try {
 			debug(SQLQuery.getØvelser(conn.conn));
 			}catch(Exception e) {
+				debug("Error i getØvelser:\n\t"+e);
 				System.out.println("Error i getØvelser:\n\t"+e);
 	 	    }
 	}
@@ -327,6 +346,7 @@ public class TreningsDagbokController {
 		try {
 			debug(SQLQuery.getApparat(conn.conn));
 			}catch(Exception e) {
+				debug("Error i getApparat:\n\t"+e);
 				System.out.println("Error i getApparat:\n\t"+e);
 	 	    }
 	}
@@ -335,6 +355,7 @@ public class TreningsDagbokController {
 		try {
 			debug(SQLQuery.getØkter(conn.conn));
 			}catch(Exception e) {
+				debug("Error i getØkter:\n\t"+e);
 				System.out.println("Error i getØkter:\n\t"+e);
 	 	    }
 	}
@@ -343,6 +364,7 @@ public class TreningsDagbokController {
 		try {
 			debug(SQLQuery.getGrupper(conn.conn));
 			}catch(Exception e) {
+				debug("Error i getGrupper:\n\t"+e);
 				System.out.println("Error i getGrupper:\n\t"+e);
 	 	    }
 	}

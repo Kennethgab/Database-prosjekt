@@ -24,6 +24,7 @@ public abstract class DBConn {
 			System.out.println("Error connecting to db: " + e);
 		}
 	}
+	public abstract void connect(String username, String password, String url);
 }
 
 

@@ -15,55 +15,21 @@
    <children>
       <TabPane prefHeight="447.0" prefWidth="440.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Usecase 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Tab text="Database login">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="apparatIDText" layoutX="30.0" layoutY="20.0" promptText="ApparatID" />
-                        <TextField fx:id="apparatNavnText" layoutX="30.0" layoutY="51.0" promptText="ApparatNavn" />
-                        <TextField fx:id="apparatBeskrivelseText" layoutX="30.0" layoutY="86.0" promptText="ApparatBeskrivelse" />
-                        <Button fx:id="newOvelseButton" layoutX="292.0" layoutY="152.0" mnemonicParsing="false" onAction="#newOvelse" text="Lag ovelse" />
-                        <TextField fx:id="ovelseIDText" layoutX="268.0" layoutY="20.0" promptText="OvelseID" />
-                        <TextField fx:id="ovelseNavnText" layoutX="268.0" layoutY="51.0" promptText="OvelseNavn" />
-                        <TextField fx:id="ovelseBeskrivelseText" layoutX="268.0" layoutY="86.0" promptText="OvelseBeskrivelse" />
-                        <TextField fx:id="ovelseApparatIDText" layoutX="268.0" layoutY="124.0" promptText="OvelseApparatID" />
-                        <Button fx:id="newApparatButton" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" onAction="#newApparat" text="lag apparat" />
-                        <TextField fx:id="treningsøktIDText" layoutX="71.0" layoutY="176.0" promptText="int" />
-                        <TextField fx:id="treningsøktVarighetText" layoutX="71.0" layoutY="208.0" promptText="int" />
-                        <TextField fx:id="treningsøktTidspunktText" layoutX="71.0" layoutY="242.0" promptText="DD/MM/YYYY HH:mm" />
-                        <TextField fx:id="treningsøktFormText" layoutX="71.0" layoutY="276.0" promptText="int [1-10]" />
-                        <TextField fx:id="treningsøktPrestasjonText" layoutX="71.0" layoutY="311.0" promptText="int [1-10]" />
-                        <TextField fx:id="treningsøktNotatText" layoutX="71.0" layoutY="346.0" promptText="string" />
-                        <Button fx:id="newTreningsøktButton" layoutX="107.0" layoutY="378.0" mnemonicParsing="false" onAction="#newTreningsøkt" text="Lag Økt" />
-                        <TextField fx:id="ØvelseØktØvelsesIDText" layoutX="276.0" layoutY="189.0" promptText="int" />
-                        <TextField fx:id="ØvelseØktØktIDText" layoutX="276.0" layoutY="221.0" promptText="int" />
-                        <TextField fx:id="ØvelseØktResultatText" layoutX="276.0" layoutY="255.0" promptText="string" />
-                        <TextField fx:id="ØvelseØktKiloText" layoutX="276.0" layoutY="289.0" promptText="int" />
-                        <TextField fx:id="ØvelseØktSettText" layoutX="276.0" layoutY="324.0" promptText="int" />
-                        <Button fx:id="addØvelseToØktButton" layoutX="313.0" layoutY="391.0" mnemonicParsing="false" onAction="#addØvelseToØkt" text="Add øvelse" />
-                        <ChoiceBox fx:id="typeØvelse" layoutX="276.0" layoutY="359.0" prefWidth="150.0" value="apparatØvelse">
-                        	<items>
-        						<FXCollections fx:factory="observableArrayList">
-						            <String fx:value="apparatØvelse" />
-						            <String fx:value="friØvelse" />
-        						</FXCollections>
-						    </items>
-						</ChoiceBox>
-                        <Text layoutX="227.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øvelseid:" />
-                        <Text layoutX="239.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øktid:" />
-                        <Text layoutX="228.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="resultat:" />
-                        <Text layoutX="243.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kilo:" />
-                        <Text layoutX="242.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sett:" />
-                        <Text layoutX="30.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øktid:" />
-                        <Text layoutX="14.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="varighet:" />
-                        <Text layoutX="10.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tidspunkt:" />
-                        <Text layoutX="36.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="form:" />
-                        <Text layoutX="8.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prestasjon:" />
-                        <Text layoutX="35.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notat:" />
+                        <TextField fx:id="loginUsernameText" layoutX="96.0" layoutY="76.0" text="root" />
+                        <TextField fx:id="loginPasswordText" layoutX="96.0" layoutY="110.0" text="root" />
+                        <TextField fx:id="loginURLText" layoutX="96.0" layoutY="142.0" promptText="host:port/scheme" text="localhost:3306/data" />
+                        <Text layoutX="40.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+                        <Text layoutX="42.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+                        <Text layoutX="3.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="database/scheme" />
+                        <Button fx:id="loginButton" layoutX="145.0" layoutY="178.0" mnemonicParsing="false" onAction="#login" text="Login" />
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
+              </content>
+            </Tab>
           <Tab text="Usecase 2">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -114,6 +80,55 @@
                   </AnchorPane>
               </content>
             </Tab>
+          <Tab text="Usecase 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="apparatIDText" layoutX="30.0" layoutY="20.0" promptText="ApparatID" />
+                        <TextField fx:id="apparatNavnText" layoutX="30.0" layoutY="51.0" promptText="ApparatNavn" />
+                        <TextField fx:id="apparatBeskrivelseText" layoutX="30.0" layoutY="86.0" promptText="ApparatBeskrivelse" />
+                        <Button fx:id="newOvelseButton" layoutX="292.0" layoutY="152.0" mnemonicParsing="false" onAction="#newOvelse" text="Lag ovelse" />
+                        <TextField fx:id="ovelseIDText" layoutX="268.0" layoutY="20.0" promptText="OvelseID" />
+                        <TextField fx:id="ovelseNavnText" layoutX="268.0" layoutY="51.0" promptText="OvelseNavn" />
+                        <TextField fx:id="ovelseBeskrivelseText" layoutX="268.0" layoutY="86.0" promptText="OvelseBeskrivelse" />
+                        <TextField fx:id="ovelseApparatIDText" layoutX="268.0" layoutY="124.0" promptText="OvelseApparatID" />
+                        <Button fx:id="newApparatButton" layoutX="59.0" layoutY="124.0" mnemonicParsing="false" onAction="#newApparat" text="lag apparat" />
+                        <TextField fx:id="treningsøktIDText" layoutX="71.0" layoutY="176.0" promptText="int" />
+                        <TextField fx:id="treningsøktVarighetText" layoutX="71.0" layoutY="208.0" promptText="int" />
+                        <TextField fx:id="treningsøktTidspunktText" layoutX="71.0" layoutY="242.0" promptText="DD/MM/YYYY HH:mm" />
+                        <TextField fx:id="treningsøktFormText" layoutX="71.0" layoutY="276.0" promptText="int [1-10]" />
+                        <TextField fx:id="treningsøktPrestasjonText" layoutX="71.0" layoutY="311.0" promptText="int [1-10]" />
+                        <TextField fx:id="treningsøktNotatText" layoutX="71.0" layoutY="346.0" promptText="string" />
+                        <Button fx:id="newTreningsøktButton" layoutX="107.0" layoutY="378.0" mnemonicParsing="false" onAction="#newTreningsøkt" text="Lag Økt" />
+                        <TextField fx:id="ØvelseØktØvelsesIDText" layoutX="276.0" layoutY="189.0" promptText="int" />
+                        <TextField fx:id="ØvelseØktØktIDText" layoutX="276.0" layoutY="221.0" promptText="int" />
+                        <TextField fx:id="ØvelseØktResultatText" layoutX="276.0" layoutY="255.0" promptText="string" />
+                        <TextField fx:id="ØvelseØktKiloText" layoutX="276.0" layoutY="289.0" promptText="int" />
+                        <TextField fx:id="ØvelseØktSettText" layoutX="276.0" layoutY="324.0" promptText="int" />
+                        <Button fx:id="addØvelseToØktButton" layoutX="313.0" layoutY="391.0" mnemonicParsing="false" onAction="#addØvelseToØkt" text="Add øvelse" />
+                        <ChoiceBox fx:id="typeØvelse" layoutX="276.0" layoutY="359.0" prefWidth="150.0" value="apparatØvelse">
+                        	<items>
+        						<FXCollections fx:factory="observableArrayList">
+						            <String fx:value="apparatØvelse" />
+						            <String fx:value="friØvelse" />
+        						</FXCollections>
+						    </items>
+						</ChoiceBox>
+                        <Text layoutX="227.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øvelseid:" />
+                        <Text layoutX="239.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øktid:" />
+                        <Text layoutX="228.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="resultat:" />
+                        <Text layoutX="243.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="kilo:" />
+                        <Text layoutX="242.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="sett:" />
+                        <Text layoutX="30.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="øktid:" />
+                        <Text layoutX="14.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="varighet:" />
+                        <Text layoutX="10.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" text="tidspunkt:" />
+                        <Text layoutX="36.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="form:" />
+                        <Text layoutX="8.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="prestasjon:" />
+                        <Text layoutX="35.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="notat:" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
         </tabs>
       </TabPane>
       <Button fx:id="getAllGrupperButton" layoutX="514.0" layoutY="459.0" mnemonicParsing="false" onAction="#getGrupper" text="GetGrupper" />
