@@ -12,29 +12,29 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class TreningsDagbokController {
-	//new apparat
+	//ny apparat
 	@FXML private Button newApparatButton;
 	@FXML private TextField apparatIDText;
 	@FXML private TextField apparatNavnText;
 	@FXML private TextField apparatBeskrivelseText;
 	@FXML private TextArea debugTextArea;
-		//new øvelse
+	//ny øvelse
 	@FXML private Button newOvelseButton;
 	@FXML private TextField ovelseIDText;
 	@FXML private TextField ovelseNavnText;
 	@FXML private TextField ovelseBeskrivelseText;
 	@FXML private TextField ovelseApparatIDText;
-		//get øvelser som bruker apparatid
+	//få alle øvelser som bruker et spesifikt apparat
 	@FXML private TextField getOvelserApparatID;
 	@FXML private Button getOvelserButton;
-		//new øvelsesgruppe
+	//ny øvelsesgruppe
 	@FXML private TextField øvelsesgruppeIDText;
 	@FXML private TextField øvelsesgruppeBeskrivelseText;
 	@FXML private Button newØvelsesgruppeButton;
-	
+	//Få alle øvelser til en gruppe
 	@FXML private TextField getGrupperOvelseIDText;
 	@FXML private Button getGrupperButton;
-		//legg øvelse i en gruppe
+	//legg øvelse i en gruppe
 	@FXML private TextField ØvelseGruppeØvelseIDText;
 	@FXML private TextField ØvelseGruppeGruppeIDText;
 	@FXML private Button ØvelseGruppeButton;
@@ -43,10 +43,10 @@ public class TreningsDagbokController {
 	@FXML private Button getApparatButton;
 	@FXML private Button getØkterButton;
 	@FXML private Button getAllGrupperButton;
-	//get n siste økter
+	//så n siste økter
 	@FXML private Button getnØkterButton;
 	@FXML private TextField nØkterText;
-	//make new treningsøkt
+	//lag ny treningsøkt
 	@FXML private TextField treningsøktIDText;
 	@FXML private TextField treningsøktVarighetText;
 	@FXML private TextField treningsøktTidspunktText;
@@ -54,7 +54,7 @@ public class TreningsDagbokController {
 	@FXML private TextField treningsøktPrestasjonText;
 	@FXML private TextField treningsøktNotatText;
 	@FXML private Button newTreningsøktButton;
-	
+	//Legg øvelse til en økt
 	@FXML private ChoiceBox<String> typeØvelse;
 	@FXML private TextField ØvelseØktØvelsesIDText;
 	@FXML private TextField ØvelseØktØktIDText;
@@ -62,12 +62,12 @@ public class TreningsDagbokController {
 	@FXML private TextField ØvelseØktKiloText;
 	@FXML private TextField ØvelseØktSettText;
 	@FXML private Button addØvelseToØktButton;
-		//usecase 3 ovelseresultat
+	//usecase 3 ovelseresultat
 	@FXML private TextField OvelseResultatIDText;
 	@FXML private TextField OvelseResultatTS1Text;
 	@FXML private TextField OvelseResultatTS2Text;
 	@FXML private Button OvelseResultatButton;
-		//login
+	//login
 	@FXML private TextField loginUsernameText;
 	@FXML private TextField loginPasswordText;
 	@FXML private TextField loginURLText;
@@ -77,20 +77,12 @@ public class TreningsDagbokController {
 
 	@FXML
 	private void initialize() {
-		/*try {
-			this.conn = new SQLConn();
-			conn.connect();
-		} catch (Exception e) {
-			System.out.println("Error connecting to database: "+e);
-			//e.printStackTrace();
-		}*/
 	}
-	
-	@FXML private void login() {
+	@FXML
+	private void login() {
 		try {
 			this.conn = new SQLConn();
 			conn.connect(loginUsernameText.getText(),loginPasswordText.getText(),loginURLText.getText());
-			//System.out.println("lmao");
 			debug("Connection established!");
 		} catch (Exception e) {
 			System.out.println("Error connecting to database:\n\t"+e);
@@ -130,7 +122,6 @@ public class TreningsDagbokController {
 			debug(s);
 		}
 	}
-
 	@FXML
 	public void newOvelse() {
 		try {
@@ -148,7 +139,6 @@ public class TreningsDagbokController {
 			debug(s);
 		}
 	}
-	
 	@FXML
 	public void newOvelsesGruppe() {
 		try {
@@ -258,14 +248,6 @@ public class TreningsDagbokController {
  	    }
 	}
 	
-	/*public void debug(Object o) {
-		try {
-			this.debugTextArea.setText(o.toString());
-		}
-		catch (Exception e) {
-		}
-	}
-	*/
 	public void debug(String s) {
 		this.debugTextArea.setText(s);
 	}
@@ -284,8 +266,6 @@ public class TreningsDagbokController {
 				String toString = "Friøvelser:\n";
 				Statement stmt = conn.conn.createStatement();
 				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat from FriØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
-				//FriØvelse o;
-				//List<FriØvelse> list = new ArrayList<FriØvelse>();
 				boolean first = true;
 				while(rs.next()) {
 					if(first == false) {
@@ -307,8 +287,6 @@ public class TreningsDagbokController {
 				String toString = "Apparatøvelser:\n";
 				Statement stmt = conn.conn.createStatement();
 				ResultSet rs = stmt.executeQuery("select O.øvelsesid, O.øvelsenavn, O.øvelsebeskrivelse,O.apparatid,F.øktid,F.resultat,F.antallkilo,F.antallsett from ApparatØvelse AS F JOIN Øvelse AS O on F.øvelsesid = O.øvelsesID WHERE F.øktid = "+t.getØktid());
-				//FriØvelse o;
-				//List<FriØvelse> list = new ArrayList<FriØvelse>();
 				boolean first = true;
 				while(rs.next()) {
 					if(first == false) {
