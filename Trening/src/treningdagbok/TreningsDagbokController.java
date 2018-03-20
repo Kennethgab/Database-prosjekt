@@ -114,7 +114,7 @@ public class TreningsDagbokController {
 	        	throw new IllegalStateException("Apparat med ID="+a.getApparatID()+" finnes allerede og er ulik input");
 	        }
 			a.save(conn.conn);
-			debug("Apparat ble lagt til /eksisterer allerede:\n"+a.toString());
+			debug("Apparat lagd:\n"+a.toString());
 		}
 		catch (Exception e) {
 			String s = "Error med å lage nytt apparat:\n\t"+e;
