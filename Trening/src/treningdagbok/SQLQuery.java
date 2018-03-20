@@ -78,12 +78,12 @@ public class SQLQuery {
 
     }
 
-    public static List<?> getOvelseResultat(Connection conn, int øvelsesid, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
+    public static List<Treningsøkt> getOvelseResultat(Connection conn, int øvelsesid, java.sql.Timestamp tid1, java.sql.Timestamp tid2) {
     	try {
     		Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("select tidspunkt, resultat from FriØvelse left outer join Treningsøkt on Treningsøkt.øktid = FriØvelse.øktid "+
-                                            "where øvelsesid= "+øvelsesid+" tidspunkt > TIMESTAMP "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt < TIMESTAMP "+ StaticMethods.toQuote(tid2.toString())+" union select tidspunkt, resultat from ApparatØvelse left outer join Treningsøkt on Treningsøkt.øktid = ApparatØvelse.øktid "+
-                                            "where øvelsesid= "+øvelsesid+" tidspunkt > TIMESTAMP "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt < TIMESTAMP "+ StaticMethods.toQuote(tid2.toString()));
+            ResultSet rs = stmt.executeQuery("select Treningsøkt.øktid, tidspunkt, resultat from FriØvelse left outer join Treningsøkt on Treningsøkt.øktid = FriØvelse.øktid "+
+                                            "where øvelsesid= "+øvelsesid+" and tidspunkt >= "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt <= "+ StaticMethods.toQuote(tid2.toString())+" union select Treningsøkt.øktid,tidspunkt, resultat from ApparatØvelse left outer join Treningsøkt on Treningsøkt.øktid = ApparatØvelse.øktid "+
+                                            "where øvelsesid= "+øvelsesid+" and tidspunkt >= "+ StaticMethods.toQuote(tid1.toString()) +" and tidspunkt <= "+ StaticMethods.toQuote(tid2.toString()));
     		Treningsøkt o;
     		List<Treningsøkt> list = new ArrayList<Treningsøkt>();
     		while (rs.next()) {

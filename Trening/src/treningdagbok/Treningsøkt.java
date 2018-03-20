@@ -108,7 +108,7 @@ public class Treningsøkt extends ActiveDomainObject {
 						+varighet+", form="+form+", prestasjon="+prestasjon+", notat="+notatString+ " where øktid=" + øktid);
 			}
 		} catch(Exception e) {
-			throw new IllegalStateException("db error during update of Treningsøkt\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
+			throw new IllegalStateException("db error during update of Treningsøkt:\n\t\tinsert error: " + error + " \n\t\t\tupdate error: "+e);
 		}
 	}
     
@@ -116,4 +116,8 @@ public class Treningsøkt extends ActiveDomainObject {
 	public String toString() {
 		return "ØktID: "+øktid + "\nVarighet: "+varighet+"\nTidspunkt: " + tidspunkt.toString() +"\nForm: "+form+"\nPrestasjon: "+prestasjon+"\nNotat: "+notat;
 	}
+    
+    public String toString2() {
+    	return "ØktID: "+øktid + "\nTidspunkt: " + tidspunkt.toString() +"\nResultat: "+notat;
+    }
 }

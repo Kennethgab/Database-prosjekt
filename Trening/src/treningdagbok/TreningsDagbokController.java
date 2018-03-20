@@ -217,8 +217,10 @@ public class TreningsDagbokController {
 					stmt.executeUpdate("insert into ApparatØvelse values ("+øvelseid+","+ øktid+","+kilo+","+sett+","+resultat+")");
 				}
 			}
+			debug("Øvelse added");
 		}catch(Exception e) {
 			System.out.println("Error adding øvelse to økt:\n\t"+e);
+			debug("Error adding øvelse to økt:\n\t"+e);
 		}
 	}
 	@FXML
@@ -240,12 +242,19 @@ public class TreningsDagbokController {
 		    java.sql.Timestamp TS1 = new Timestamp(date.getTime());
 		    date = formatter.parse(this.OvelseResultatTS2Text.getText());
 		    java.sql.Timestamp TS2 = new Timestamp(date.getTime());
-			debug(SQLQuery.getOvelseResultat(conn.conn, øvelsesid, TS1,TS2));
+			debugOvelseResultat(SQLQuery.getOvelseResultat(conn.conn, øvelsesid, TS1,TS2));
 		}catch(Exception e) {
 			String s = "Error med getOvelseResultat: \n\t"+e;
 			System.out.println(s);
 			debug(s);
  	    }
+	}
+	public void debugOvelseResultat(List<Treningsøkt> l) {
+		String s = "";
+		for (Treningsøkt o : l) {
+			s+=o.toString2() + "\n----------------------\n";
+		}
+		debugTextArea.setText(s);
 	}
 	
 	public void debug(String s) {
@@ -331,7 +340,7 @@ public class TreningsDagbokController {
 	@FXML
 	public void getØkter() {
 		try {
-			debug(SQLQuery.getØkter(conn.conn));
+			debugØkt(SQLQuery.getØkter(conn.conn));
 			}catch(Exception e) {
 				debug("Error i getØkter:\n\t"+e);
 				System.out.println("Error i getØkter:\n\t"+e);
