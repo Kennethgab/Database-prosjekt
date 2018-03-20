@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="681.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="treningdagbok.TreningsDagbokController">
    <children>
-      <TabPane prefHeight="447.0" prefWidth="440.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="447.0" prefWidth="748.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Database login">
               <content>
@@ -149,6 +149,6 @@
       <Button fx:id="getApparatButton" layoutX="341.0" layoutY="459.0" mnemonicParsing="false" onAction="#getApparat" text="Hent apparat" />
       <Button fx:id="getØvelserButton" layoutX="427.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØvelser" text="Hent øvelser" />
       <Button fx:id="getØkterButton" layoutX="602.0" layoutY="459.0" mnemonicParsing="false" onAction="#getØkter" text="Hent økter" />
-      <TextArea fx:id="debugTextArea" layoutX="447.0" layoutY="6.0" prefHeight="435.0" prefWidth="268.0" />
+      <TextArea fx:id="debugTextArea" layoutX="447.0" layoutY="48.0" prefHeight="393.0" prefWidth="268.0" />
    </children>
 </AnchorPane>
